@@ -118,7 +118,7 @@ export default function Home() {
                       <Chip key={i} size="small" variant="outlined" label={t} sx={monoChipSx} />
                     ))}
                   </Box>
-                  <Box component="h3" sx={{ m: 0, typography: 'h3' }}>{w.title}</Box>
+                  <Box component="h3" sx={{ m: 0, typography: 'h4' }}>{w.title}</Box>
                   <Divider />
                   <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px', typography: 'body2' }}>
                     <div><Box component="span" sx={fieldLabel}>Problem </Box>{w.problem || '[One sentence: what was broken, and for whom]'}</div>
