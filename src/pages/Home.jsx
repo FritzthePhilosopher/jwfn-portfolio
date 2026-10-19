@@ -217,8 +217,9 @@ export default function Home() {
       </Container>
 
       {/* CONTACT + FOOTER */}
-      <Container id="contact" sx={{ pt: 'clamp(72px, 10vw, 136px)', pb: 5 }}>
-        <Box component="h2" sx={{ m: 0, typography: 'h3' }}>If you want to talk.</Box>
+      <Container id="contact" sx={{ pt: sectionTop, pb: 5 }}>
+        <Label>Contact / 05</Label>
+        <Box component="h2" sx={{ ...h2Sx, mt: 1.5 }}>If you want to talk.</Box>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '12px', mt: 4 }}>
           <Button variant="contained" size="large" href="mailto:justin@jwfn.design">Email me</Button>
           <Button variant="outlined" color="inherit" size="large" href="https://www.linkedin.com/in/jwfn/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</Button>
