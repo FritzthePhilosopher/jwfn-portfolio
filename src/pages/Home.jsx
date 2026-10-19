@@ -57,8 +57,8 @@ const jobs = [
 
 const about = [
   ['Agency first.', 'I started at Dynamic Marketing Systems (now Truelio), a digital marketing agency, where I did my Barclays and American Airlines work, then moved in-house to product design.'],
-  ['Enterprise, three times.', 'Barclays, American Airlines, then CarMax. [One line on what that taught you.]'],
-  ['Atlanta.', 'Home for more than a decade. [One line on what it means to you.]']
+  ['Enterprise, three times.', 'Barclays, American Airlines, then CarMax.'],
+  ['Atlanta.', 'Home for more than a decade.']
 ];
 
 
