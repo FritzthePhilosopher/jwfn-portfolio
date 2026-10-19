@@ -213,7 +213,7 @@ export default function Home() {
 
       {/* CONTACT + FOOTER */}
       <Container id="contact" sx={{ pt: 'clamp(72px, 10vw, 136px)', pb: 5 }}>
-        <Box component="h2" sx={{ m: 0, typography: 'display' }}>If you want to talk.</Box>
+        <Box component="h2" sx={{ m: 0, typography: 'h3' }}>If you want to talk.</Box>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '12px', mt: 4 }}>
           <Button variant="contained" size="large" href="mailto:">[YOUR EMAIL]</Button>
           <Button variant="outlined" color="inherit" size="large" href="#top">[LINKEDIN URL] ↗</Button>
