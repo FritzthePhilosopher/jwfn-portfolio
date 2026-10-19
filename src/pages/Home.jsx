@@ -52,7 +52,7 @@ const SHOW_CLAUDE = false;
 
 const jobs = [
   ['CarMax', 'Product Designer II, CarMax Auctions. Earlier, contract Product Designer.', 'Feb 2022 to Sep 2026'],
-  ['Dynamic Marketing Systems (now Truelio)', 'UX Designer (Nov 2019 to Jan 2022): mobile products for American Airlines, JetBlue and Frontier Airlines, plus tools for flight attendants to track incentives, set goals and monitor progress. Earlier Sr. Digital Designer (web and print design files, HTML email design and development), HTML Email Developer (weekly and recurring emails, airline site maintenance), and Graphic Designer, where I started in 2012. [Add your Barclays work.]', '2012 to Jan 2022'],
+  ['Dynamic Marketing Systems (now Truelio)', 'UX Designer (Nov 2019 to Jan 2022): mobile products for American Airlines, JetBlue and Frontier Airlines, plus tools for flight attendants to track incentives, set goals and monitor progress. Earlier Sr. Digital Designer (web and print design files, HTML email design and development), HTML Email Developer (weekly and recurring emails, airline site maintenance), and Graphic Designer, where I started in 2012.', '2012 to Jan 2022'],
 ];
 
 const about = [
