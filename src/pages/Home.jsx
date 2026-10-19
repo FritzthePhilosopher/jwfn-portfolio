@@ -34,7 +34,8 @@ const work = [
   }
 ];
 
-const extra = ['life-school', 'heal-thy', 'ohto'].map((k, i) => {
+// Hidden for now: 'heal-thy', 'ohto'. Add them back to this list to show their cards again.
+const extra = ['life-school'].map((k, i) => {
   const c = cards[k];
   return { n: '0' + (4 + i), tags: c.tags, title: c.title, problem: c.problem, outcome: c.outcome, metric: c.metric, cover: c.cover, to: '/work/' + k };
 });

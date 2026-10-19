@@ -141,11 +141,11 @@
   ],
   "nextSteps": null,
   "prev": {
-    "label": "← Previous: [Project 3]",
+    "label": "← Previous: AAdvantage Cash app",
     "to": "/work/project-3"
   },
   "next": {
-    "label": "Next: Heal•Thy →",
-    "to": "/work/heal-thy"
+    "label": "Back to all work →",
+    "to": "/#work"
   }
 }
