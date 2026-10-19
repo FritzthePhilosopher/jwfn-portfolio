@@ -29,7 +29,7 @@ const work = [
   {
     n: '03',
     tags: ['[Barclays or American Airlines]', 'UX', '[YEAR]'],
-    title: '[Result-led headline: I [verb] [thing] so [who] could [outcome].]',
+    title: 'I designed the AAdvantage® Cash app so flight attendants could see every card application they earned in flight and track their incentives.',
     to: '/work/project-3'
   }
 ];
