@@ -24,7 +24,7 @@
     "Metric": "25 → 6 pages"
   },
   "hero": {
-    "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/618b2bb26137612e3a8ba547_Home%20Page%20wireframe.jpg",
+    "src": "/images/life-school/home-page-wireframe.jpg",
     "alt": "Home page wireframe for The LIFE School 2.0 website",
     "caption": "Wireframe example of The LIFE School 2.0 website"
   },
@@ -54,7 +54,7 @@
         "Most students learned about the school from adults in their lives, not from their own research."
       ],
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5ce17366d0cadb6a2e2d7fd4_User%20Interviews.jpg",
+        "src": "/images/life-school/user-interviews.jpg",
         "alt": "User interviews",
         "caption": "User interviews"
       }
@@ -68,7 +68,7 @@
         "Most schools focus heavily on Admissions and About us, with other content treated as secondary."
       ],
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5c7ad6a8ced3c77e1de022c2_life-school-Competitive%20Analysis.png",
+        "src": "/images/life-school/life-school-competitive-analysis.png",
         "alt": "Competitive analysis",
         "caption": "Competitive analysis"
       }
@@ -85,7 +85,7 @@
         "Sites emphasize giving and applying, making those options easy to find."
       ],
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5c749ee022531a4922856207_Web%20Comparative%20Analysis.png",
+        "src": "/images/life-school/web-comparative-analysis.png",
         "alt": "Web comparative analysis",
         "caption": "Web comparative analysis"
       }
@@ -98,7 +98,7 @@
         "The personas are modeled on the adults and students we interviewed. Their pain points overlap, centering on a desire for more growth, focus, and attention."
       ],
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5ce17ef97c5e2f791600a6e0_Personas.jpg",
+        "src": "/images/life-school/personas.jpg",
         "alt": "Personas",
         "caption": "Personas"
       }
@@ -111,7 +111,7 @@
         "Research showed the site was very dense, with information spread across several pages."
       ],
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5c7c1d3c9254e9b92cc29827_site-map.png",
+        "src": "/images/life-school/site-map.png",
         "alt": "Site map",
         "caption": "Site map"
       }

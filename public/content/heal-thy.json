@@ -24,7 +24,7 @@
     "Metric": "4 core flows"
   },
   "hero": {
-    "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5c0d978436137d2289dd6664_Wireframes.png",
+    "src": "/images/heal-thy/wireframes.png",
     "alt": "Wireframes and annotations",
     "caption": "Wireframes and annotations"
   },
@@ -46,7 +46,7 @@
         "I concluded that people are less interested in tracking food and more influenced by eating what suits their body."
       ],
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5c0357f1f4cf117618cd2a8d_user%20interview%20Overview-2.png",
+        "src": "/images/heal-thy/user-interview-overview-2.png",
         "alt": "Interview questions and answers",
         "caption": "Interview questions and answers"
       }
@@ -59,7 +59,7 @@
         "Combined with the interview findings, this told me people want ease of use and more detail without stress."
       ],
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5c0413c990375e170652117d_Competitive%20Analysis.png",
+        "src": "/images/heal-thy/competitive-analysis.png",
         "alt": "Competitive analysis breakdown",
         "caption": "Competitive analysis breakdown"
       }
@@ -80,7 +80,7 @@
         "I ran a card sorting exercise to see how interviewees categorize their diets and food choices."
       ],
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5c0bf3a6dff7c4b0e9627734_Card%20Sorting.png",
+        "src": "/images/heal-thy/card-sorting.png",
         "alt": "Card sorting via Optimal Workshop",
         "caption": "Card sorting via Optimal Workshop"
       }
@@ -93,12 +93,12 @@
         "I created an affinity map and a persona from the research."
       ],
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5c0c615797f12941b35b43ef_Affinity%20Mapping.png",
+        "src": "/images/heal-thy/affinity-mapping.png",
         "alt": "Affinity mapping",
         "caption": "Affinity mapping"
       },
       "image2": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5b7af60a23fe174b1cf66b74_jwfneely%20Heal%E2%80%A2Thy%20persona%20connie.jpg",
+        "src": "/images/heal-thy/jwfneely-heal-thy-persona-connie.jpg",
         "alt": "Persona: Connie",
         "caption": "Persona: Connie"
       }
@@ -111,7 +111,7 @@
         "I prioritized features using the MoSCoW method."
       ],
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5c0d3982a90b667054885439_MosCoW%20Method.png",
+        "src": "/images/heal-thy/moscow-method.png",
         "alt": "MoSCoW method",
         "caption": "MoSCoW method"
       }
@@ -121,7 +121,7 @@
       "label": "User flows",
       "heading": "Four flows: onboarding, article, user settings and library.",
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5c0d952f583e2f033eac39fc_User%20Flow.png",
+        "src": "/images/heal-thy/user-flow.png",
         "alt": "Four user flows",
         "caption": "Four user flows: onboarding, article, user settings and library"
       }
@@ -147,7 +147,7 @@
       "label": "Site map",
       "heading": "Several site map versions.",
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5c0d946336137d70e0dd6124_site%20map.png",
+        "src": "/images/heal-thy/site-map.png",
         "alt": "Site map versions",
         "caption": "Site map versions"
       }
@@ -157,7 +157,7 @@
       "label": "Sketches and prototypes",
       "heading": "Hand-drawn sketches and paper prototypes.",
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5c0d9699583e2f5c97ac3b51_Sketches%20%2B%20Prototypes.png",
+        "src": "/images/heal-thy/sketches-prototypes.png",
         "alt": "Sketches and paper prototypes",
         "caption": "Sketches and paper prototypes"
       }

@@ -12,7 +12,7 @@ export const cards = {
       "2018"
     ],
     "cover": {
-      "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/618b2bb26137612e3a8ba547_Home%20Page%20wireframe.jpg",
+      "src": "/images/life-school/home-page-wireframe.jpg",
       "alt": "Home page wireframe for The LIFE School 2.0 website"
     }
   },
@@ -27,7 +27,7 @@ export const cards = {
       "[YEAR]"
     ],
     "cover": {
-      "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5c0d978436137d2289dd6664_Wireframes.png",
+      "src": "/images/heal-thy/wireframes.png",
       "alt": "Wireframes and annotations"
     }
   },
@@ -42,7 +42,7 @@ export const cards = {
       "[YEAR]"
     ],
     "cover": {
-      "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5caae6217177dc8ee6d67539_Hi-Fi%20Comps.jpg",
+      "src": "/images/ohto/hi-fi-comps.jpg",
       "alt": "Hi-fi comps"
     }
   }

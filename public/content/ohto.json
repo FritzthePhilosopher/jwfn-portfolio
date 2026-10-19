@@ -19,7 +19,7 @@
     "Metric": "UI refresh concept"
   },
   "hero": {
-    "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5caae6217177dc8ee6d67539_Hi-Fi%20Comps.jpg",
+    "src": "/images/ohto/hi-fi-comps.jpg",
     "alt": "Hi-fi comps",
     "caption": "Hi-fi comps"
   },
@@ -33,7 +33,7 @@
         "When I did, it looked dated, roughly early 2000s, so I set out to refresh it."
       ],
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5caad3eb7177dc68edd64296_OHTO-Current-Site.png",
+        "src": "/images/ohto/ohto-current-site.png",
         "alt": "Current OHTO site",
         "caption": "The current OHTO site"
       }
@@ -46,7 +46,7 @@
         "I surveyed UI patterns across e-commerce sites in the same category."
       ],
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5caae5c4f8e012cc64e5c3f9_E-Comm%20Site%20Research.jpg",
+        "src": "/images/ohto/e-comm-site-research.jpg",
         "alt": "E-commerce site research",
         "caption": "E-commerce site research"
       }
@@ -59,7 +59,7 @@
         "I compared three similar brands. Most e-commerce sites share standard structures, and several dated elements, especially search and icons, were common on the weaker sites."
       ],
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5caae5ee3be192d3387f8f3f_Competitive%20Analysis.jpg",
+        "src": "/images/ohto/competitive-analysis.jpg",
         "alt": "Competitive analysis",
         "caption": "Competitive analysis"
       }
@@ -72,7 +72,7 @@
         "I focused on the hero image, since OHTO's products are large in scale, and on showcasing the technology the pens use."
       ],
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5caae5fad636b7088960ce74_Sketches.jpg",
+        "src": "/images/ohto/sketches.jpg",
         "alt": "Sketches",
         "caption": "Sketches"
       }
@@ -85,7 +85,7 @@
         "The wireframes carry the flow from the sketches."
       ],
       "image": {
-        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5caae6107177dc6a9bd67521_Wireframes.jpg",
+        "src": "/images/ohto/wireframes.jpg",
         "alt": "Wireframes",
         "caption": "Wireframes"
       }
