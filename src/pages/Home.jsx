@@ -28,7 +28,7 @@ const work = [
   },
   {
     n: '03',
-    tags: ['Truelio', 'UX', '[YEAR]'],
+    tags: ['Truelio', 'UX', '2021–2022'],
     title: 'I designed an app that let flight attendants track card sign-ups and incentives.',
     to: '/work/project-3'
   }

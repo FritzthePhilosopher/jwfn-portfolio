@@ -2,7 +2,7 @@
   "title": "[Project Title].",
   "client": "Truelio",
   "role": "[Your role]",
-  "year": "[YEAR]",
+  "year": "2021–2022",
   "contribution": "[What you owned: research, flows, UI, testing.]",
   "heroLabel": "[Hero image: final design]",
   "contextOne": "[Who the users are, what the product lets them do, and how the old experience worked.]",
@@ -58,6 +58,6 @@
   "tags": [
     "Truelio",
     "UX",
-    "[YEAR]"
+    "2021–2022"
   ]
 }
