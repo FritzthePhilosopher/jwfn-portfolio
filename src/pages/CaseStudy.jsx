@@ -50,7 +50,7 @@ export default function CaseStudy() {
       <Container sx={{ pt: 'clamp(24px, 4vw, 40px)' }}>
         <Button component={RouterLink} to="/#work" color="inherit" sx={{ ...navBtnSx, color: colors.muted, ml: -1 }}>← Work index</Button>
         <Box sx={{ mt: 3, display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-          {[s.client, 'UX', 'Product', s.year].map((t) => (
+          {(s.tags || [s.client, s.year]).map((t) => (
             <Chip key={t} size="small" variant="outlined" label={t} sx={monoChipSx} />
           ))}
         </Box>

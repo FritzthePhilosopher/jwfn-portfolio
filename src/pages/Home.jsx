@@ -16,19 +16,19 @@ const stats = [
 const work = [
   {
     n: '01',
-    tags: ['CarMax Auctions', 'UX', '2026'],
+    tags: ['CarMax Auctions', 'Product design', '2026'],
     title: "I designed the damage detail card that shows dealers a vehicle's true condition.",
     to: '/work/damage-detail-card'
   },
   {
     n: '02',
-    tags: ['CarMax Auctions', 'UX', '2025'],
+    tags: ['CarMax Auctions', 'Product design', '2025'],
     title: 'I helped lead the redesign of how dealers register with CarMax Auctions.',
     to: '/work/dealer-registration'
   },
   {
     n: '03',
-    tags: ['[Barclays or American Airlines]', 'UX', '[YEAR]'],
+    tags: ['Truelio', 'UX', '[YEAR]'],
     title: 'I designed an app that let flight attendants track card sign-ups and incentives.',
     to: '/work/project-3'
   }
