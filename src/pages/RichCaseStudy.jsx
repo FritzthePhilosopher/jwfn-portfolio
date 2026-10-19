@@ -81,6 +81,7 @@ export default function RichCaseStudy({ s }) {
                 {x.bullets.map((b) => <li key={b}>{b}</li>)}
               </Box>
             )}
+            {(x.after || []).map((p, i) => <Box key={'a' + i} component="p" sx={{ mt: 3, mb: 0, color: colors.body }}>{p}</Box>)}
             {x.quotes && (
               <Box sx={{ mt: 3, display: 'flex', flexDirection: 'column', gap: 3 }}>
                 {x.quotes.map((q) => (

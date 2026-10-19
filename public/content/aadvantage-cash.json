@@ -1,0 +1,86 @@
+{
+  "title": "AAdvantage® Cash App.",
+  "subtitle": "Flight attendants earn bonuses for the AAdvantage® Cash card applications they bring in, but could only check on them through a web portal. We designed a mobile app that puts their application status and earnings first.",
+  "tags": [
+    "Truelio",
+    "UX",
+    "2021–2022"
+  ],
+  "year": "2021–2022",
+  "role": "UX Designer (team: Aleks Glukov, lead)",
+  "client": "Truelio",
+  "links": [],
+  "glance": {
+    "Problem": "Flight attendants could only check the status of their card applications on a web portal, which didn't fit a job that's always on the move.",
+    "Contribution": "UX and visual design: MVP scope, wireframes, testing, typography, components, prototypes, and the Bonus Booster.",
+    "Outcome": "A mobile app that leads with application status and projected earnings.",
+    "Metric": "Currently live"
+  },
+  "hero": {
+    "src": "/private/aadvantage-cash/aadvantage-cash.png",
+    "alt": "AAdvantage Cash app screens: a home screen showing projected earnings and received and approved applications, beside a qualification status screen",
+    "caption": "Final design: the home screen and qualification status"
+  },
+  "sections": [
+    {
+      "id": "problem",
+      "label": "Problem",
+      "heading": "Status checks lived on a web portal.",
+      "paras": [
+        "Flight attendants in the AAdvantage® Cash program earn bonuses and trips for the credit card applications they submit, but the only way to check their status was a web portal. That doesn't fit a job where they're always on the move. On top of that, another company had already built a UI mockup before our team came in, and it was made with very little research. The visuals lacked depth and the layouts had almost no white space."
+      ]
+    },
+    {
+      "id": "context",
+      "label": "Context",
+      "heading": "Starting from someone else's mockup.",
+      "paras": [
+        "This was a 2021–2022 project where I owned UX and visual design. Because the team inherited someone else's mockup, it didn't start like a normal UX project. After a lot of back and forth about which features mattered, I suggested focusing on an MVP that would help users and still satisfy stakeholders. The team ran a design sprint, built personas from research on flight attendants, then moved through several rounds of wireframes and two rounds of unguided user testing."
+      ]
+    },
+    {
+      "id": "research",
+      "label": "Research",
+      "heading": "What flight attendants told us.",
+      "bullets": [
+        "Most flight attendants wanted the information to be straightforward.",
+        "Their biggest concern was seeing the status of the applications they'd submitted.",
+        "In the first round of testing, they called out the lack of color in the app.",
+        "When the final version was presented, they liked the updated visuals and the Bonus Booster."
+      ]
+    },
+    {
+      "id": "solution",
+      "label": "Solution",
+      "heading": "Status and earnings first.",
+      "paras": [
+        "The team rebuilt the homepage around current application status (received vs. approved) and projected earnings, so the thing flight attendants cared about most was the first thing they saw. I also designed the Bonus Booster, a slider that shows what they could earn at each bonus tier (Base, Tier 1, Tier 2). I handled typography, components, sizing, and prototypes, while teammates created onboarding artwork and refined the visuals."
+      ]
+    },
+    {
+      "id": "next",
+      "label": "Next steps",
+      "heading": "What I'd have tracked.",
+      "paras": [
+        "The app launched shortly after I moved on from the project. I didn't get to see the post-launch results, but the last round of testing was a good sign: flight attendants responded well to the updated visuals and the Bonus Booster, which were the two areas the first round had flagged.",
+        "If I'd stayed on, I would have tracked:"
+      ],
+      "bullets": [
+        "Adoption: how many flight attendants switched from the web portal to the app.",
+        "Bonus Booster impact: whether seeing the next bonus tier led them to submit more applications.",
+        "Support requests: whether fewer flight attendants had to ask about their application status."
+      ],
+      "after": [
+        "I'd also want to test with veteran flight attendants. They're the most resistant to change, and the most likely to stop using the app."
+      ]
+    }
+  ],
+  "prev": {
+    "label": "← Previous: Dealer registration",
+    "to": "/work/dealer-registration"
+  },
+  "next": {
+    "label": "Next: The LIFE School →",
+    "to": "/work/life-school"
+  }
+}

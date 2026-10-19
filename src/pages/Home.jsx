@@ -32,7 +32,10 @@ const work = [
     n: '03',
     tags: ['Truelio', 'UX', '2021–2022'],
     title: 'I designed an app that let flight attendants track card sign-ups and incentives.',
-    to: '/work/project-3'
+    problem: 'Flight attendants could only check their card applications on a web portal.',
+    outcome: 'A mobile app that puts application status and projected earnings first.',
+    metric: 'Currently live',
+    to: '/work/aadvantage-cash'
   }
 ];
 
