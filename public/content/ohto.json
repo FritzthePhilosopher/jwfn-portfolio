@@ -1,0 +1,116 @@
+{
+  "title": "OHTO.",
+  "short": "OHTO",
+  "subtitle": "A Japanese stationery brand. A UI refresh of a site that still looked like the early 2000s.",
+  "tags": [
+    "Personal Project",
+    "UI Refresh",
+    "UX",
+    "UI"
+  ],
+  "year": "[YEAR]",
+  "role": "[Your role]",
+  "client": "Personal project",
+  "links": [],
+  "glance": {
+    "Problem": "OHTO's website looked dated, roughly early 2000s.",
+    "Contribution": "Personal project: research, competitive analysis, sketches, wireframes and hi-fi comps in Figma.",
+    "Outcome": "A contemporary hi-fi redesign that follows the wireframe structure and draws colors from the current site.",
+    "Metric": "UI refresh concept"
+  },
+  "hero": {
+    "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5caae6217177dc8ee6d67539_Hi-Fi%20Comps.jpg",
+    "alt": "Hi-fi comps",
+    "caption": "Hi-fi comps"
+  },
+  "sections": [
+    {
+      "id": "overview",
+      "label": "Overview",
+      "heading": "A stationery brand I use every day.",
+      "paras": [
+        "OHTO makes unique pens, mechanical pencils, 3-in-1 multi-pens, and other stationery. I use the products daily but bought them through third-party sellers, so I had never visited the company's site.",
+        "When I did, it looked dated, roughly early 2000s, so I set out to refresh it."
+      ],
+      "image": {
+        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5caad3eb7177dc68edd64296_OHTO-Current-Site.png",
+        "alt": "Current OHTO site",
+        "caption": "The current OHTO site"
+      }
+    },
+    {
+      "id": "research",
+      "label": "Research",
+      "heading": "How similar e-commerce sites are built.",
+      "paras": [
+        "I surveyed UI patterns across e-commerce sites in the same category."
+      ],
+      "image": {
+        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5caae5c4f8e012cc64e5c3f9_E-Comm%20Site%20Research.jpg",
+        "alt": "E-commerce site research",
+        "caption": "E-commerce site research"
+      }
+    },
+    {
+      "id": "competitive",
+      "label": "Competitive analysis",
+      "heading": "Standard structures, dated details.",
+      "paras": [
+        "I compared three similar brands. Most e-commerce sites share standard structures, and several dated elements, especially search and icons, were common on the weaker sites."
+      ],
+      "image": {
+        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5caae5ee3be192d3387f8f3f_Competitive%20Analysis.jpg",
+        "alt": "Competitive analysis",
+        "caption": "Competitive analysis"
+      }
+    },
+    {
+      "id": "sketches",
+      "label": "Sketches",
+      "heading": "Lead with the product.",
+      "paras": [
+        "I focused on the hero image, since OHTO's products are large in scale, and on showcasing the technology the pens use."
+      ],
+      "image": {
+        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5caae5fad636b7088960ce74_Sketches.jpg",
+        "alt": "Sketches",
+        "caption": "Sketches"
+      }
+    },
+    {
+      "id": "wireframes",
+      "label": "Wireframes",
+      "heading": "Grayscale layouts on a 4px baseline grid.",
+      "paras": [
+        "The wireframes carry the flow from the sketches."
+      ],
+      "image": {
+        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5caae6107177dc6a9bd67521_Wireframes.jpg",
+        "alt": "Wireframes",
+        "caption": "Wireframes"
+      }
+    },
+    {
+      "id": "hi-fi",
+      "label": "Hi-fi composition",
+      "heading": "A contemporary style.",
+      "paras": [
+        "High-fidelity mockups follow the wireframe structure and draw colors from the current site, aiming for a contemporary style. The final comps are shown above."
+      ]
+    }
+  ],
+  "results": null,
+  "nextSteps": [
+    "Explore more attractive color palette options",
+    "Design mobile and tablet layouts",
+    "Build a clickable prototype of the rebuilt site"
+  ],
+  "prev": {
+    "label": "← Previous: Heal•Thy",
+    "to": "/work/heal-thy"
+  },
+  "next": {
+    "label": "Back to all work →",
+    "to": "/#work"
+  }
+}

@@ -1,6 +1,6 @@
 import { Box, Button, Chip, Divider, Paper } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { Link as RouterLink, useParams, Navigate } from 'react-router-dom';
-import { studies } from './studies.js';
 import RichCaseStudy from './RichCaseStudy.jsx';
 import { colors } from '../theme.js';
 import { Container, Label, Placeholder, SiteNav, SiteFooter, h2CaseSx, displaySx, fieldLabel, monoChipSx, navBtnSx, monoLabel } from '../components/Shared.jsx';
@@ -8,20 +8,39 @@ import { Container, Label, Placeholder, SiteNav, SiteFooter, h2CaseSx, displaySx
 const sectionTop = 'clamp(48px, 7vw, 88px)';
 const h2Case = h2CaseSx;
 
-const decisions = [
-  ['01', '[Decision 1, stated as a choice]'],
-  ['02', '[Decision 2, stated as a choice]'],
-  ['03', '[Decision 3, stated as a choice]']
-];
-
-const results = ['[00%]', '[00]', '[00x]'];
-
+// All case study copy lives in public/content/<slug>.json, never in this file,
+// so it stays behind the password.
 const toc = [['call', 'The call'], ['context', 'Context'], ['decisions', 'Decisions'], ['results', 'Results'], ['reflection', 'Reflection']];
+
+// Content is fetched from /content/<slug>.json, which Vercel only serves after
+// the password is entered (see middleware.js). A locked response sends the
+// visitor to /unlock and back here afterwards.
+function useStudy(slug) {
+  const [state, setState] = useState({ status: 'loading' });
+  useEffect(() => {
+    let live = true;
+    setState({ status: 'loading' });
+    fetch(`/content/${slug}.json`, { credentials: 'same-origin', cache: 'no-store' })
+      .then(async (res) => {
+        if (res.status === 401) return { status: 'locked' };
+        const type = res.headers.get('content-type') || '';
+        if (!res.ok || !type.includes('json')) return { status: 'missing' };
+        return { status: 'ready', s: await res.json() };
+      })
+      .catch(() => ({ status: 'missing' }))
+      .then((next) => live && setState(next));
+    return () => { live = false; };
+  }, [slug]);
+  return state;
+}
 
 export default function CaseStudy() {
   const { slug } = useParams();
-  const s = studies[slug];
-  if (!s) return <Navigate to="/" replace />;
+  const study = useStudy(slug);
+  if (study.status === 'locked') return <Navigate to={`/unlock?next=${encodeURIComponent('/work/' + slug)}`} replace />;
+  if (study.status === 'missing') return <Navigate to="/" replace />;
+  if (study.status === 'loading') return <Box sx={{ minHeight: '100vh', bgcolor: '#fff' }}><SiteNav /></Box>;
+  const s = study.s;
   if (s.sections) return <RichCaseStudy s={s} />;
   return (
     <Box sx={{ width: '100%', bgcolor: '#fff', color: colors.ink, typography: 'body1' }}>
@@ -42,7 +61,7 @@ export default function CaseStudy() {
           {s.title}
         </Box>
         <Box component="p" sx={{ mt: 3, mb: 0, maxWidth: 720, typography: 'subtitle1', color: colors.body }}>
-          [One sentence: the redesigned experience, who it serves, and the constraint that shaped it.]
+          {s.subtitle}
         </Box>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px 64px', mt: 5, pt: '20px' }}>
           <Box sx={{ width: '100%' }}><Divider /></Box>
@@ -62,9 +81,9 @@ export default function CaseStudy() {
             <Label sx={{ color: colors.accentText }}>At a glance</Label>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '28px 40px' }}>
               {[
-                ['Problem', '[What was broken, and for whom. One or two sentences.]'],
+                ['Problem', s.problem],
                 ['Contribution', s.contribution],
-                ['Outcome', '[What shipped, and what changed for dealers.]']
+                ['Outcome', s.outcome]
               ].map(([k, v]) => (
                 <Box key={k} sx={{ flex: '1 1 240px' }}>
                   <Box sx={{ ...fieldLabel, mb: '6px' }}>{k}</Box>
@@ -73,7 +92,7 @@ export default function CaseStudy() {
               ))}
               <Box sx={{ flex: '1 1 240px' }}>
                 <Box sx={{ ...fieldLabel, mb: '6px' }}>Metric</Box>
-                <Box component="span" sx={{ typography: 'statSm' }}>[KEY NUMBER]</Box>
+                <Box component="span" sx={{ typography: 'statSm' }}>{s.metric}</Box>
               </Box>
             </Box>
           </Box>
@@ -101,10 +120,10 @@ export default function CaseStudy() {
       <Container id="call" sx={{ pt: sectionTop }}>
         <Label>The call</Label>
         <Box component="h2" sx={{ ...h2Case, mt: 1.5, maxWidth: 900 }}>
-          [The tension in one line: "Ship the quick fix, or rebuild the flow right?"]
+          {s.callHeading}
         </Box>
         <Box component="p" sx={{ mt: 3, mb: 0, maxWidth: 680, color: colors.body }}>
-          [Two or three sentences: the constraint, the stakes, and the decision you faced. This is the paragraph a hiring manager reads first, so name the trade-off plainly.]
+          {s.callBody}
         </Box>
       </Container>
 
@@ -115,7 +134,7 @@ export default function CaseStudy() {
           <Box sx={{ flex: '1 1 420px' }}>
             <Box component="h2" sx={{ m: 0, mb: 2, typography: 'h3' }}>Who it was for.</Box>
             <Box component="p" sx={{ m: 0, mb: 2, color: colors.body }}>{s.contextOne}</Box>
-            <Box component="p" sx={{ m: 0, color: colors.body }}>[What the team knew going in: feedback, support volume, drop-off, or business goals.]</Box>
+            <Box component="p" sx={{ m: 0, color: colors.body }}>{s.contextTwo}</Box>
           </Box>
           <Placeholder label={s.beforeLabel} sx={{ flex: '1 1 420px', minHeight: 280 }} />
         </Box>
@@ -127,13 +146,13 @@ export default function CaseStudy() {
         <Box component="h2" sx={{ ...h2Case, mt: 1.5 }}>Three choices that shaped it.</Box>
         <Box sx={{ mt: 5 }}>
           <Divider sx={{ borderColor: colors.ink, borderBottomWidth: '1.5px' }} />
-          {decisions.map(([n, title]) => (
+          {s.decisions.map(({ n, title, body }) => (
             <Box key={n}>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '16px 32px', py: '28px' }}>
                 <Box sx={{ flex: '0 0 64px', typography: 'statSm', color: colors.accentText }}>{n}</Box>
                 <Box sx={{ flex: '1 1 360px' }}>
                   <Box component="h3" sx={{ m: 0, mb: 1, typography: 'h4' }}>{title}</Box>
-                  <Box component="p" sx={{ m: 0, color: colors.body }}>[What the options were, what you chose, and the evidence or constraint behind it.]</Box>
+                  <Box component="p" sx={{ m: 0, color: colors.body }}>{body}</Box>
                 </Box>
                 <Placeholder sx={{ flex: '1 1 320px', minHeight: 180 }} />
               </Box>
@@ -147,12 +166,12 @@ export default function CaseStudy() {
       <Box id="results" sx={{ bgcolor: colors.band, color: colors.ink, mt: 'clamp(56px, 8vw, 104px)' }}>
         <Container sx={{ py: sectionTop }}>
           <Label sx={{ color: colors.onBandMuted }}>Results</Label>
-          <Box component="h2" sx={{ ...h2Case, mt: 1.5 }}>What changed after launch.</Box>
+          <Box component="h2" sx={{ ...h2Case, mt: 1.5 }}>{s.resultsHeading}</Box>
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3, mt: 5 }}>
-            {results.map((r) => (
+            {s.results.map(({ value: r, text }) => (
               <Paper key={r} variant="outlined" sx={{ flex: '1 1 240px', p: 3, bgcolor: 'transparent', color: colors.ink, borderColor: colors.bandBorder }}>
                 <Box sx={{ typography: 'stat', color: colors.accentOnBand }}>{r}</Box>
-                <Box sx={{ mt: '10px', color: colors.onBand, typography: 'body2' }}>[What this number measures, and the baseline it moved from.]</Box>
+                <Box sx={{ mt: '10px', color: colors.onBand, typography: 'body2' }}>{text}</Box>
               </Paper>
             ))}
           </Box>
@@ -163,7 +182,7 @@ export default function CaseStudy() {
       <Container id="reflection" sx={{ pt: sectionTop }}>
         <Label>What I took from it</Label>
         <Box component="p" sx={{ mt: 2, mb: 0, maxWidth: 820, typography: 'quote' }}>
-          [One reflective paragraph: the constraint that looked like a limit and became the brief, and what you would do next.]
+          {s.reflection}
         </Box>
       </Container>
 

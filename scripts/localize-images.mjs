@@ -1,5 +1,5 @@
 // One-time script: copies the case study images off Webflow into public/images,
-// points src/pages/scraped.js at the local copies, and commits the result.
+// points the case study content and home page cards at the local copies, and commits the result.
 // Run from the project folder:  node scripts/localize-images.mjs
 import fs from "node:fs";
 import path from "node:path";
@@ -30,7 +30,7 @@ const MAP = {
   "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5caae6107177dc6a9bd67521_Wireframes.jpg": "/images/ohto/wireframes.jpg"
 };
 
-const DATA = "src/pages/scraped.js";
+const DATA_FILES = ["src/pages/cards.js", ...fs.readdirSync("public/content").map((f) => "public/content/" + f)];
 let failed = 0, downloaded = 0, skipped = 0;
 for (const [url, local] of Object.entries(MAP)) {
   const dest = path.join("public", local);
@@ -53,16 +53,18 @@ if (failed) {
   process.exit(1);
 }
 
-let src = fs.readFileSync(DATA, "utf8");
 let swapped = 0;
-for (const [url, local] of Object.entries(MAP)) {
-  if (src.includes(url)) { src = src.split(url).join(local); swapped++; }
+for (const file of DATA_FILES) {
+  let src = fs.readFileSync(file, "utf8");
+  for (const [url, local] of Object.entries(MAP)) {
+    if (src.includes(url)) { swapped += src.split(url).length - 1; src = src.split(url).join(local); }
+  }
+  fs.writeFileSync(file, src);
 }
-fs.writeFileSync(DATA, src);
-console.log(`Pointed ${swapped} image links in ${DATA} at the local copies.`);
+console.log(`Pointed ${swapped} image links at the local copies.`);
 
 try {
-  execSync("git add public/images " + DATA, { stdio: "inherit" });
+  execSync("git add public/images " + DATA_FILES.join(" "), { stdio: "inherit" });
   execSync(`git commit -m "Move case study images off Webflow into the project" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" -m "Claude-Session: https://claude.ai/code/session_014o4eAMjMZBckGajgszV1aj"`, { stdio: "inherit" });
   console.log("\nCommitted. Images are now part of the project.");
 } catch {

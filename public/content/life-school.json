@@ -1,0 +1,151 @@
+{
+  "title": "The LIFE School.",
+  "short": "The LIFE School",
+  "subtitle": "A self-directed school where students make their own path. I helped redesign its website so parents and students could find their next step.",
+  "tags": [
+    "Client Project",
+    "UX",
+    "UI",
+    "Prototyping"
+  ],
+  "year": "2018",
+  "role": "UX Designer (team: Jarrett Coger, lead; Treven Holcomb, UX)",
+  "client": "The LIFE School",
+  "links": [
+    [
+      "Live site",
+      "http://www.thelifeschool.co"
+    ]
+  ],
+  "glance": {
+    "Problem": "The site lacked direction, so parents and students had trouble identifying their next steps.",
+    "Contribution": "UX on a three-person team: research, personas, site map and wireframes.",
+    "Outcome": "A clearer, consolidated site with an easier application process.",
+    "Metric": "25 → 6 pages"
+  },
+  "hero": {
+    "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/618b2bb26137612e3a8ba547_Home%20Page%20wireframe.jpg",
+    "alt": "Home page wireframe for The LIFE School 2.0 website",
+    "caption": "Wireframe example of The LIFE School 2.0 website"
+  },
+  "sections": [
+    {
+      "id": "overview",
+      "label": "Overview",
+      "heading": "Everything is catered towards the student.",
+      "paras": [
+        "The LIFE School is self-directed: students shape their own paths. The website needed to reflect that and guide families toward what to do next."
+      ]
+    },
+    {
+      "id": "problem",
+      "label": "Problem statement",
+      "heading": "Visitors had no clear next step.",
+      "paras": [
+        "The website lacked direction. Without guidance, parents and students had trouble identifying what to do next."
+      ]
+    },
+    {
+      "id": "interviews",
+      "label": "User interviews",
+      "heading": "Freedom of choice is what excites students.",
+      "bullets": [
+        "Students were more excited about the freedom of choice at this school than at their previous schools.",
+        "Most students learned about the school from adults in their lives, not from their own research."
+      ],
+      "image": {
+        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5ce17366d0cadb6a2e2d7fd4_User%20Interviews.jpg",
+        "alt": "User interviews",
+        "caption": "User interviews"
+      }
+    },
+    {
+      "id": "competitive",
+      "label": "Competitive analysis",
+      "heading": "Every competing school specializes in something.",
+      "bullets": [
+        "Each competing school specializes in something particular.",
+        "Most schools focus heavily on Admissions and About us, with other content treated as secondary."
+      ],
+      "image": {
+        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5c7ad6a8ced3c77e1de022c2_life-school-Competitive%20Analysis.png",
+        "alt": "Competitive analysis",
+        "caption": "Competitive analysis"
+      }
+    },
+    {
+      "id": "web-comparative",
+      "label": "Web comparative analysis",
+      "heading": "What the best school sites do well.",
+      "bullets": [
+        "All the sites present their identity clearly.",
+        "They use abundant photos and videos of students and their activities.",
+        "Text-heavy pages are broken into more digestible sections.",
+        "Each site has at least one unique feature.",
+        "Sites emphasize giving and applying, making those options easy to find."
+      ],
+      "image": {
+        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5c749ee022531a4922856207_Web%20Comparative%20Analysis.png",
+        "alt": "Web comparative analysis",
+        "caption": "Web comparative analysis"
+      }
+    },
+    {
+      "id": "personas",
+      "label": "Personas",
+      "heading": "Different people, overlapping pain points.",
+      "paras": [
+        "The personas are modeled on the adults and students we interviewed. Their pain points overlap, centering on a desire for more growth, focus, and attention."
+      ],
+      "image": {
+        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5ce17ef97c5e2f791600a6e0_Personas.jpg",
+        "alt": "Personas",
+        "caption": "Personas"
+      }
+    },
+    {
+      "id": "discovery",
+      "label": "Discovery",
+      "heading": "The site was dense, with information spread across many pages.",
+      "paras": [
+        "Research showed the site was very dense, with information spread across several pages."
+      ],
+      "image": {
+        "src": "https://cdn.prod.website-files.com/5b703dc941c61675b76df11b/5c7c1d3c9254e9b92cc29827_site-map.png",
+        "alt": "Site map",
+        "caption": "Site map"
+      }
+    },
+    {
+      "id": "wireframes",
+      "label": "Wireframes",
+      "heading": "Wireframes for The LIFE School 2.0.",
+      "paras": [
+        "The hero image above is the home page wireframe from the redesign."
+      ]
+    }
+  ],
+  "results": [
+    [
+      "25 → 6",
+      "The site was consolidated from 25 pages down to 6 long pages with clear directions."
+    ],
+    [
+      "New",
+      "A freedom-of-choice schedule was introduced."
+    ],
+    [
+      "Easier",
+      "The application process is easier to navigate."
+    ]
+  ],
+  "nextSteps": null,
+  "prev": {
+    "label": "← Previous: [Project 3]",
+    "to": "/work/project-3"
+  },
+  "next": {
+    "label": "Next: Heal•Thy →",
+    "to": "/work/heal-thy"
+  }
+}

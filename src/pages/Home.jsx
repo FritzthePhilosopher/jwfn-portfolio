@@ -1,7 +1,7 @@
 import { Box, Button, Card, CardActions, Chip, Divider, Paper } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { colors } from '../theme.js';
-import { studies } from './studies.js';
+import { cards } from './cards.js';
 import { Container, Label, Placeholder, SiteNav, SiteFooter, h2Sx, displaySx, fieldLabel, monoChipSx } from '../components/Shared.jsx';
 
 const cardPad = 'clamp(16px, 3vw, 32px)';
@@ -35,8 +35,8 @@ const work = [
 ];
 
 const extra = ['life-school', 'heal-thy', 'ohto'].map((k, i) => {
-  const s = studies[k];
-  return { n: '0' + (4 + i), tags: s.card.tags, title: s.card.title, problem: s.card.problem, outcome: s.card.outcome, metric: s.card.metric, cover: s.hero, to: '/work/' + k };
+  const c = cards[k];
+  return { n: '0' + (4 + i), tags: c.tags, title: c.title, problem: c.problem, outcome: c.outcome, metric: c.metric, cover: c.cover, to: '/work/' + k };
 });
 work.push(...extra);
 
@@ -127,9 +127,12 @@ export default function Home() {
                   </Box>
                 </Box>
               </Box>
-              <CardActions sx={{ px: cardPad, pb: cardPad, pt: 0 }}>
+              <CardActions sx={{ px: cardPad, pb: cardPad, pt: 0, gap: 2, flexWrap: 'wrap' }}>
                 {w.to ? (
-                  <Button variant="contained" component={RouterLink} to={w.to}>Read the case study →</Button>
+                  <>
+                    <Button variant="contained" component={RouterLink} to={w.to}>Read the case study →</Button>
+                    <Box component="span" sx={{ typography: 'caption', color: colors.muted, ml: '0 !important' }}>Password required</Box>
+                  </>
                 ) : (
                   <Button variant="outlined" color="inherit" disabled>[ADD CASE STUDY LINK]</Button>
                 )}
