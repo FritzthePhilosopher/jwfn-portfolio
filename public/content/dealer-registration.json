@@ -8,7 +8,7 @@
   "contextOne": "[Who the dealers are, what registering lets them do, and how the old process worked.]",
   "beforeLabel": "[Before: the old registration flow]",
   "prev": {
-    "label": "← Previous: Damage detail card",
+    "label": "← Previous: Damage assessment cards",
     "to": "/work/damage-detail-card"
   },
   "next": {

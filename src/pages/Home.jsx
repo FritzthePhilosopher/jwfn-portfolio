@@ -18,6 +18,8 @@ const work = [
     n: '01',
     tags: ['CarMax Auctions', 'Product design', '2026'],
     title: "I designed the damage detail card that shows dealers a vehicle's true condition.",
+    problem: 'Damage photos were too small and scattered for dealers to judge before bidding.',
+    outcome: 'Vertically scrolling damage cards with a large, highlighted photo and a clear label.',
     to: '/work/damage-detail-card'
   },
   {

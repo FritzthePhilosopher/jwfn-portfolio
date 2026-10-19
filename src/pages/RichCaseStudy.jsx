@@ -79,6 +79,15 @@ export default function RichCaseStudy({ s }) {
                 {x.bullets.map((b) => <li key={b}>{b}</li>)}
               </Box>
             )}
+            {x.quotes && (
+              <Box sx={{ mt: 3, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                {x.quotes.map((q) => (
+                  <Box key={q} component="blockquote" sx={{ m: 0, pl: 3, borderLeft: `3px solid ${colors.accent}`, typography: 'subtitle1', color: colors.ink }}>
+                    “{q}”
+                  </Box>
+                ))}
+              </Box>
+            )}
           </Box>
           <Figure img={x.image} />
           <Figure img={x.image2} />
@@ -89,7 +98,7 @@ export default function RichCaseStudy({ s }) {
         <Box id="results" sx={{ bgcolor: colors.band, color: colors.ink, mt: 'clamp(56px, 8vw, 104px)' }}>
           <Container sx={{ py: sectionTop }}>
             <Label sx={{ color: colors.onBandMuted }}>Results</Label>
-            <Box component="h2" sx={{ ...h2Case, mt: 1.5 }}>What changed.</Box>
+            <Box component="h2" sx={{ ...h2Case, mt: 1.5 }}>{s.resultsHeading || 'What changed.'}</Box>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3, mt: 5 }}>
               {s.results.map(([big, text]) => (
                 <Paper key={big} variant="outlined" sx={{ flex: '1 1 240px', p: 3, bgcolor: 'transparent', color: colors.ink, borderColor: colors.bandBorder }}>

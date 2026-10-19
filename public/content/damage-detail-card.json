@@ -1,12 +1,99 @@
 {
-  "title": "Damage Detail Card.",
-  "client": "CarMax Auctions",
-  "role": "Product Designer II",
+  "title": "Damage Assessment Cards.",
+  "subtitle": "Dealers on CarMax Auctions couldn't tell how bad a vehicle's damage was before bidding. We redesigned how the vehicle detail page shows it, so they can judge the damage at a glance and bid with confidence.",
+  "tags": [
+    "CarMax Auctions",
+    "Product design",
+    "2026"
+  ],
   "year": "2026",
-  "contribution": "[What you owned: research, flows, UI, testing.]",
-  "heroLabel": "[Hero image: final damage detail card]",
-  "contextOne": "[Who the dealers are, how they judge a vehicle's condition, and how damage was shown before.]",
-  "beforeLabel": "[Before: the old damage view]",
+  "role": "Product Designer (team: Bobby Eaves, lead)",
+  "client": "CarMax Auctions",
+  "links": [],
+  "glance": {
+    "Problem": "Damage photos on the vehicle detail page were too small and too spread out for dealers to judge before bidding.",
+    "Contribution": "Product design on a two-person team, with Bobby Eaves as lead.",
+    "Outcome": "A vertical stack of damage cards: a large photo with the damage highlighted, plus its location, type and size.",
+    "Metric": "94% preferred it"
+  },
+  "hero": {
+    "src": "/private/damage-assessment/damage-assessment-cards.png",
+    "alt": "Damage assessment cards on a CarMax Auctions vehicle detail page, each with a large photo, the damaged area highlighted, and a label for location, type and size",
+    "caption": "Final design: damage assessment cards on the vehicle detail page"
+  },
+  "sections": [
+    {
+      "id": "problem",
+      "label": "Problem",
+      "heading": "Is this damage worth the bid?",
+      "paras": [
+        "On the vehicle detail page, dealers had trouble judging how bad the damage was before bidding. The damage photos were too small, and the wide spacing made the details hard to follow. That slowed down the main decision the page exists for: is this damage worth the bid?"
+      ]
+    },
+    {
+      "id": "context",
+      "label": "Context",
+      "heading": "Each competitor solved part of it.",
+      "paras": [
+        "This was an April 2026 study on damage clarity in vehicle assessment. I looked at three competitors, and each one solved part of the problem but not all of it:"
+      ],
+      "bullets": [
+        "ACV has descriptive damage callouts, but they aren't visually tied to the photos, so users have to scan back and forth.",
+        "Manheim uses images too small to read at a glance.",
+        "Openlane has a diagram that shows where the damage is, but not what it actually looks like."
+      ]
+    },
+    {
+      "id": "exploration",
+      "label": "Exploration",
+      "heading": "Two layouts made the cut.",
+      "paras": [
+        "The team explored several layouts and narrowed them to two:"
+      ],
+      "bullets": [
+        "Option A: a large photo with the damage highlighted and details underneath.",
+        "Option B: a compact thumbnail with the details beside it."
+      ]
+    },
+    {
+      "id": "research",
+      "label": "Research",
+      "heading": "What customers are saying.",
+      "quotes": [
+        "I would have never known there was a missing piece…",
+        "I like that it's zoomed in and I like the little description at the bottom. It tells you exactly what it is.",
+        "Vertical scrolling feels natural because it's how people already scroll social media."
+      ]
+    },
+    {
+      "id": "solution",
+      "label": "Solution",
+      "heading": "A vertical stack of damage cards.",
+      "paras": [
+        "We went with Option A: a vertically scrolling stack of damage cards. Each card has a large photo with the damage highlighted, plus a short label showing location, type, and size (for example, “Front – Bumper Cover · Dented · 6–8 inches”). It works on any device and gives dealers what they need to bid with confidence, without hunting across the page."
+      ]
+    }
+  ],
+  "resultsHeading": "What dealers told us.",
+  "results": [
+    [
+      "94%",
+      "preferred the larger image with supporting details below (n=50)."
+    ],
+    [
+      "66%",
+      "preferred vertical scrolling over horizontal (n=20)."
+    ],
+    [
+      "4 of 5",
+      "interviewees preferred vertical scrolling."
+    ]
+  ],
+  "nextSteps": [
+    "Ship Option A and measure whether it changes bid confidence or how fast dealers decide.",
+    "Run a follow-up on horizontal vs. vertical scrolling. The interview sample (5 people) is small next to the survey (50).",
+    "Test how the cards hold up on vehicles with many damage points, since a long vertical list could get heavy."
+  ],
   "prev": {
     "label": "← All work",
     "to": "/#work"
@@ -14,50 +101,5 @@
   "next": {
     "label": "Next: Dealer registration →",
     "to": "/work/dealer-registration"
-  },
-  "subtitle": "[One sentence: the redesigned experience, who it serves, and the constraint that shaped it.]",
-  "problem": "[What was broken, and for whom. One or two sentences.]",
-  "outcome": "[What shipped, and what changed for the people using it.]",
-  "metric": "[KEY NUMBER]",
-  "callHeading": "[The tension in one line: \"Ship the quick fix, or rebuild the flow right?\"]",
-  "callBody": "[Two or three sentences: the constraint, the stakes, and the decision you faced. This is the paragraph a hiring manager reads first, so name the trade-off plainly.]",
-  "contextTwo": "[What the team knew going in: feedback, support volume, drop-off, or business goals.]",
-  "decisions": [
-    {
-      "n": "01",
-      "title": "[Decision 1, stated as a choice]",
-      "body": "[What the options were, what you chose, and the evidence or constraint behind it.]"
-    },
-    {
-      "n": "02",
-      "title": "[Decision 2, stated as a choice]",
-      "body": "[What the options were, what you chose, and the evidence or constraint behind it.]"
-    },
-    {
-      "n": "03",
-      "title": "[Decision 3, stated as a choice]",
-      "body": "[What the options were, what you chose, and the evidence or constraint behind it.]"
-    }
-  ],
-  "resultsHeading": "What changed after launch.",
-  "results": [
-    {
-      "value": "[00%]",
-      "text": "[What this number measures, and the baseline it moved from.]"
-    },
-    {
-      "value": "[00]",
-      "text": "[What this number measures, and the baseline it moved from.]"
-    },
-    {
-      "value": "[00x]",
-      "text": "[What this number measures, and the baseline it moved from.]"
-    }
-  ],
-  "reflection": "[One reflective paragraph: the constraint that looked like a limit and became the brief, and what you would do next.]",
-  "tags": [
-    "CarMax Auctions",
-    "Product design",
-    "2026"
-  ]
+  }
 }
