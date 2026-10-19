@@ -32,7 +32,7 @@ export const coverChipSx = {
 };
 
 // Home page section heading
-export const h2Sx = { m: 0, typography: 'h1' };
+export const h2Sx = { m: 0, typography: 'h3' };
 
 // Case study section heading
 export const h2CaseSx = { m: 0, typography: 'h2' };
