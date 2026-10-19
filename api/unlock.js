@@ -20,8 +20,9 @@ export default async function handler(request) {
   try { body = await request.json(); } catch { /* empty or bad body */ }
   const attempt = typeof body.password === 'string' ? body.password.slice(0, 200) : '';
 
-  const [given, expected] = await Promise.all([tokenFor(attempt), tokenFor(real)]);
-  if (!attempt || !safeEqual(given, expected)) {
+  const expected = await tokenFor(real);
+  const given = attempt ? await tokenFor(attempt) : '';
+  if (!given || !safeEqual(given, expected)) {
     await new Promise((r) => setTimeout(r, 700)); // slow down guessing
     return json({ error: 'wrong_password' }, 401);
   }
