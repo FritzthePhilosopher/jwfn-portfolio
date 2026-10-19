@@ -2,18 +2,18 @@
   "title": "Damage Detail Card.",
   "client": "CarMax Auctions",
   "role": "Product Designer II",
-  "year": "[YEAR]",
+  "year": "2026",
   "contribution": "[What you owned: research, flows, UI, testing.]",
   "heroLabel": "[Hero image: final damage detail card]",
   "contextOne": "[Who the dealers are, how they judge a vehicle's condition, and how damage was shown before.]",
   "beforeLabel": "[Before: the old damage view]",
   "prev": {
-    "label": "← Previous: Dealer registration",
-    "to": "/work/dealer-registration"
+    "label": "← All work",
+    "to": "/#work"
   },
   "next": {
-    "label": "Next: [Project 3] →",
-    "to": "/work/project-3"
+    "label": "Next: Dealer registration →",
+    "to": "/work/dealer-registration"
   },
   "subtitle": "[One sentence: the redesigned experience, who it serves, and the constraint that shaped it.]",
   "problem": "[What was broken, and for whom. One or two sentences.]",

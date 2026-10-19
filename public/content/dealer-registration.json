@@ -2,18 +2,18 @@
   "title": "Dealer Registration.",
   "client": "CarMax Auctions",
   "role": "Product Designer II",
-  "year": "[YEAR]",
+  "year": "2025",
   "contribution": "Helped lead the registration refresh and redesign. [Name your specific scope: research, flows, UI, testing.]",
   "heroLabel": "[Hero image: final registration flow]",
   "contextOne": "[Who the dealers are, what registering lets them do, and how the old process worked.]",
   "beforeLabel": "[Before: the old registration flow]",
   "prev": {
-    "label": "← All work",
-    "to": "/#work"
+    "label": "← Previous: Damage detail card",
+    "to": "/work/damage-detail-card"
   },
   "next": {
-    "label": "Next: Damage detail card →",
-    "to": "/work/damage-detail-card"
+    "label": "Next: AAdvantage Cash app →",
+    "to": "/work/project-3"
   },
   "subtitle": "[One sentence: the redesigned experience, who it serves, and the constraint that shaped it.]",
   "problem": "[What was broken, and for whom. One or two sentences.]",
