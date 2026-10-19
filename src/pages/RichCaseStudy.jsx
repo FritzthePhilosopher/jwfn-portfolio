@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Box, Button, Chip, Divider, Paper } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { colors } from '../theme.js';
@@ -7,10 +8,11 @@ const sectionTop = 'clamp(48px, 7vw, 88px)';
 const h2Case = h2CaseSx;
 
 function Figure({ img }) {
-  if (!img) return null;
+  const [failed, setFailed] = useState(false);
+  if (!img || failed) return null;
   return (
     <Box component="figure" sx={{ m: 0, mt: 4 }}>
-      <Box component="img" src={img.src} alt={img.alt} loading="lazy" sx={{ display: 'block', width: '100%', height: 'auto', border: `1px solid ${colors.border}`, bgcolor: '#fff' }} />
+      <Box component="img" src={img.src} alt={img.alt} loading="lazy" onError={() => setFailed(true)} sx={{ display: 'block', width: '100%', height: 'auto', border: `1px solid ${colors.border}`, bgcolor: '#fff' }} />
       {img.caption && <Box component="figcaption" sx={{ ...fieldLabel, mt: 1 }}>{img.caption}</Box>}
     </Box>
   );
