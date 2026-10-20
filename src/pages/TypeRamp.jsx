@@ -16,7 +16,7 @@ const samples = {
   stat: '15+',
   statSm: '25 → 6',
   quote: 'The constraint that looked like a limit became the brief.',
-  subtitle1: 'Fifteen-plus years of enterprise B2B design across Barclays, American Airlines, and CarMax.',
+  subtitle1: 'Fifteen-plus years of enterprise B2B design across Truelio (formerly Dynamic Marketing Systems) and CarMax.',
   subtitle2: 'Product Designer II',
   body1: 'Dealers needed a faster way to register. The old flow asked for the same documents three times, and support tickets showed where people gave up.',
   body2: 'Problem: the site lacked direction, so parents and students had trouble identifying their next steps.',

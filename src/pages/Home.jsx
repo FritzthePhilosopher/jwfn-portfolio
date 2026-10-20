@@ -9,7 +9,7 @@ const sectionTop = 'clamp(56px, 8vw, 104px)';
 
 const stats = [
   ['15+', 'Years designing enterprise B2B software'],
-  ['3', 'Enterprise teams: Barclays, American Airlines, CarMax'],
+  ['2', 'Teams: one agency, Truelio (formerly Dynamic Marketing Systems), and one enterprise, CarMax'],
   ['4y 3m', 'Full-time on CarMax Auctions, after six months as a contractor']
 ];
 
@@ -76,7 +76,7 @@ export default function Home() {
           I design enterprise products people can run a business on.
         </Box>
         <Box component="p" sx={{ mt: 4, mb: 0, maxWidth: 640, typography: 'subtitle1', color: colors.body }}>
-          Justin Neely. Fifteen-plus years of enterprise B2B design across Barclays, American Airlines, and CarMax. A left-handed human being who happens to design.
+          Justin Neely. Fifteen-plus years of enterprise B2B design across Truelio (formerly Dynamic Marketing Systems) and CarMax. A left-handed human being who happens to design.
         </Box>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '12px', mt: 5 }}>
           <Button variant="contained" size="large" href="#work">See selected work ↓</Button>
