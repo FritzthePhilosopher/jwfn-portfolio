@@ -12,8 +12,8 @@ export const cards = {
       "2018"
     ],
     "cover": {
-      "src": "/images/life-school/home-page-wireframe.jpg",
-      "alt": "Home page wireframe for The LIFE School 2.0 website"
+      "src": "/images/life-school/home-page-cover.jpg",
+      "alt": "Redesigned home page for The LIFE School: \"Design Your Own High School Experience\" beside a photo of a student speaking"
     }
   },
   "heal-thy": {
