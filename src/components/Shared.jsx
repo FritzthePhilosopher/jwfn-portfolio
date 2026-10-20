@@ -89,9 +89,9 @@ export function SiteNav() {
         >
           <Avatar
             variant="square"
-            sx={{ bgcolor: colors.band, color: colors.ink, fontFamily: fonts.serif, fontWeight: 700, fontSize: 15 /* logo mark, not part of the ramp */, width: 40, height: 40, borderRadius: 0 }}
+            sx={{ bgcolor: colors.band, color: colors.ink, fontFamily: fonts.serif, fontWeight: 700, fontSize: 22 /* logo mark, not part of the ramp */, width: 40, height: 40, borderRadius: 0 }}
           >
-            JN
+            J
           </Avatar>
           <span>Justin Neely</span>
         </Box>
