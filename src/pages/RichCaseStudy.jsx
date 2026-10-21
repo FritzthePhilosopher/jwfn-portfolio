@@ -10,8 +10,9 @@ const h2Case = h2CaseSx;
 function Figure({ img }) {
   const [failed, setFailed] = useState(false);
   if (!img || failed) return null;
+  // Optional img.maxWidth (px) shrinks and centers tall images, like full-page wireframes.
   return (
-    <Box component="figure" sx={{ m: 0, mt: 4 }}>
+    <Box component="figure" sx={{ m: 0, mt: 4, ...(img.maxWidth && { maxWidth: img.maxWidth, mx: 'auto' }) }}>
       <Box component="img" src={img.src} alt={img.alt} loading="lazy" onError={() => setFailed(true)} sx={{ display: 'block', width: '100%', height: 'auto', border: `1px solid ${colors.border}`, bgcolor: '#fff' }} />
       {img.caption && <Box component="figcaption" sx={{ ...fieldLabel, mt: 1 }}>{img.caption}</Box>}
     </Box>
