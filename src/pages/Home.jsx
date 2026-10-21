@@ -27,6 +27,8 @@ const work = [
     n: '02',
     tags: ['CarMax Auctions', 'Product design', '2025'],
     title: 'I helped lead the redesign of how dealers register with CarMax Auctions.',
+    problem: 'The registration process was long and a bit confusing for customers, and we wanted to cut the time and effort it took.',
+    outcome: 'Fewer pages and less confusion about registration status, which means quicker access to more inventory.',
     to: '/work/dealer-registration'
   },
   {
