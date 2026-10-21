@@ -17,9 +17,20 @@
     "Metric": "Currently live"
   },
   "hero": {
-    "src": "/private/aadvantage-cash/aadvantage-cash.png",
-    "alt": "AAdvantage Cash app screens: a home screen showing projected earnings and received and approved applications, beside a qualification status screen",
-    "caption": "Final design: the home screen and qualification status"
+    "layout": "phone",
+    "caption": "Final design: the home screen and qualification status",
+    "items": [
+      {
+        "src": "/private/aadvantage-cash/01-hero-home-screen.png",
+        "label": "Home",
+        "alt": "AAdvantage Cash home screen greeting Joy, with $425 in projected April earnings, 13 applications received and 8 approved, and 2 more approved apps needed for the next bonus tier"
+      },
+      {
+        "src": "/private/aadvantage-cash/01-hero-qualified-status.png",
+        "label": "Qualification status",
+        "alt": "Qualification status screen showing a flight attendant marked Qualified on 3/27/2021, with 21 days until the qualification expires"
+      }
+    ]
   },
   "sections": [
     {
@@ -28,7 +39,38 @@
       "heading": "Status checks lived on a web portal.",
       "paras": [
         "Flight attendants in the AAdvantage® Cash program earn bonuses and trips for the credit card applications they submit, but the only way to check their status was a web portal. That doesn't fit a job where they're always on the move. On top of that, another company had already built a UI mockup before our team came in, and it was made with very little research. The visuals lacked depth and the layouts had almost no white space."
-      ]
+      ],
+      "image": {
+        "layout": "phone",
+        "caption": "The mockup we inherited: built with little research, with dense layouts and almost no white space",
+        "items": [
+          {
+            "src": "/private/aadvantage-cash/02-original-mockup-home.png",
+            "label": "Home",
+            "alt": "Original grayscale mockup home screen with a promo banner, an apps-approved gauge and $900 in total earnings packed together"
+          },
+          {
+            "src": "/private/aadvantage-cash/02-original-mockup-profile.png",
+            "label": "Profile",
+            "alt": "Original mockup profile screen with employee number, home base and a short list of account links"
+          },
+          {
+            "src": "/private/aadvantage-cash/02-original-mockup-menu.png",
+            "label": "Menu",
+            "alt": "Original mockup side menu listing progress, earnings, refer-a-friend, tools and a spin-the-wheel game"
+          },
+          {
+            "src": "/private/aadvantage-cash/02-original-mockup-goals.png",
+            "label": "Goals",
+            "alt": "Original mockup goals tab under My Progress, listing two personal goals with status icons"
+          },
+          {
+            "src": "/private/aadvantage-cash/02-original-mockup-leaderboard.png",
+            "label": "Leaderboard",
+            "alt": "Original mockup leaderboard ranking flight attendants by home base and apps approved"
+          }
+        ]
+      }
     },
     {
       "id": "context",
@@ -36,7 +78,33 @@
       "heading": "Starting from someone else's mockup.",
       "paras": [
         "This was a 2021–2022 project where I owned UX and visual design. Because the team inherited someone else's mockup, it didn't start like a normal UX project. After a lot of back and forth about which features mattered, I suggested focusing on an MVP that would help users and still satisfy stakeholders. The team ran a design sprint, built personas from research on flight attendants, then moved through several rounds of wireframes and two rounds of unguided user testing."
-      ]
+      ],
+      "image": {
+        "layout": "wide",
+        "caption": "Personas built from our research on flight attendants before the design sprint",
+        "items": [
+          {
+            "src": "/private/aadvantage-cash/03-persona-lucy-leader.png",
+            "label": "Lucy Leader",
+            "alt": "Persona: Lucy Leader, a 38–65 veteran flight attendant and top performer who values recognition and the extra income the program brings"
+          },
+          {
+            "src": "/private/aadvantage-cash/03-persona-myrtle-main-cabin.png",
+            "label": "Myrtle Main Cabin",
+            "alt": "Persona: Myrtle Main Cabin, a 48–62 flight attendant near retirement who isn't tech savvy, dislikes change, and wishes she understood why she's selling credit cards"
+          },
+          {
+            "src": "/private/aadvantage-cash/03-persona-joy-jumpseat.png",
+            "label": "Joy Jumpseat",
+            "alt": "Persona: Joy Jumpseat, a 24–32 tech-savvy flight attendant looking for extra income who'd become a brand ambassador for the app"
+          },
+          {
+            "src": "/private/aadvantage-cash/03-persona-darius-doubtful.png",
+            "label": "Darius Doubtful",
+            "alt": "Persona: Darius Doubtful, a 35–54 flight attendant who handed out 100 applications without an approval and lost interest for lack of transparency"
+          }
+        ]
+      }
     },
     {
       "id": "research",
@@ -47,7 +115,43 @@
         "Their biggest concern was seeing the status of the applications they'd submitted.",
         "In the first round of testing, they called out the lack of color in the app.",
         "When the final version was presented, they liked the updated visuals and the Bonus Booster."
-      ]
+      ],
+      "image": {
+        "layout": "phone",
+        "caption": "From wireframes to the final home screen: after testing, application status and projected earnings moved to the top",
+        "items": [
+          {
+            "src": "/private/aadvantage-cash/04-wireframe-1.png",
+            "label": "Wireframe 1",
+            "alt": "Early wireframe leading with a large $6,040 projected earnings figure above four tiles for activity, promotions and history"
+          },
+          {
+            "src": "/private/aadvantage-cash/04-wireframe-2-current-activity.png",
+            "label": "Wireframe 2",
+            "alt": "Wireframe of a current activity screen with March applications at a glance, 94 received and 61 approved, and payout breakdowns"
+          },
+          {
+            "src": "/private/aadvantage-cash/04-wireframe-3.png",
+            "label": "Wireframe 3",
+            "alt": "Wireframe adding current totals of 94 apps received and 61 approved under the projected earnings"
+          },
+          {
+            "src": "/private/aadvantage-cash/04-midfi-home.png",
+            "label": "Mid-fidelity",
+            "alt": "Mid-fidelity home screen with projected April earnings, current activity and a Boost Your Earnings card"
+          },
+          {
+            "src": "/private/aadvantage-cash/04-hifi-home.png",
+            "label": "Final home",
+            "alt": "High-fidelity home screen in blue and green with projected earnings, current activity and the next bonus tier"
+          },
+          {
+            "src": "/private/aadvantage-cash/04-hifi-home-details-expanded.png",
+            "label": "Details expanded",
+            "alt": "High-fidelity home screen with earnings details expanded: $400 from 8 apps at the $50 base plus a $25 requalification promo"
+          }
+        ]
+      }
     },
     {
       "id": "solution",
@@ -55,7 +159,69 @@
       "heading": "Status and earnings first.",
       "paras": [
         "The team rebuilt the homepage around current application status (received vs. approved) and projected earnings, so the thing flight attendants cared about most was the first thing they saw. I also designed the Bonus Booster, a slider that shows what they could earn at each bonus tier (Base, Tier 1, Tier 2). I handled typography, components, sizing, and prototypes, while teammates created onboarding artwork and refined the visuals."
-      ]
+      ],
+      "image": {
+        "layout": "phone",
+        "caption": "The Bonus Booster: drag the slider to see what more approved apps would earn at each bonus tier",
+        "items": [
+          {
+            "src": "/private/aadvantage-cash/05-bonus-booster-10-apps.png",
+            "label": "10 approved apps",
+            "alt": "Bonus Booster set to 10 approved apps, estimating $725 and highlighting Tier 1 at $70 per approved app"
+          },
+          {
+            "src": "/private/aadvantage-cash/05-bonus-booster-details-expanded.png",
+            "label": "Details expanded",
+            "alt": "Bonus Booster with details expanded, breaking $725 into $500 base, a $200 Tier 1 bonus and a $25 requalification promo"
+          },
+          {
+            "src": "/private/aadvantage-cash/05-bonus-booster-25-apps.png",
+            "label": "25 approved apps",
+            "alt": "Bonus Booster set to 25 approved apps, estimating $2,275 and highlighting Tier 2 at $90 per approved app"
+          }
+        ]
+      },
+      "image2": {
+        "layout": "phone",
+        "caption": "Other screens in the final design",
+        "items": [
+          {
+            "src": "/private/aadvantage-cash/05-menu.png",
+            "label": "Menu",
+            "alt": "Menu with key card benefits, roadshows, qualification, my info and help"
+          },
+          {
+            "src": "/private/aadvantage-cash/05-my-info.png",
+            "label": "My info",
+            "alt": "My Info screen showing a qualified status badge, home base, email and phone"
+          },
+          {
+            "src": "/private/aadvantage-cash/05-paychecks-1.png",
+            "label": "Paychecks",
+            "alt": "Paychecks screen with the March-end paycheck of $450 and bar charts of previous paychecks"
+          },
+          {
+            "src": "/private/aadvantage-cash/05-inflight-scripts.png",
+            "label": "Inflight scripts",
+            "alt": "Inflight scripts screen with a standard sales script and an audio player"
+          },
+          {
+            "src": "/private/aadvantage-cash/05-roadshows.png",
+            "label": "Roadshows",
+            "alt": "Roadshows screen listing upcoming events by gate and time with reminders"
+          },
+          {
+            "src": "/private/aadvantage-cash/05-meet-the-team.png",
+            "label": "Meet the team",
+            "alt": "Meet the team screen introducing the flight service manager with a contact button"
+          },
+          {
+            "src": "/private/aadvantage-cash/05-faqs.png",
+            "label": "FAQs",
+            "alt": "FAQs screen with expandable questions about the program"
+          }
+        ]
+      }
     },
     {
       "id": "next",

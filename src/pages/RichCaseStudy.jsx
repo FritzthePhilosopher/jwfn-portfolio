@@ -7,8 +7,36 @@ import { Container, Label, SiteNav, SiteFooter, h2CaseSx, displaySx, fieldLabel,
 const sectionTop = 'clamp(48px, 7vw, 88px)';
 const h2Case = h2CaseSx;
 
+// A row of images, like phone screens or persona cards: { items: [{ src, alt, label }], layout: 'phone' | 'wide', caption }.
+// Phone screens sit in one row (up to six), or two balanced rows when there are more.
+function Gallery({ g }) {
+  const wide = g.layout === 'wide';
+  const n = g.items.length;
+  const cols = n <= 6 ? n : Math.ceil(n / 2);
+  const grid = wide
+    ? { gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' } }
+    : {
+        gridTemplateColumns: { xs: `repeat(${Math.min(cols, 2)}, 1fr)`, sm: `repeat(${Math.min(cols, 3)}, 1fr)`, md: `repeat(${cols}, 1fr)` },
+        maxWidth: { md: cols * 220 + (cols - 1) * 16 }
+      };
+  return (
+    <Box component="figure" sx={{ m: 0, mt: 4 }}>
+      <Box sx={{ display: 'grid', gap: wide ? 3 : 2, alignItems: 'start', ...grid }}>
+        {g.items.map((it) => (
+          <div key={it.src}>
+            <Box component="img" src={it.src} alt={it.alt} loading="lazy" sx={{ display: 'block', width: '100%', height: 'auto', border: `1px solid ${colors.border}`, bgcolor: '#fff' }} />
+            {it.label && <Box sx={{ ...fieldLabel, mt: 1 }}>{it.label}</Box>}
+          </div>
+        ))}
+      </Box>
+      {g.caption && <Box component="figcaption" sx={{ ...fieldLabel, mt: 2 }}>{g.caption}</Box>}
+    </Box>
+  );
+}
+
 function Figure({ img }) {
   const [failed, setFailed] = useState(false);
+  if (img?.items) return <Gallery g={img} />;
   if (!img || failed) return null;
   // Optional img.maxWidth (px) narrows and centers the figure.
   // Optional img.frameHeight (px) shows a tall image, like a full-page wireframe,
