@@ -2,12 +2,16 @@
 // Locks the case study pages, their content files, and anything in /private.
 import { next } from '@vercel/functions';
 import { isUnlocked } from './lib/case-study-auth.js';
+import { isPublicPath } from './lib/public-case-studies.js';
 
 export const config = {
   matcher: ['/work/:path*', '/content/:path*', '/private/:path*']
 };
 
 export default async function middleware(request) {
+  // Public case studies skip the lock entirely.
+  if (isPublicPath(new URL(request.url).pathname)) return next();
+
   if (await isUnlocked(request, process.env.CASE_STUDY_PASSWORD)) {
     return next({ headers: { 'Cache-Control': 'private, no-store' } });
   }

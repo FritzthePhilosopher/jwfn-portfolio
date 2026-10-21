@@ -2,6 +2,7 @@ import { Box, Button, Card, CardActions, Chip, Divider, Paper } from '@mui/mater
 import { Link as RouterLink } from 'react-router-dom';
 import { colors } from '../theme.js';
 import { cards } from './cards.js';
+import { PUBLIC_CASE_STUDIES } from '../../lib/public-case-studies.js';
 import { Container, Label, Placeholder, SiteNav, SiteFooter, h2Sx, displaySx, fieldLabel, monoChipSx } from '../components/Shared.jsx';
 
 const cardPad = 'clamp(16px, 3vw, 32px)';
@@ -139,7 +140,9 @@ export default function Home() {
                 {w.to ? (
                   <>
                     <Button variant="contained" component={RouterLink} to={w.to}>Read the case study →</Button>
-                    <Box component="span" sx={{ typography: 'caption', color: colors.muted, ml: '0 !important' }}>Password required</Box>
+                    {!PUBLIC_CASE_STUDIES.includes(w.to.replace('/work/', '')) && (
+                      <Box component="span" sx={{ typography: 'caption', color: colors.muted, ml: '0 !important' }}>Password required</Box>
+                    )}
                   </>
                 ) : (
                   <Button variant="outlined" color="inherit" disabled>[ADD CASE STUDY LINK]</Button>
