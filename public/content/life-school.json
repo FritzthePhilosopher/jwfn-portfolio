@@ -27,7 +27,8 @@
     "src": "/images/life-school/home-page-wireframe.jpg",
     "alt": "Home page wireframe for The LIFE School 2.0 website",
     "caption": "Wireframe example of The LIFE School 2.0 website",
-    "maxWidth": 480
+    "maxWidth": 720,
+    "frameHeight": 560
   },
   "sections": [
     {

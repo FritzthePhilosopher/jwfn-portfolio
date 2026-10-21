@@ -10,10 +10,24 @@ const h2Case = h2CaseSx;
 function Figure({ img }) {
   const [failed, setFailed] = useState(false);
   if (!img || failed) return null;
-  // Optional img.maxWidth (px) shrinks and centers tall images, like full-page wireframes.
+  // Optional img.maxWidth (px) narrows and centers the figure.
+  // Optional img.frameHeight (px) shows a tall image, like a full-page wireframe,
+  // in a fixed-height window you scroll inside.
+  const picture = (
+    <Box component="img" src={img.src} alt={img.alt} loading="lazy" onError={() => setFailed(true)} sx={{ display: 'block', width: '100%', height: 'auto', border: img.frameHeight ? 0 : `1px solid ${colors.border}`, bgcolor: '#fff' }} />
+  );
   return (
     <Box component="figure" sx={{ m: 0, mt: 4, ...(img.maxWidth && { maxWidth: img.maxWidth, mx: 'auto' }) }}>
-      <Box component="img" src={img.src} alt={img.alt} loading="lazy" onError={() => setFailed(true)} sx={{ display: 'block', width: '100%', height: 'auto', border: `1px solid ${colors.border}`, bgcolor: '#fff' }} />
+      {img.frameHeight ? (
+        <Box
+          tabIndex={0}
+          role="region"
+          aria-label={`${img.alt} (scroll to see the full page)`}
+          sx={{ height: img.frameHeight, overflowY: 'auto', border: `1px solid ${colors.border}`, bgcolor: '#fff', '&:focus-visible': { outline: `2px solid ${colors.ink}`, outlineOffset: 2 } }}
+        >
+          {picture}
+        </Box>
+      ) : picture}
       {img.caption && <Box component="figcaption" sx={{ ...fieldLabel, mt: 1 }}>{img.caption}</Box>}
     </Box>
   );
