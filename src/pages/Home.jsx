@@ -83,8 +83,11 @@ export default function Home() {
         >
           I turn complex systems into products people can actually use.
         </Box>
-        <Box component="p" sx={{ mt: 4, mb: 0, maxWidth: 640, typography: 'subtitle1', color: colors.body }}>
-          Justin Neely. 15+ years in enterprise B2B design, with experience at Truelio (formerly Dynamic Marketing Systems) and CarMax. Left-handed by nature. Designer by profession. Human by default.
+        <Box component="p" sx={{ mt: 4, mb: 0, maxWidth: 700, typography: 'subtitle1', color: colors.body, textWrap: 'pretty' }}>
+          Justin Neely. 15+ years in enterprise B2B design, with experience at Truelio (formerly Dynamic Marketing Systems) and CarMax.{' '}
+          {/* Desktop: the tagline gets its own line. Phones wrap naturally. */}
+          <Box component="br" sx={{ display: { xs: 'none', md: 'inline' } }} />
+          Left-handed by nature. Designer by profession. Human by{'\u00A0'}default.
         </Box>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '12px', mt: 5 }}>
           <Button variant="contained" size="large" href="#work">See selected work ↓</Button>
