@@ -40,6 +40,10 @@ const work = [
     problem: 'Flight attendants could only check their card applications on a web portal.',
     outcome: 'A mobile app that puts application status and projected earnings first.',
     metric: 'Currently live',
+    cover: {
+      src: '/images/aadvantage-cash/cover.jpg',
+      alt: 'AAdvantage Cash app home screen greeting Joy, with $425 in projected April earnings and 13 applications received and 8 approved, beside a qualification status screen'
+    },
     to: '/work/aadvantage-cash'
   }
 ];
