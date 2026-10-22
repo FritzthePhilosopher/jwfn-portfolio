@@ -81,10 +81,10 @@ export default function Home() {
           component="h1"
           sx={{ ...displaySx, maxWidth: 1040 }}
         >
-          I design enterprise products people can run a business on.
+          I turn complex systems into products people can actually use.
         </Box>
         <Box component="p" sx={{ mt: 4, mb: 0, maxWidth: 640, typography: 'subtitle1', color: colors.body }}>
-          Justin Neely. Fifteen-plus years of enterprise B2B design across Truelio (formerly Dynamic Marketing Systems) and CarMax. A left-handed human being who happens to design.
+          Justin Neely. 15+ years in enterprise B2B design, with experience at Truelio (formerly Dynamic Marketing Systems) and CarMax. Left-handed by nature. Designer by profession. Human by default.
         </Box>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '12px', mt: 5 }}>
           <Button variant="contained" size="large" href="#work">See selected work ↓</Button>
