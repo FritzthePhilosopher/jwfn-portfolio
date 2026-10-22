@@ -1,4 +1,5 @@
-import { Box, Chip, Divider, Avatar, AppBar, Link } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Box, Chip, Divider, Avatar, AppBar, Link, IconButton, Collapse } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { colors, fonts, stripes } from '../theme.js';
 
@@ -72,7 +73,35 @@ export function Placeholder({ label, sx }) {
   );
 }
 
+// At 500px and below, the nav links fold into a hamburger menu.
+const mobileNav = '@media (max-width: 500px)';
+const navItems = [['/#work', 'Work'], ['/#about', 'About'], ['/#contact', 'Contact']];
+
+function MenuIcon({ open }) {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square">
+      {open ? <path d="M5 5l14 14M19 5L5 19" /> : <path d="M3 6h18M3 12h18M3 18h18" />}
+    </svg>
+  );
+}
+
 export function SiteNav() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === 'Escape' && setOpen(false);
+    // Close if the window grows past the breakpoint while the menu is open.
+    const mq = window.matchMedia('(min-width: 501px)');
+    const onWide = (e) => e.matches && setOpen(false);
+    window.addEventListener('keydown', onKey);
+    mq.addEventListener('change', onWide);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      mq.removeEventListener('change', onWide);
+    };
+  }, [open]);
+
   return (
     <AppBar
       position="sticky"
@@ -95,12 +124,37 @@ export function SiteNav() {
           </Avatar>
           <span>Justin Neely</span>
         </Box>
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px 32px' }}>
-          <Link component={RouterLink} to="/#work" underline="hover" sx={navLinkSx}>Work</Link>
-          <Link component={RouterLink} to="/#about" underline="hover" sx={navLinkSx}>About</Link>
-          <Link component={RouterLink} to="/#contact" underline="hover" sx={navLinkSx}>Contact</Link>
+        <Box component="nav" aria-label="Main" sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px 32px', [mobileNav]: { display: 'none' } }}>
+          {navItems.map(([to, label]) => (
+            <Link key={to} component={RouterLink} to={to} underline="hover" sx={navLinkSx}>{label}</Link>
+          ))}
         </Box>
+        <IconButton
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          onClick={() => setOpen((o) => !o)}
+          sx={{ display: 'none', ml: 'auto', mr: -1, color: colors.ink, borderRadius: 0, [mobileNav]: { display: 'inline-flex' } }}
+        >
+          <MenuIcon open={open} />
+        </IconButton>
       </Container>
+      <Collapse in={open} timeout={200} unmountOnExit>
+        <Box component="nav" id="mobile-menu" aria-label="Main" sx={{ display: 'none', [mobileNav]: { display: 'block' }, borderTop: `1px solid ${colors.border}` }}>
+          {navItems.map(([to, label]) => (
+            <Link
+              key={to}
+              component={RouterLink}
+              to={to}
+              underline="none"
+              onClick={() => setOpen(false)}
+              sx={{ ...navLinkSx, display: 'block', px: gutter, py: '16px', borderBottom: `1px solid ${colors.border}`, '&:last-of-type': { borderBottom: 0 } }}
+            >
+              {label}
+            </Link>
+          ))}
+        </Box>
+      </Collapse>
     </AppBar>
   );
 }
