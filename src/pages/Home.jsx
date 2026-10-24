@@ -203,10 +203,13 @@ export default function Home() {
           <Divider sx={{ borderColor: colors.ink, borderBottomWidth: '1.5px' }} />
           {jobs.map(([co, role, yrs]) => (
             <Box key={co}>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '8px 24px', py: '22px' }}>
-                <Box sx={{ typography: 'h4' }}>{co}</Box>
-                <Box sx={{ flex: '1 1 320px', color: colors.ink }}>{role}</Box>
-                <Box sx={{ typography: 'mono', color: colors.ink }}>{yrs}</Box>
+              <Box sx={{ py: '24px' }}>
+                {/* Company and dates on one line, the description underneath */}
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'baseline', gap: '4px 24px' }}>
+                  <Box component="h3" sx={{ m: 0, typography: 'h4' }}>{co}</Box>
+                  <Box sx={{ typography: 'mono', color: colors.ink }}>{yrs}</Box>
+                </Box>
+                <Box component="p" sx={{ mt: 1.5, mb: 0, maxWidth: 760, color: colors.ink, textWrap: 'pretty' }}>{role}</Box>
               </Box>
               <Divider sx={{ borderColor: colors.bandBorder }} />
             </Box>
