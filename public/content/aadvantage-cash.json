@@ -242,8 +242,8 @@
     }
   ],
   "prev": {
-    "label": "← Previous: Dealer registration",
-    "to": "/work/dealer-registration"
+    "label": "← Previous: Damage assessment cards",
+    "to": "/work/damage-detail-card"
   },
   "next": {
     "label": "Next: The LIFE School →",

@@ -31,7 +31,8 @@ const work = [
     problem: 'The registration process was long and a bit confusing for customers, and we wanted to cut the time and effort it took.',
     outcome: 'Fewer pages and less confusion about registration status, which means quicker access to more inventory.',
     metric: 'Reduced registration time by nearly 40%',
-    to: '/work/dealer-registration'
+    to: '/work/dealer-registration',
+    hidden: true // Hidden for now; set to false (or delete this line) to show it again.
   },
   {
     n: '03',
@@ -54,6 +55,9 @@ const extra = ['life-school'].map((k, i) => {
   return { n: '0' + (4 + i), tags: c.tags, title: c.title, problem: c.problem, outcome: c.outcome, metric: c.metric, cover: c.cover, to: '/work/' + k };
 });
 work.push(...extra);
+
+// Drop hidden projects and number the rest in order (01, 02, 03...).
+const shownWork = work.filter((w) => !w.hidden).map((w, i) => ({ ...w, n: String(i + 1).padStart(2, '0') }));
 
 const labs = [1, 2];
 const SHOW_CLAUDE = false;
@@ -120,7 +124,7 @@ export default function Home() {
         <Label>Selected work / 01</Label>
         <Box component="h2" sx={{ ...h2Sx, mt: 1.5, mb: 5 }}>Things I've shipped.</Box>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          {work.map((w) => (
+          {shownWork.map((w) => (
             <Card key={w.n} variant="outlined" sx={{ bgcolor: colors.tint, borderColor: colors.ink, borderWidth: '1.5px', borderRadius: 0 }}>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4, p: cardPad }}>
                 {w.cover ? (
