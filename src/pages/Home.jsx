@@ -22,6 +22,10 @@ const work = [
     problem: 'Damage photos were too small and scattered for dealers to judge before bidding.',
     outcome: 'Vertically scrolling damage cards with a large, highlighted photo and a clear label.',
     metric: '94% preferred the new layout (n=50)',
+    cover: {
+      src: '/images/damage-detail-card/cover.jpg',
+      alt: 'CarMax Auctions vehicle page with the damage assessment open: five cards, each with a large photo, the damaged area outlined, and a label for location, type and size'
+    },
     to: '/work/damage-detail-card'
   },
   {
