@@ -19,12 +19,12 @@ const work = [
     n: '01',
     tags: ['CarMax Auctions', 'Product design', '2026'],
     title: "I designed the damage detail card that shows dealers a vehicle's true condition.",
-    problem: 'Damage photos were too small and scattered for dealers to judge before bidding.',
-    outcome: 'Vertically scrolling damage cards with a large, highlighted photo and a clear label.',
-    metric: '94% preferred the new layout (n=50)',
+    // Locked: the homepage shows only a blurred preview. The problem, outcome and
+    // results live in the password-protected case study (public/content/damage-detail-card.json).
+    locked: true,
     cover: {
-      src: '/images/damage-detail-card/cover.jpg',
-      alt: 'CarMax Auctions vehicle page with the damage assessment open: five cards, each with a large photo, the damaged area outlined, and a label for location, type and size'
+      src: '/images/damage-detail-card/cover-locked.jpg',
+      alt: 'Blurred preview of the damage assessment design'
     },
     to: '/work/damage-detail-card'
   },
@@ -76,6 +76,15 @@ const about = [
   ['Atlanta.', 'Home for more than a decade.']
 ];
 
+
+function LockIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square">
+      <rect x="5" y="11" width="14" height="10" />
+      <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+    </svg>
+  );
+}
 
 export default function Home() {
   return (
@@ -131,7 +140,17 @@ export default function Home() {
           {shownWork.map((w) => (
             <Card key={w.n} variant="outlined" sx={{ bgcolor: colors.tint, borderColor: colors.ink, borderWidth: '1.5px', borderRadius: 0 }}>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4, p: cardPad }}>
-                {w.cover ? (
+                {w.cover && w.locked ? (
+                  <Box sx={{ flex: '1 1 440px', minWidth: 0, position: 'relative', maxHeight: 360, overflow: 'hidden', border: `1px solid ${colors.border}` }}>
+                    <Box component="img" src={w.cover.src} alt={w.cover.alt} loading="lazy" sx={{ display: 'block', width: '100%', height: '100%', maxHeight: 360, objectFit: 'cover' }} />
+                    <Box sx={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px', px: 2, py: 1.25, bgcolor: '#fff', color: colors.ink, border: `1.5px solid ${colors.ink}`, typography: 'label' }}>
+                        <LockIcon />
+                        Password protected
+                      </Box>
+                    </Box>
+                  </Box>
+                ) : w.cover ? (
                   <Box component="img" src={w.cover.src} alt={w.cover.alt} loading="lazy" sx={{ flex: '1 1 440px', minWidth: 0, width: '100%', maxHeight: 360, objectFit: 'cover', objectPosition: 'top', border: `1px solid ${colors.border}`, bgcolor: '#fff' }} />
                 ) : (
                   <Placeholder label="[Cover image or prototype video]" sx={{ flex: '1 1 440px', minHeight: 320 }} />
@@ -145,18 +164,24 @@ export default function Home() {
                   </Box>
                   <Box component="h3" sx={{ m: 0, typography: 'h4' }}>{w.title}</Box>
                   <Divider />
-                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px', typography: 'body2' }}>
-                    <div><Box component="span" sx={fieldLabel}>Problem </Box>{w.problem || '[One sentence: what was broken, and for whom]'}</div>
-                    <div><Box component="span" sx={fieldLabel}>Outcome </Box>{w.outcome || '[One sentence: what changed]'}</div>
-                    <div><Box component="span" sx={fieldLabel}>Metric </Box>{w.metric || '[KEY NUMBER]'}</div>
-                  </Box>
+                  {w.locked ? (
+                    <Box component="p" sx={{ m: 0, typography: 'body2', color: colors.body }}>
+                      The problem, the process and the results for this project are behind the password. Enter it to read the full case study.
+                    </Box>
+                  ) : (
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px', typography: 'body2' }}>
+                      <div><Box component="span" sx={fieldLabel}>Problem </Box>{w.problem || '[One sentence: what was broken, and for whom]'}</div>
+                      <div><Box component="span" sx={fieldLabel}>Outcome </Box>{w.outcome || '[One sentence: what changed]'}</div>
+                      <div><Box component="span" sx={fieldLabel}>Metric </Box>{w.metric || '[KEY NUMBER]'}</div>
+                    </Box>
+                  )}
                 </Box>
               </Box>
               <CardActions sx={{ px: cardPad, pb: cardPad, pt: 0, gap: 2, flexWrap: 'wrap' }}>
                 {w.to ? (
                   <>
-                    <Button variant="contained" component={RouterLink} to={w.to}>Read the case study →</Button>
-                    {!PUBLIC_CASE_STUDIES.includes(w.to.replace('/work/', '')) && (
+                    <Button variant="contained" component={RouterLink} to={w.to}>{w.locked ? 'Unlock the case study →' : 'Read the case study →'}</Button>
+                    {!w.locked && !PUBLIC_CASE_STUDIES.includes(w.to.replace('/work/', '')) && (
                       <Box component="span" sx={{ typography: 'caption', color: colors.muted, ml: '0 !important' }}>Password required</Box>
                     )}
                   </>
