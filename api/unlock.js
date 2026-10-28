@@ -1,5 +1,5 @@
 // POST /api/unlock  { password, next }  ->  sets the unlock cookie.
-import { COOKIE_NAME, COOKIE_MAX_AGE, tokenFor, safeEqual, safeNext } from '../lib/case-study-auth.js';
+import { COOKIE_NAME, COOKIE_MAX_AGE, tokenFor, issueSession, safeEqual, safeNext } from '../lib/case-study-auth.js';
 
 const json = (body, status = 200, headers = {}) =>
   new Response(JSON.stringify(body), {
@@ -27,6 +27,7 @@ export default async function handler(request) {
     return json({ error: 'wrong_password' }, 401);
   }
 
-  const cookie = `${COOKIE_NAME}=${expected}; Path=/; Max-Age=${COOKIE_MAX_AGE}; HttpOnly; Secure; SameSite=Lax`;
+  // A fresh 30-minute session; after that the visitor has to enter the password again.
+  const cookie = `${COOKIE_NAME}=${await issueSession(real)}; Path=/; Max-Age=${COOKIE_MAX_AGE}; HttpOnly; Secure; SameSite=Lax`;
   return json({ ok: true, next: safeNext(body.next) }, 200, { 'Set-Cookie': cookie });
 }

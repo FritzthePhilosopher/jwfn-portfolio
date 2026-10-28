@@ -49,7 +49,7 @@ export default function Unlock() {
           <Label>Case studies</Label>
           <Box component="h1" sx={{ m: 0, mt: 2, typography: 'h1' }}>This work is password protected.</Box>
           <Box component="p" sx={{ mt: 3, mb: 0, typography: 'subtitle1', color: colors.body }}>
-            Some of these projects include client work I can only share privately. Enter the password to continue.
+            Some of these projects include client work I can only share privately. Enter the password to continue. Access lasts 30 minutes.
           </Box>
 
           <Box component="form" onSubmit={submit} noValidate sx={{ mt: 5, display: 'flex', flexDirection: 'column', gap: 2 }}>
