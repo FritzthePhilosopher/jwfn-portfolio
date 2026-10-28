@@ -24,7 +24,7 @@ function Gallery({ g }) {
       <Box sx={{ display: 'grid', gap: wide ? 3 : 2, alignItems: 'start', ...grid }}>
         {g.items.map((it) => (
           <div key={it.src}>
-            <Box component="img" src={it.src} alt={it.alt} loading="lazy" sx={{ display: 'block', width: '100%', height: 'auto', border: `1px solid ${colors.border}`, bgcolor: '#fff' }} />
+            <Box component="img" src={it.src} alt={it.alt} loading="lazy" sx={{ display: 'block', width: '100%', height: 'auto', bgcolor: '#fff' }} />
             {it.label && <Box sx={{ ...fieldLabel, mt: 1 }}>{it.label}</Box>}
           </div>
         ))}
@@ -42,7 +42,7 @@ function Figure({ img }) {
   // Optional img.frameHeight (px) shows a tall image, like a full-page wireframe,
   // in a fixed-height window you scroll inside.
   const picture = (
-    <Box component="img" src={img.src} alt={img.alt} loading="lazy" onError={() => setFailed(true)} sx={{ display: 'block', width: '100%', height: 'auto', border: img.frameHeight ? 0 : `1px solid ${colors.border}`, bgcolor: '#fff' }} />
+    <Box component="img" src={img.src} alt={img.alt} loading="lazy" onError={() => setFailed(true)} sx={{ display: 'block', width: '100%', height: 'auto', bgcolor: '#fff' }} />
   );
   return (
     <Box component="figure" sx={{ m: 0, mt: 4, ...(img.maxWidth && { maxWidth: img.maxWidth, mx: 'auto' }) }}>
