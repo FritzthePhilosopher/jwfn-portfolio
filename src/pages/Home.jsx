@@ -117,7 +117,7 @@ export default function Home() {
           <Label sx={{ mb: 1 }}>Right now</Label>
           <Chip
             variant="outlined"
-            label="Open to senior product design roles"
+            label="Open to product designer roles"
             sx={{ typography: 'mono', height: 36, borderRadius: 0, color: colors.ink, borderColor: colors.band, bgcolor: 'rgba(255,255,255,0.4)' }}
           />
         </Box>
