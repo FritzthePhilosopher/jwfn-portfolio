@@ -75,7 +75,7 @@ export function Placeholder({ label, sx }) {
 
 // At 500px and below, the nav links fold into a hamburger menu.
 const mobileNav = '@media (max-width: 500px)';
-const navItems = [['/#work', 'Work'], ['/#resume', 'Resume'], ['/#about', 'About'], ['/#contact', 'Contact']];
+const navItems = [['/#work', 'Work'], ['/resume', 'Resume'], ['/#about', 'About'], ['/#contact', 'Contact']];
 
 function MenuIcon({ open }) {
   return (
