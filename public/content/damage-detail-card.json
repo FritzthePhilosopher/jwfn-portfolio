@@ -28,7 +28,12 @@
       "heading": "Is this damage worth the bid?",
       "paras": [
         "On the vehicle detail page, dealers had trouble judging how bad the damage was before bidding. The damage photos were too small, and the wide spacing made the details hard to follow. That slowed down the main decision the page exists for: is this damage worth the bid?"
-      ]
+      ],
+      "image": {
+        "src": "/private/damage-assessment/before-vehicle-assessment.png",
+        "alt": "The original vehicle assessment list: one damage row with a small thumbnail of the car, the location \"Front Left Door\", \"Dented\", and a \"6 to 8 inches\" tag spread far apart",
+        "caption": "Before: a small thumbnail and wide spacing made each damage hard to judge"
+      }
     },
     {
       "id": "context",
@@ -41,7 +46,28 @@
         "ACV has descriptive damage callouts, but they aren't visually tied to the photos, so users have to scan back and forth.",
         "Manheim uses images too small to read at a glance.",
         "Openlane has a diagram that shows where the damage is, but not what it actually looks like."
-      ]
+      ],
+      "image": {
+        "layout": "phone",
+        "items": [
+          {
+            "src": "/private/damage-assessment/competitor-acv.png",
+            "alt": "ACV vehicle page listing damage as text: structural announcements, CARFAX reports, body, glass and light damage, with no photos",
+            "label": "Damage callouts (ACV)"
+          },
+          {
+            "src": "/private/damage-assessment/competitor-manheim.png",
+            "alt": "Manheim damage table with a tiny vehicle thumbnail in the Image column",
+            "label": "Small image (Manheim)"
+          },
+          {
+            "src": "/private/damage-assessment/competitor-openlane.png",
+            "alt": "Openlane exterior damage card with a photo of a red truck bed labeled \"Driver bed side, Ding\"",
+            "label": "Location & issues (Openlane)"
+          }
+        ],
+        "caption": "From the competitive analysis"
+      }
     },
     {
       "id": "exploration",
@@ -53,7 +79,39 @@
       "bullets": [
         "Option A: a large photo with the damage highlighted and details underneath.",
         "Option B: a compact thumbnail with the details beside it."
-      ]
+      ],
+      "image": {
+        "layout": "wide",
+        "items": [
+          {
+            "src": "/private/damage-assessment/iteration-1.jpg",
+            "alt": "Iteration: a grid of compact damage rows, each with a small thumbnail, location, type and size tag",
+            "label": "Compact rows"
+          },
+          {
+            "src": "/private/damage-assessment/iteration-2.jpg",
+            "alt": "Iteration: compact damage cards with the thumbnail on the left and the vehicle area on the right",
+            "label": "Compact cards"
+          },
+          {
+            "src": "/private/damage-assessment/iteration-3.jpg",
+            "alt": "Iteration: a row of damage cards with large vehicle photos and details below",
+            "label": "Large photo cards"
+          },
+          {
+            "src": "/private/damage-assessment/iteration-4.jpg",
+            "alt": "Iteration: a grid of large photo cards with the damaged area outlined",
+            "label": "Photo grid"
+          }
+        ],
+        "caption": "Early iterations the team explored"
+      },
+      "image2": {
+        "src": "/private/damage-assessment/options-a-and-b.jpg",
+        "alt": "The two finalists. Option A: damage cards with a large photo, the damage outlined, and details below. Option B: compact cards with a small thumbnail and details beside it",
+        "caption": "The two finalists: Option A (top) and Option B (bottom)",
+        "maxWidth": 680
+      }
     },
     {
       "id": "research",
@@ -71,7 +129,13 @@
       "heading": "A vertical stack of damage cards.",
       "paras": [
         "We went with Option A: a vertically scrolling stack of damage cards. Each card has a large photo with the damage highlighted, plus a short label showing location, type, and size (for example, “Front – Bumper Cover · Dented · 6–8 inches”). It works on any device and gives dealers what they need to bid with confidence, without hunting across the page."
-      ]
+      ],
+      "image": {
+        "src": "/private/damage-assessment/final-damage-card.jpg",
+        "alt": "Final damage card: a large photo of a front bumper with the dent outlined in orange, labeled \"Front – Bumper Cover, Dented, 6–8 inches\"",
+        "caption": "The final card: large photo, highlighted damage, and location, type and size",
+        "maxWidth": 420
+      }
     }
   ],
   "resultsHeading": "What dealers told us.",
