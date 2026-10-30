@@ -1,10 +1,19 @@
-import { createTheme } from '@mui/material';
+import { experimental_extendTheme as extendTheme } from '@mui/material/styles';
 
-export const colors = {
+/* ------------------------------------------------------------------
+   COLOR
+   Two schemes, light and dark. Components use `colors.ink` etc., which
+   are CSS variables, so the whole site flips when the theme toggle sets
+   data-mui-color-scheme on <html>. The coral band keeps dark text in
+   both schemes, so its "on band" colors are the same in each.
+   ------------------------------------------------------------------ */
+const light = {
+  bg: '#FFFFFF',
   ink: '#2A1612',
   body: '#5A3B34',
   muted: '#7A5C55',
   border: '#F0D6CC',
+  chipBorder: '#E0B5A6',
   tint: '#FFF1EC',
   band: '#FF7F50',
   accent: '#FF7F50',
@@ -15,6 +24,26 @@ export const colors = {
   bandBorder: '#C2512B',
   bandBorderStrong: '#A8431F'
 };
+
+const dark = {
+  ...light,
+  bg: '#16100E',
+  ink: '#F7EAE5',
+  body: '#DCC7C0',
+  muted: '#B09790',
+  border: '#3A2A25',
+  chipBorder: '#5C433B',
+  tint: '#211714',
+  accentText: '#FF9A74'
+};
+
+export const schemes = { light, dark };
+
+const cssVar = (k) => `--c-${k.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase())}`;
+const toVars = (scheme) => Object.fromEntries(Object.entries(scheme).map(([k, v]) => [cssVar(k), v]));
+
+/** Color tokens as CSS variables: colors.ink === 'var(--c-ink)'. */
+export const colors = Object.fromEntries(Object.keys(light).map((k) => [k, `var(${cssVar(k)})`]));
 
 export const fonts = {
   serif: "'IBM Plex Serif', serif",
@@ -92,12 +121,17 @@ const variants = Object.fromEntries(
   ])
 );
 
-const theme = createTheme({
-  palette: {
-    primary: { main: colors.accent },
-    text: { primary: colors.ink, secondary: colors.muted },
-    divider: colors.border,
-    background: { default: '#FFFFFF' }
+const palette = (c) => ({
+  primary: { main: c.accent, contrastText: c.accentOnBand },
+  text: { primary: c.ink, secondary: c.muted },
+  divider: c.border,
+  background: { default: c.bg, paper: c.bg }
+});
+
+const theme = extendTheme({
+  colorSchemes: {
+    light: { palette: palette(light) },
+    dark: { palette: palette(dark) }
   },
   shape: { borderRadius: 2 },
   typography: {
@@ -109,7 +143,9 @@ const theme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: {
-        body: { color: colors.ink },
+        ':root, [data-mui-color-scheme="light"]': toVars(light),
+        '[data-mui-color-scheme="dark"]': toVars(dark),
+        body: { color: colors.ink, backgroundColor: colors.bg, transition: 'background-color 200ms ease, color 200ms ease' },
         '[id]': { scrollMarginTop: '72px' }
       }
     },
@@ -123,7 +159,10 @@ const theme = createTheme({
         }
       }
     },
-    MuiButton: { defaultProps: { disableElevation: true } },
+    MuiButton: {
+      defaultProps: { disableElevation: true },
+      styleOverrides: { outlined: { '&.MuiButton-colorInherit': { borderColor: 'currentColor' } } }
+    },
     MuiChip: { styleOverrides: { root: { borderRadius: 0 } } },
     MuiPaper: { styleOverrides: { root: { borderRadius: 0 } } }
   }

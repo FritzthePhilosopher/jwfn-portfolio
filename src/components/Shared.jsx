@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Box, Chip, Divider, Avatar, AppBar, Link, IconButton, Collapse } from '@mui/material';
+import { Box, Chip, Divider, Avatar, AppBar, Link, IconButton, Collapse, ButtonBase } from '@mui/material';
+import { useColorScheme } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
 import { colors, fonts, stripes } from '../theme.js';
 
@@ -22,14 +23,14 @@ export const navLinkSx = {
 export const monoChipSx = {
   typography: 'caption',
   borderRadius: 0,
-  borderColor: '#E0B5A6'
+  borderColor: colors.chipBorder
 };
 
 export const coverChipSx = {
   typography: 'caption',
   borderRadius: 0,
   bgcolor: colors.band,
-  color: colors.ink
+  color: colors.onBand
 };
 
 // Home page section heading
@@ -85,6 +86,33 @@ function MenuIcon({ open }) {
   );
 }
 
+function ThemeIcon() {
+  // A circle, half filled: reads as "light / dark" in either scheme.
+  return (
+    <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
+      <circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor" />
+    </svg>
+  );
+}
+
+/** Light / dark switch. MUI remembers the choice in localStorage. */
+export function ThemeToggle({ sx }) {
+  const { mode, setMode } = useColorScheme();
+  const isDark = mode === 'dark';
+  return (
+    <ButtonBase
+      onClick={() => setMode(isDark ? 'light' : 'dark')}
+      aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+      title="Toggle theme"
+      sx={{ ...navLinkSx, gap: '8px', py: '6px', px: '2px', '&:focus-visible': { outline: `2px solid ${colors.ink}`, outlineOffset: 2 }, ...sx }}
+    >
+      <ThemeIcon />
+      <span>{isDark ? 'Light' : 'Dark'}</span>
+    </ButtonBase>
+  );
+}
+
 export function SiteNav() {
   const [open, setOpen] = useState(false);
 
@@ -106,10 +134,10 @@ export function SiteNav() {
     <AppBar
       position="sticky"
       elevation={0}
-      sx={{ bgcolor: '#fff', top: 0, color: colors.ink, borderBottom: `1px solid ${colors.border}`, boxShadow: 'none' }}
+      sx={{ bgcolor: colors.bg, top: 0, color: colors.ink, borderBottom: `1px solid ${colors.border}`, boxShadow: 'none' }}
     >
       <Container
-        sx={{ width: '100%', py: '14px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'flex-start', gap: '12px 48px' }}
+        sx={{ width: '100%', py: '14px', display: 'flex', alignItems: 'center', gap: '12px 32px' }}
       >
         <Box
           component={RouterLink}
@@ -118,23 +146,24 @@ export function SiteNav() {
         >
           <Avatar
             variant="square"
-            sx={{ bgcolor: colors.band, color: colors.ink, fontFamily: fonts.serif, fontWeight: 700, fontSize: 22 /* logo mark, not part of the ramp */, width: 40, height: 40, borderRadius: 0 }}
+            sx={{ bgcolor: colors.band, color: colors.onBand, fontFamily: fonts.serif, fontWeight: 700, fontSize: 22 /* logo mark, not part of the ramp */, width: 40, height: 40, borderRadius: 0 }}
           >
             J
           </Avatar>
           <span>Justin Neely</span>
         </Box>
-        <Box component="nav" aria-label="Main" sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px 32px', [mobileNav]: { display: 'none' } }}>
+        <Box component="nav" aria-label="Main" sx={{ ml: 'auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px 28px', [mobileNav]: { display: 'none' } }}>
           {navItems.map(([to, label]) => (
             <Link key={to} component={RouterLink} to={to} underline="hover" sx={navLinkSx}>{label}</Link>
           ))}
         </Box>
+        <ThemeToggle sx={{ [mobileNav]: { ml: 'auto' } }} />
         <IconButton
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen((o) => !o)}
-          sx={{ display: 'none', ml: 'auto', mr: -1, color: colors.ink, borderRadius: 0, [mobileNav]: { display: 'inline-flex' } }}
+          sx={{ display: 'none', mr: -1, color: colors.ink, borderRadius: 0, [mobileNav]: { display: 'inline-flex' } }}
         >
           <MenuIcon open={open} />
         </IconButton>
@@ -159,6 +188,9 @@ export function SiteNav() {
   );
 }
 
+// Set at build time in vite.config.js, so every deploy stamps its own date.
+const lastUpdated = new Date(__BUILD_DATE__).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
+
 export function SiteFooter({ sx }) {
   return (
     <Box sx={sx}>
@@ -166,8 +198,57 @@ export function SiteFooter({ sx }) {
       <Box
         sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '8px 24px', pt: '20px', typography: 'mono', color: colors.muted }}
       >
-        <span>Justin Neely - 2026</span>
+        <span>© Justin Neely 2026</span>
+        <span>Last updated {lastUpdated}</span>
         <span>ATL</span>
+      </Box>
+    </Box>
+  );
+}
+
+/**
+ * Every project as a table row: number, name, tags, year.
+ * `current` greys out the case study you're already on.
+ */
+export function ProjectIndex({ items, current, id = 'index', sx }) {
+  return (
+    <Box id={id} component="section" aria-labelledby={`${id}-heading`} sx={sx}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 2, mb: 2 }}>
+        <Box component="h2" id={`${id}-heading`} sx={{ m: 0, ...monoLabel }}>Index</Box>
+        <Box sx={{ typography: 'mono', color: colors.muted }}>({String(items.length).padStart(2, '0')})</Box>
+      </Box>
+      <Box component="ol" sx={{ listStyle: 'none', m: 0, p: 0, borderTop: `1.5px solid ${colors.ink}` }}>
+        {items.map((w) => {
+          const here = w.slug === current;
+          return (
+            <Box component="li" key={w.slug} sx={{ borderBottom: `1px solid ${colors.border}` }}>
+              <Box
+                component={here ? 'div' : RouterLink}
+                to={here ? undefined : w.to}
+                aria-current={here ? 'page' : undefined}
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: { xs: '40px 1fr auto', md: '56px 1.2fr 1fr 120px' },
+                  alignItems: 'baseline',
+                  gap: '4px 16px',
+                  py: '16px',
+                  color: here ? colors.muted : colors.ink,
+                  textDecoration: 'none',
+                  transition: 'color 150ms ease, padding 150ms ease',
+                  ...(!here && { '&:hover, &:focus-visible': { color: colors.accentText, pl: { md: '8px' } } })
+                }}
+              >
+                <Box component="span" sx={{ typography: 'mono', color: colors.muted }}>{w.n}</Box>
+                <Box component="span" sx={{ typography: 'h6' }}>
+                  {w.name}{w.locked && <Box component="span" sx={{ typography: 'caption', color: colors.muted, ml: 1 }}>Locked</Box>}
+                  {here && <Box component="span" sx={{ typography: 'caption', ml: 1 }}>You're here</Box>}
+                </Box>
+                <Box component="span" sx={{ typography: 'caption', color: colors.muted, display: { xs: 'none', md: 'block' } }}>{w.tags.join(' · ')}</Box>
+                <Box component="span" sx={{ typography: 'mono', color: colors.muted, textAlign: 'right' }}>{w.year}</Box>
+              </Box>
+            </Box>
+          );
+        })}
       </Box>
     </Box>
   );

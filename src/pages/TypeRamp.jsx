@@ -75,7 +75,7 @@ const groups = [
 
 export default function TypeRamp() {
   return (
-    <Box sx={{ width: '100%', bgcolor: '#fff', color: colors.ink, typography: 'body1' }}>
+    <Box sx={{ width: '100%', bgcolor: colors.bg, color: colors.ink, typography: 'body1' }}>
       <SiteNav />
       <Container sx={{ pt: 'clamp(48px, 7vw, 88px)' }}>
         <Label>Design system / Type</Label>

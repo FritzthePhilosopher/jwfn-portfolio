@@ -42,7 +42,7 @@ export default function Unlock() {
   }
 
   return (
-    <Box sx={{ width: '100%', minHeight: '100vh', bgcolor: '#fff', color: colors.ink, typography: 'body1', display: 'flex', flexDirection: 'column' }}>
+    <Box sx={{ width: '100%', minHeight: '100vh', bgcolor: colors.bg, color: colors.ink, typography: 'body1', display: 'flex', flexDirection: 'column' }}>
       <SiteNav />
       <Container sx={{ pt: 'clamp(56px, 10vw, 128px)', pb: 8, flex: 1, width: '100%' }}>
         <Box sx={{ maxWidth: 560 }}>
@@ -64,7 +64,7 @@ export default function Unlock() {
               error={Boolean(error)}
               helperText={error || ' '}
               FormHelperTextProps={{ role: error ? 'alert' : undefined, sx: { typography: 'body2', mx: 0, mt: 1 } }}
-              InputProps={{ sx: { borderRadius: 0, bgcolor: '#fff', typography: 'body1' } }}
+              InputProps={{ sx: { borderRadius: 0, bgcolor: colors.bg, typography: 'body1' } }}
               InputLabelProps={{ sx: { typography: 'body1' } }}
             />
             <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '12px 24px' }}>

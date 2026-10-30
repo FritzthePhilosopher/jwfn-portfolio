@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Box, Button, Chip, Divider, Paper } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { colors } from '../theme.js';
-import { Container, Label, SiteNav, SiteFooter, h2CaseSx, displaySx, fieldLabel, monoChipSx, navBtnSx, monoLabel } from '../components/Shared.jsx';
+import { work } from './work.js';
+import { Container, Label, SiteNav, SiteFooter, ProjectIndex, h2CaseSx, displaySx, fieldLabel, monoChipSx, navBtnSx, monoLabel } from '../components/Shared.jsx';
 
 const sectionTop = 'clamp(48px, 7vw, 88px)';
 const h2Case = h2CaseSx;
@@ -61,9 +62,9 @@ function Figure({ img }) {
   );
 }
 
-export default function RichCaseStudy({ s }) {
+export default function RichCaseStudy({ s, slug }) {
   return (
-    <Box sx={{ width: '100%', bgcolor: '#fff', color: colors.ink, typography: 'body1' }}>
+    <Box sx={{ width: '100%', bgcolor: colors.bg, color: colors.ink, typography: 'body1' }}>
       <SiteNav />
 
       <Container sx={{ pt: 'clamp(24px, 4vw, 40px)' }}>
@@ -141,13 +142,13 @@ export default function RichCaseStudy({ s }) {
       ))}
 
       {s.results && (
-        <Box id="results" sx={{ bgcolor: colors.band, color: colors.ink, mt: 'clamp(56px, 8vw, 104px)' }}>
+        <Box id="results" sx={{ bgcolor: colors.band, color: colors.onBand, mt: 'clamp(56px, 8vw, 104px)' }}>
           <Container sx={{ py: sectionTop }}>
             <Label sx={{ color: colors.onBandMuted }}>Results</Label>
             <Box component="h2" sx={{ ...h2Case, mt: 1.5 }}>{s.resultsHeading || 'What changed.'}</Box>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3, mt: 5 }}>
               {s.results.map(([big, text]) => (
-                <Paper key={big} variant="outlined" sx={{ flex: '1 1 240px', p: 3, bgcolor: 'transparent', color: colors.ink, borderColor: colors.bandBorder }}>
+                <Paper key={big} variant="outlined" sx={{ flex: '1 1 240px', p: 3, bgcolor: 'transparent', color: colors.onBand, borderColor: colors.bandBorder }}>
                   <Box sx={{ typography: 'stat', color: colors.accentOnBand }}>{big}</Box>
                   <Box sx={{ mt: '10px', color: colors.onBand, typography: 'body2' }}>{text}</Box>
                 </Paper>
@@ -174,7 +175,8 @@ export default function RichCaseStudy({ s }) {
           <Button component={RouterLink} to={s.next.to} variant="contained" size="large">{s.next.label}</Button>
         </Box>
         <Divider />
-        <SiteFooter sx={{ mt: 3 }} />
+        <ProjectIndex items={work} current={slug} sx={{ mt: 'clamp(56px, 8vw, 96px)' }} />
+        <SiteFooter sx={{ mt: 6 }} />
       </Container>
     </Box>
   );
