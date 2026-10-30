@@ -39,11 +39,11 @@ export default function CaseStudy() {
   const study = useStudy(slug);
   if (study.status === 'locked') return <Navigate to={`/unlock?next=${encodeURIComponent('/work/' + slug)}`} replace />;
   if (study.status === 'missing') return <Navigate to="/" replace />;
-  if (study.status === 'loading') return <Box sx={{ minHeight: '100vh', bgcolor: '#fff' }}><SiteNav /></Box>;
+  if (study.status === 'loading') return <Box sx={{ minHeight: '100vh', bgcolor: colors.bg }}><SiteNav /></Box>;
   const s = study.s;
   if (s.sections) return <RichCaseStudy s={s} />;
   return (
-    <Box sx={{ width: '100%', bgcolor: '#fff', color: colors.ink, typography: 'body1' }}>
+    <Box sx={{ width: '100%', bgcolor: colors.bg, color: colors.ink, typography: 'body1' }}>
       <SiteNav />
 
       {/* HEADER */}
@@ -194,7 +194,7 @@ export default function CaseStudy() {
           <Button component={RouterLink} to={s.next.to} variant="contained" size="large">{s.next.label}</Button>
         </Box>
         <Divider />
-        <SiteFooter sx={{ mt: 3 }} />
+        <SiteFooter sx={{ mt: 'clamp(64px, 8vw, 112px)' }} />
       </Container>
     </Box>
   );

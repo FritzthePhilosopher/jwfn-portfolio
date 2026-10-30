@@ -63,7 +63,7 @@ function Figure({ img }) {
 
 export default function RichCaseStudy({ s }) {
   return (
-    <Box sx={{ width: '100%', bgcolor: '#fff', color: colors.ink, typography: 'body1' }}>
+    <Box sx={{ width: '100%', bgcolor: colors.bg, color: colors.ink, typography: 'body1' }}>
       <SiteNav />
 
       <Container sx={{ pt: 'clamp(24px, 4vw, 40px)' }}>
@@ -174,7 +174,7 @@ export default function RichCaseStudy({ s }) {
           <Button component={RouterLink} to={s.next.to} variant="contained" size="large">{s.next.label}</Button>
         </Box>
         <Divider />
-        <SiteFooter sx={{ mt: 3 }} />
+        <SiteFooter sx={{ mt: 'clamp(64px, 8vw, 112px)' }} />
       </Container>
     </Box>
   );

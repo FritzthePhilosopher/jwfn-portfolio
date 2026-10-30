@@ -42,7 +42,7 @@ export default function Unlock() {
   }
 
   return (
-    <Box sx={{ width: '100%', minHeight: '100vh', bgcolor: '#fff', color: colors.ink, typography: 'body1', display: 'flex', flexDirection: 'column' }}>
+    <Box sx={{ width: '100%', minHeight: '100vh', bgcolor: colors.bg, color: colors.ink, typography: 'body1', display: 'flex', flexDirection: 'column' }}>
       <SiteNav />
       <Container sx={{ pt: 'clamp(56px, 10vw, 128px)', pb: 8, flex: 1, width: '100%' }}>
         <Box sx={{ maxWidth: 560 }}>

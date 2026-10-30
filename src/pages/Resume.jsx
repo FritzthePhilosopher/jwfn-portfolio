@@ -15,7 +15,7 @@ export default function Resume() {
   }, []);
 
   return (
-    <Box sx={{ width: '100%', bgcolor: '#fff', color: colors.ink, typography: 'body1' }}>
+    <Box sx={{ width: '100%', bgcolor: colors.bg, color: colors.ink, typography: 'body1' }}>
       <SiteNav />
 
       {/* HEADER */}
@@ -86,7 +86,7 @@ export default function Resume() {
               <Divider sx={{ ...heavyRule, mb: 2 }} />
               <Box component="ul" sx={{ listStyle: 'none', m: 0, p: 0, display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                 {skills.map((k) => (
-                  <Box component="li" key={k} sx={{ ...monoChipSx, color: colors.ink, border: '1px solid #E0B5A6', bgcolor: colors.tint, px: 1, py: '4px' }}>{k}</Box>
+                  <Box component="li" key={k} sx={{ ...monoChipSx, color: colors.ink, border: `1px solid ${colors.border}`, bgcolor: colors.tint, px: 1, py: '4px' }}>{k}</Box>
                 ))}
               </Box>
             </Box>
@@ -97,7 +97,7 @@ export default function Resume() {
       {/* FOOTER */}
       <Container sx={{ pt: 'clamp(56px, 8vw, 96px)', pb: 5 }}>
         <Box sx={{ typography: 'body2', color: colors.muted }}>References available upon request.</Box>
-        <SiteFooter sx={{ mt: 3 }} />
+        <SiteFooter sx={{ mt: 'clamp(64px, 8vw, 112px)' }} />
       </Container>
     </Box>
   );

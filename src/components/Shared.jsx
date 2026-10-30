@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Box, Chip, Divider, Avatar, AppBar, Link, IconButton, Collapse } from '@mui/material';
+import { Box, Chip, Divider, AppBar, Link, IconButton, Collapse } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { colors, fonts, stripes } from '../theme.js';
+import { colors, stripes } from '../theme.js';
+import { RESUME_PDF } from '../pages/resume-data.js';
 
 export const gutter = 'clamp(20px, 5vw, 48px)';
 
@@ -22,7 +23,7 @@ export const navLinkSx = {
 export const monoChipSx = {
   typography: 'caption',
   borderRadius: 0,
-  borderColor: '#E0B5A6'
+  borderColor: colors.border
 };
 
 export const coverChipSx = {
@@ -75,7 +76,23 @@ export function Placeholder({ label, sx }) {
 
 // At 500px and below, the nav links fold into a hamburger menu.
 const mobileNav = '@media (max-width: 500px)';
-const navItems = [['/#work', 'Work'], ['/resume', 'Resume'], ['/#about', 'About'], ['/#contact', 'Contact']];
+const navItems = [['/#work', 'Work'], ['/#about', 'About'], ['/resume', 'Resume'], ['/#contact', 'Contact']];
+
+/** Small coral dot with a slow pulse (still for reduced motion). */
+export function StatusDot() {
+  return (
+    <Box
+      component="span"
+      aria-hidden="true"
+      sx={{
+        width: 7, height: 7, borderRadius: '50%', bgcolor: colors.coral, flex: 'none',
+        '@keyframes pulse': { '0%': { boxShadow: '0 0 0 0 rgba(255,127,80,.55)' }, '70%': { boxShadow: '0 0 0 7px rgba(255,127,80,0)' }, '100%': { boxShadow: '0 0 0 0 rgba(255,127,80,0)' } },
+        animation: 'pulse 2.4s ease-out infinite',
+        '@media (prefers-reduced-motion: reduce)': { animation: 'none' }
+      }}
+    />
+  );
+}
 
 function MenuIcon({ open }) {
   return (
@@ -106,25 +123,23 @@ export function SiteNav() {
     <AppBar
       position="sticky"
       elevation={0}
-      sx={{ bgcolor: '#fff', top: 0, color: colors.ink, borderBottom: `1px solid ${colors.border}`, boxShadow: 'none' }}
+      sx={{ bgcolor: colors.bg, top: 0, color: colors.ink, borderBottom: `1px solid ${colors.border}`, boxShadow: 'none' }}
     >
       <Container
-        sx={{ width: '100%', py: '14px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'flex-start', gap: '12px 48px' }}
+        sx={{ width: '100%', py: '18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px 32px' }}
       >
         <Box
           component={RouterLink}
           to="/"
-          sx={{ display: 'flex', alignItems: 'center', gap: '12px', typography: 'h5', color: 'inherit', textDecoration: 'none' }}
+          sx={{ display: 'flex', alignItems: 'baseline', gap: '10px', color: 'inherit', textDecoration: 'none' }}
         >
-          <Avatar
-            variant="square"
-            sx={{ bgcolor: colors.band, color: colors.ink, fontFamily: fonts.serif, fontWeight: 700, fontSize: 22 /* logo mark, not part of the ramp */, width: 40, height: 40, borderRadius: 0 }}
-          >
-            J
-          </Avatar>
-          <span>Justin Neely</span>
+          <Box component="span" sx={{ typography: 'h5' }}>Justin Neely</Box>
+          <Box component="span" sx={{ typography: 'mono', color: colors.muted, display: { xs: 'none', sm: 'inline' } }}>Product designer</Box>
         </Box>
-        <Box component="nav" aria-label="Main" sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px 32px', [mobileNav]: { display: 'none' } }}>
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: '8px', mx: 'auto', typography: 'mono', color: colors.muted }}>
+          <StatusDot /> Open to product designer roles
+        </Box>
+        <Box component="nav" aria-label="Main" sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px 28px', [mobileNav]: { display: 'none' } }}>
           {navItems.map(([to, label]) => (
             <Link key={to} component={RouterLink} to={to} underline="hover" sx={navLinkSx}>{label}</Link>
           ))}
@@ -159,15 +174,66 @@ export function SiteNav() {
   );
 }
 
+const footLink = {
+  color: colors.ink,
+  textDecoration: 'none',
+  backgroundImage: 'linear-gradient(currentColor, currentColor)',
+  backgroundSize: '0% 1px',
+  backgroundPosition: '0 100%',
+  backgroundRepeat: 'no-repeat',
+  transition: 'background-size 300ms ease',
+  '&:hover, &:focus-visible': { backgroundSize: '100% 1px' }
+};
+
+function FootCol({ title, children }) {
+  return (
+    <div>
+      <Box sx={{ typography: 'caption', color: colors.muted, mb: '14px' }}>{title}</Box>
+      <Box component="ul" sx={{ listStyle: 'none', m: 0, p: 0, display: 'flex', flexDirection: 'column', gap: '8px', typography: 'body2' }}>
+        {children}
+      </Box>
+    </div>
+  );
+}
+
+/** Studio footer: contact line, link columns, back to top, and the three-line sign-off. */
 export function SiteFooter({ sx }) {
   return (
-    <Box sx={sx}>
-      <Divider />
-      <Box
-        sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '8px 24px', pt: '20px', typography: 'mono', color: colors.muted }}
-      >
-        <span>Justin Neely - 2026</span>
-        <span>ATL</span>
+    <Box component="footer" id="contact" sx={{ borderTop: `1px solid ${colors.ink}`, pt: 'clamp(40px, 6vw, 72px)', ...sx }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1.6fr 1fr 1fr 1fr' }, gap: { xs: '40px', md: '32px' } }}>
+        <div>
+          <Box sx={{ typography: 'caption', color: colors.muted, mb: '14px' }}>Contact</Box>
+          <Box sx={{ typography: 'h3', m: 0 }}>If you want to talk.</Box>
+          <Link href="mailto:justin@jwfn.design" underline="none" sx={{ ...footLink, display: 'inline-block', mt: 1.5, typography: 'h3', color: colors.muted, '&:hover': { color: colors.ink } }}>
+            justin@jwfn.design
+          </Link>
+        </div>
+        <FootCol title="Elsewhere">
+          <li><Link href="https://www.linkedin.com/in/jwfn/" target="_blank" rel="noopener noreferrer" underline="none" sx={footLink}>LinkedIn ↗</Link></li>
+          <li><Link href={RESUME_PDF} download="Justin-Neely-Resume.pdf" underline="none" sx={footLink}>Resume (PDF) ↓</Link></li>
+        </FootCol>
+        <FootCol title="Pages">
+          {navItems.map(([to, label]) => (
+            <li key={to}><Link component={RouterLink} to={to} underline="none" sx={footLink}>{label}</Link></li>
+          ))}
+        </FootCol>
+        <FootCol title="&nbsp;">
+          <li>
+            <Link href="#" underline="none" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} sx={footLink}>Back to top ↑</Link>
+          </li>
+        </FootCol>
+      </Box>
+
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '32px', mt: 'clamp(64px, 10vw, 128px)', pb: '8px' }}>
+        <Box sx={{ typography: 'h2', color: colors.ink }}>
+          <div>Left-handed by nature.</div>
+          <Box sx={{ color: colors.muted }}>Designer by profession.</Box>
+          <div>Human by default.</div>
+        </Box>
+        <Box sx={{ typography: 'mono', color: colors.muted, textAlign: { md: 'right' } }}>
+          <div>© 2026 Justin Neely</div>
+          <div>Atlanta, GA</div>
+        </Box>
       </Box>
     </Box>
   );

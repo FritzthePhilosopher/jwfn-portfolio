@@ -1,19 +1,23 @@
 import { createTheme } from '@mui/material';
 
+// Studio palette: warm off-white paper, near-black ink, hairline rules.
+// Coral survives only as a small signal (accentText, the status dot).
 export const colors = {
-  ink: '#2A1612',
-  body: '#5A3B34',
-  muted: '#7A5C55',
-  border: '#F0D6CC',
-  tint: '#FFF1EC',
-  band: '#FF7F50',
-  accent: '#FF7F50',
-  accentText: '#CC4326',
-  onBand: '#3B1F18',
-  onBandMuted: '#5A2A1E',
-  accentOnBand: '#2A1612',
-  bandBorder: '#C2512B',
-  bandBorderStrong: '#A8431F'
+  bg: '#F6F6F4',
+  ink: '#141414',
+  body: '#3F3F3C',
+  muted: '#86867F',
+  border: '#DDDDD7',
+  tint: '#EDEDE9',
+  band: '#E6E6E1',
+  accent: '#141414',
+  accentText: '#D9481F',
+  coral: '#FF7F50',
+  onBand: '#141414',
+  onBandMuted: '#5E5E58',
+  accentOnBand: '#141414',
+  bandBorder: '#C9C9C2',
+  bandBorderStrong: '#AFAFA7'
 };
 
 export const fonts = {
@@ -23,7 +27,7 @@ export const fonts = {
 };
 
 export const stripes =
-  'repeating-linear-gradient(135deg, #F7DDD3 0 14px, #FBE8E0 14px 28px)';
+  'repeating-linear-gradient(135deg, #E9E9E4 0 14px, #EFEFEB 14px 28px)';
 
 /* ------------------------------------------------------------------
    TYPE RAMP
@@ -49,25 +53,25 @@ export function fluid(min, max) {
 // [token, family, weight, minPx, maxPx, lineHeight, letterSpacing, role]
 // maxPx === minPx means a fixed size.
 const RAMP = [
-  ['display',   'serif', 700, 40, 88, 1.02, '-0.02em',  'Hero headline, case study title, contact CTA'],
-  ['h1',        'serif', 700, 34, 56, 1.05, '-0.015em', 'Home page section headings'],
-  ['h2',        'serif', 700, 28, 44, 1.1,  '-0.01em',  'Case study section headings'],
-  ['h3',        'serif', 700, 24, 34, 1.15, '-0.01em',  'Work card titles, sub-section headings'],
-  ['h4',        'serif', 700, 22, 26, 1.2,  '-0.01em',  'Company names, decision titles, about cards'],
-  ['h5',        'serif', 700, 20, 20, 1.2,  '-0.005em', 'Nav wordmark'],
-  ['h6',        'serif', 700, 17, 17, 1.3,  '0',        'Small serif heading (spare)'],
-  ['stat',      'serif', 700, 44, 56, 1,    '-0.015em', 'Big numbers: stats band, results'],
-  ['statSm',    'serif', 700, 30, 36, 1.05, '-0.01em',  'Inline metrics, decision numbers'],
-  ['quote',     'serif', 500, 22, 32, 1.3,  '-0.01em',  'Reflection / pull quote'],
-  ['subtitle1', 'sans',  400, 18, 22, 1.45, '0',        'Lead paragraph under a title'],
-  ['subtitle2', 'sans',  600, 17, 17, 1.4,  '0',        'Emphasized values (Role, Client, Year)'],
-  ['body1',     'sans',  400, 17, 17, 1.6,  '0',        'Default body copy'],
-  ['body2',     'sans',  400, 15, 15, 1.55, '0',        'Card details, stat captions, small copy'],
-  ['button',    'sans',  600, 16, 16, 1.25, '0',        'Buttons'],
-  ['overline',  'mono',  400, 13, 13, 1.4,  '0.08em',   'Section eyebrows ("Selected work / 01")'],
-  ['label',     'mono',  500, 13, 13, 1.4,  '0.06em',   'Nav links, on-this-page links'],
-  ['caption',   'mono',  400, 12, 12, 1.4,  '0.06em',   'Field labels, chips, figure captions'],
-  ['mono',      'mono',  400, 13, 13, 1.5,  '0',        'Dates, index numbers, footer']
+  ['display',   'sans',  500, 40, 96, 1.0,  '-0.04em',  'Hero headline, case study title, contact CTA'],
+  ['h1',        'sans',  500, 34, 56, 1.05, '-0.035em', 'Home page section headings'],
+  ['h2',        'sans',  500, 28, 44, 1.1,  '-0.03em',  'Case study section headings'],
+  ['h3',        'sans',  500, 24, 32, 1.15, '-0.025em', 'Work card titles, sub-section headings'],
+  ['h4',        'sans',  500, 20, 24, 1.25, '-0.015em', 'Company names, decision titles, about cards'],
+  ['h5',        'sans',  600, 15, 15, 1.2,  '0',        'Nav wordmark'],
+  ['h6',        'sans',  500, 17, 17, 1.3,  '-0.01em',  'List row names'],
+  ['stat',      'sans',  500, 44, 56, 1,    '-0.04em',  'Big numbers: stats band, results'],
+  ['statSm',    'sans',  500, 28, 36, 1.05, '-0.03em',  'Inline metrics, decision numbers'],
+  ['quote',     'sans',  400, 22, 30, 1.35, '-0.02em',  'Reflection / pull quote, intro statement'],
+  ['subtitle1', 'sans',  400, 18, 21, 1.5,  '-0.005em', 'Lead paragraph under a title'],
+  ['subtitle2', 'sans',  500, 16, 16, 1.4,  '0',        'Emphasized values (Role, Client, Year)'],
+  ['body1',     'sans',  400, 16, 16, 1.6,  '0',        'Default body copy'],
+  ['body2',     'sans',  400, 14, 14, 1.55, '0',        'Card details, stat captions, small copy'],
+  ['button',    'sans',  500, 15, 15, 1.25, '0',        'Buttons'],
+  ['overline',  'mono',  400, 12, 12, 1.4,  '0.06em',   'Section eyebrows'],
+  ['label',     'mono',  400, 12, 12, 1.4,  '0.06em',   'Nav links, list headers'],
+  ['caption',   'mono',  400, 11, 11, 1.4,  '0.06em',   'Field labels, chips, figure captions'],
+  ['mono',      'mono',  400, 12, 12, 1.5,  '0',        'Dates, index numbers, footer']
 ];
 
 const UPPERCASE = new Set(['overline', 'label', 'caption']);
@@ -97,7 +101,7 @@ const theme = createTheme({
     primary: { main: colors.accent },
     text: { primary: colors.ink, secondary: colors.muted },
     divider: colors.border,
-    background: { default: '#FFFFFF' }
+    background: { default: colors.bg, paper: colors.bg }
   },
   shape: { borderRadius: 2 },
   typography: {
@@ -109,7 +113,8 @@ const theme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: {
-        body: { color: colors.ink },
+        body: { color: colors.ink, backgroundColor: colors.bg },
+        '::selection': { background: colors.ink, color: colors.bg },
         '[id]': { scrollMarginTop: '72px' }
       }
     },
