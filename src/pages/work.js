@@ -9,6 +9,7 @@ const all = [
     name: 'Damage Detail Card',
     tags: ['CarMax Auctions', 'Product design'],
     year: '2026',
+    credit: 'Product designer, CarMax Auctions',
     title: "I designed the damage detail card that shows dealers a vehicle's true condition.",
     // Locked: the home page shows only a blurred preview.
     locked: true,
@@ -30,6 +31,7 @@ const all = [
     name: 'AAdvantage® Cash App',
     tags: ['Truelio', 'UX'],
     year: '2021–2022',
+    credit: 'UX designer at Truelio, for American Airlines flight attendants',
     title: 'I designed an app that let flight attendants track card sign-ups and incentives.',
     cover: {
       src: '/images/aadvantage-cash/cover.jpg',
@@ -41,8 +43,11 @@ const all = [
     name: 'The LIFE School',
     tags: ['Client project', 'UX'],
     year: '2018',
+    credit: 'UX designer, with Jarrett Coger (lead) and Treven Holcomb',
     title: cards['life-school'].title,
-    cover: cards['life-school'].cover
+    cover: cards['life-school'].cover,
+    // Where tall crops should anchor (CSS object-position). Keeps the headline in frame.
+    focus: 'left top'
   }
   // Hidden for now: 'heal-thy', 'ohto' (their card text is in cards.js).
 ];

@@ -198,62 +198,84 @@ function LockIcon() {
   );
 }
 
-/** Image view: the first project runs full width, the rest sit two up. */
+// Desktop layout for the image view, on a 12-column grid:
+// the first project runs edge to edge, then pairs alternate a wide
+// landscape (7 cols) with a narrower portrait (5 cols) set lower.
+function slot(i) {
+  if (i === 0) return { cols: '1 / -1', ratio: { xs: '4 / 3', md: '2 / 1' }, offset: 0, feature: true };
+  const wide = i % 2 === 1;
+  return wide
+    ? { cols: 'span 7', ratio: '4 / 3', offset: 0 }
+    : { cols: 'span 5', ratio: { xs: '4 / 3', md: '4 / 5' }, offset: 'clamp(80px, 10vw, 160px)' };
+}
+
+/** Image view: big, mixed-shape images with a credit line under each. */
 function WorkGrid() {
   return (
-    <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: { xs: '56px', md: '72px 32px' }, pt: 3 }}>
-      {work.map((w, i) => {
-        const feature = i === 0;
-        return (
-          <Reveal key={w.slug} delay={feature ? 0 : (i - 1) * 100} sx={{ gridColumn: feature ? { md: '1 / -1' } : undefined }}>
-            <Box
-              component={RouterLink}
-              to={w.to}
-              sx={{
-                display: 'block', color: colors.ink, textDecoration: 'none',
-                '&:hover img, &:focus-visible img': { transform: 'scale(1.03)' },
-                '&:hover .name, &:focus-visible .name': { color: colors.accentText },
-                '&:hover .cta, &:focus-visible .cta': { gap: '14px' },
-                '&:focus-visible': { outline: `1px solid ${colors.ink}`, outlineOffset: 6 }
-              }}
-            >
-              <Box sx={{ position: 'relative', overflow: 'hidden', aspectRatio: feature ? { xs: '4 / 3', md: '16 / 7' } : '4 / 3', bgcolor: colors.tint }}>
-                {w.cover ? (
-                  <Box component="img" src={w.cover.src} alt={w.cover.alt} loading="lazy" sx={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block', transition: 'transform 700ms cubic-bezier(.2,.7,.2,1)' }} />
-                ) : (
-                  <Placeholder sx={{ height: '100%' }} />
-                )}
-                {w.locked && (
-                  <Box sx={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '8px', px: 1.5, py: 1, bgcolor: colors.bg, color: colors.ink, typography: 'label' }}>
-                      <LockIcon /> Password protected
+    <Box sx={{ maxWidth: 1560, mx: 'auto', px: 'clamp(12px, 2vw, 24px)', boxSizing: 'border-box' }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(12, 1fr)' }, columnGap: 'clamp(12px, 2vw, 24px)', rowGap: { xs: '56px', md: '96px' }, alignItems: 'start' }}>
+        {work.map((w, i) => {
+          const s = slot(i);
+          return (
+            <Reveal key={w.slug} delay={s.feature ? 0 : 80} sx={{ gridColumn: { md: s.cols }, mt: { md: s.offset } }}>
+              <Box
+                component={RouterLink}
+                to={w.to}
+                sx={{
+                  display: 'block', color: colors.ink, textDecoration: 'none',
+                  '&:hover img, &:focus-visible img': { transform: 'scale(1.025)' },
+                  '&:hover .name, &:focus-visible .name': { color: colors.accentText },
+                  '&:hover .arrow, &:focus-visible .arrow': { transform: 'translateX(6px)' },
+                  '&:focus-visible': { outline: `1px solid ${colors.ink}`, outlineOffset: 6 }
+                }}
+              >
+                <Box sx={{ position: 'relative', overflow: 'hidden', aspectRatio: s.ratio, bgcolor: colors.tint }}>
+                  {w.cover ? (
+                    <Box component="img" src={w.cover.src} alt={w.cover.alt} loading={i === 0 ? 'eager' : 'lazy'} sx={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: w.focus || 'top', display: 'block', transition: 'transform 900ms cubic-bezier(.2,.7,.2,1)' }} />
+                  ) : (
+                    <Placeholder sx={{ height: '100%' }} />
+                  )}
+                  {w.locked && (
+                    <Box sx={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: '8px', px: 1.5, py: 1, bgcolor: colors.bg, color: colors.ink, typography: 'label' }}>
+                        <LockIcon /> Password protected
+                      </Box>
                     </Box>
-                  </Box>
-                )}
-              </Box>
-              <Box sx={{ display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'baseline', gap: '6px 16px', pt: '18px' }}>
-                <Box sx={{ display: 'flex', alignItems: 'baseline', gap: '12px', minWidth: 0 }}>
-                  <Box component="span" sx={{ typography: 'mono', color: colors.accentText }}>{w.n}</Box>
-                  <Box component="h3" className="name" sx={{ m: 0, typography: feature ? 'h3' : 'h4', transition: 'color 200ms ease' }}>{w.name}</Box>
-                </Box>
-                <Box component="span" sx={{ typography: 'mono', color: colors.muted }}>{w.year}</Box>
-                <Box sx={{ gridColumn: '1 / -1', typography: 'caption', color: colors.muted }}>{w.tags.join(' · ')}</Box>
-                <Box component="p" sx={{ gridColumn: '1 / -1', m: 0, mt: '6px', maxWidth: 620, typography: 'body2', color: colors.body, textWrap: 'pretty' }}>{w.title}</Box>
-                <Box className="cta" sx={{ gridColumn: '1 / -1', mt: '8px', display: 'flex', alignItems: 'center', gap: '8px', typography: 'label', transition: 'gap 200ms ease' }}>
-                  <span>{w.locked ? 'Unlock the case study' : 'Read the case study'}</span>
-                  <Box component="span" sx={{ color: colors.accentText }}>→</Box>
-                  {!w.locked && !PUBLIC_CASE_STUDIES.includes(w.slug) && (
-                    <Box component="span" sx={{ typography: 'caption', color: colors.muted, ml: 1 }}>Password required</Box>
                   )}
                 </Box>
+
+                {/* Caption: name and year, the credit, then one line on the work */}
+                <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr auto', md: s.feature ? '64px 1.2fr 1fr auto' : '1fr auto' }, alignItems: 'baseline', gap: '4px 16px', pt: '16px', px: { md: s.feature ? 0 : 0 } }}>
+                  {s.feature && <Box component="span" sx={{ typography: 'mono', color: colors.accentText, display: { xs: 'none', md: 'block' } }}>{w.n}</Box>}
+                  <Box component="h3" className="name" sx={{ m: 0, typography: 'h4', textTransform: 'uppercase', letterSpacing: '0.01em', transition: 'color 200ms ease' }}>
+                    {!s.feature && <Box component="span" sx={{ typography: 'mono', color: colors.accentText, mr: 1.5 }}>{w.n}</Box>}
+                    {s.feature && <Box component="span" sx={{ typography: 'mono', color: colors.accentText, mr: 1.5, display: { md: 'none' } }}>{w.n}</Box>}
+                    {w.name}
+                  </Box>
+                  {s.feature && <Box component="span" sx={{ typography: 'mono', color: colors.muted, display: { xs: 'none', md: 'block' } }}>{w.credit}</Box>}
+                  <Box component="span" sx={{ typography: 'mono', color: colors.muted, textAlign: 'right' }}>{w.year}</Box>
+                  <Box sx={{ gridColumn: s.feature ? { xs: '1 / -1', md: '2 / -1' } : '1 / -1', display: { md: s.feature ? 'none' : 'block' }, typography: 'mono', color: colors.muted }}>{w.credit}</Box>
+                  <Box sx={{ gridColumn: s.feature ? { xs: '1 / -1', md: '2 / -1' } : '1 / -1', display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '8px 24px', mt: '8px' }}>
+                    <Box component="p" sx={{ m: 0, maxWidth: 560, typography: 'body2', color: colors.body, textWrap: 'pretty' }}>{w.title}</Box>
+                    <Box sx={{ display: 'flex', alignItems: 'baseline', gap: '8px', typography: 'label', whiteSpace: 'nowrap' }}>
+                      {!w.locked && !PUBLIC_CASE_STUDIES.includes(w.slug) && <Box component="span" sx={{ typography: 'caption', color: colors.muted, mr: 1 }}>Password</Box>}
+                      <span>{w.locked ? 'Unlock' : 'Read'}</span>
+                      <Box component="span" className="arrow" sx={{ color: colors.accentText, transition: 'transform 250ms ease' }}>→</Box>
+                    </Box>
+                  </Box>
+                </Box>
               </Box>
-            </Box>
-          </Reveal>
-        );
-      })}
+            </Reveal>
+          );
+        })}
+      </Box>
     </Box>
   );
 }
+
+// "2018–2026" from the project years.
+const years = work.flatMap((w) => (w.year.match(/\d{4}/g) || []).map(Number));
+const range = `${Math.min(...years)}–${Math.max(...years)}`;
 
 export default function Home() {
   const [view, setView] = useState('img');
@@ -321,13 +343,14 @@ export default function Home() {
           <Box sx={{ display: 'flex', alignItems: 'baseline', gap: '16px' }}>
             <Box component="h2" sx={{ m: 0, typography: 'h1' }}>Selected work</Box>
             <Box sx={{ typography: 'mono', color: colors.muted }}>
-              (<Box component="span" sx={{ color: colors.accentText }}><CountUp to={work.length} /></Box> cases)
+              (<Box component="span" sx={{ color: colors.accentText }}><CountUp to={work.length} /></Box> cases · {range})
             </Box>
           </Box>
           <Toggle view={view} setView={setView} />
         </Box>
-        {view === 'img' ? <WorkGrid /> : <WorkList />}
+        {view === 'txt' && <WorkList />}
       </Container>
+      {view === 'img' && <Box sx={{ pt: 2 }}><WorkGrid /></Box>}
 
       {/* ABOUT */}
       <Container id="about" sx={{ pt: sectionTop }}>

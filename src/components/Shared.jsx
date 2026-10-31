@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Box, Chip, Divider, AppBar, Link, IconButton, Collapse, ButtonBase } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
+import { Box, Chip, Divider, AppBar, Link, ButtonBase } from '@mui/material';
 import { useColorScheme } from '@mui/material/styles';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { colors, stripes } from '../theme.js';
 import { RESUME_PDF } from '../pages/resume-data.js';
 
@@ -76,8 +76,6 @@ export function Placeholder({ label, sx }) {
   );
 }
 
-// At 500px and below, the nav links fold into a hamburger menu.
-const mobileNav = '@media (max-width: 500px)';
 const navItems = [['/#work', 'Work'], ['/#about', 'About'], ['/resume', 'Resume'], ['/#contact', 'Contact']];
 
 /** Small coral dot with a slow pulse (still for reduced motion). */
@@ -93,14 +91,6 @@ export function StatusDot() {
         '@media (prefers-reduced-motion: reduce)': { animation: 'none' }
       }}
     />
-  );
-}
-
-function MenuIcon({ open }) {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square">
-      {open ? <path d="M5 5l14 14M19 5L5 19" /> : <path d="M3 6h18M3 12h18M3 18h18" />}
-    </svg>
   );
 }
 
@@ -131,76 +121,132 @@ export function ThemeToggle({ sx }) {
   );
 }
 
+// Full-screen menu: big numbered links plus the ways to reach me.
+const menuContact = [
+  ['Email', 'justin@jwfn.design', { href: 'mailto:justin@jwfn.design' }],
+  ['LinkedIn', 'in/jwfn ↗', { href: 'https://www.linkedin.com/in/jwfn/', target: '_blank', rel: 'noopener noreferrer' }],
+  ['Resume', 'PDF ↓', { href: RESUME_PDF, download: 'Justin-Neely-Resume.pdf' }]
+];
+
+function MenuButton({ open, onClick }) {
+  return (
+    <ButtonBase
+      onClick={onClick}
+      aria-expanded={open}
+      aria-controls="site-menu"
+      sx={{ ...navLinkSx, gap: '10px', py: '6px', px: '2px', justifySelf: 'start', '&:focus-visible': { outline: `1px solid ${colors.ink}`, outlineOffset: 3 } }}
+    >
+      {/* Two lines that cross into an X when open */}
+      <Box component="span" aria-hidden="true" sx={{ position: 'relative', width: 16, height: 10, '& i': { position: 'absolute', left: 0, width: '100%', height: '1.5px', bgcolor: 'currentColor', transition: 'transform 300ms ease, top 300ms ease' } }}>
+        <Box component="i" sx={{ top: open ? '4px' : 0, transform: open ? 'rotate(45deg)' : 'none' }} />
+        <Box component="i" sx={{ top: open ? '4px' : '8px', transform: open ? 'rotate(-45deg)' : 'none' }} />
+      </Box>
+      <span>{open ? 'Close' : 'Menu'}</span>
+    </ButtonBase>
+  );
+}
+
 export function SiteNav() {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const firstLink = useRef(null);
+
+  // Close whenever the page or section changes.
+  useEffect(() => setOpen(false), [location.pathname, location.hash]);
 
   useEffect(() => {
     if (!open) return;
     const onKey = (e) => e.key === 'Escape' && setOpen(false);
-    // Close if the window grows past the breakpoint while the menu is open.
-    const mq = window.matchMedia('(min-width: 501px)');
-    const onWide = (e) => e.matches && setOpen(false);
     window.addEventListener('keydown', onKey);
-    mq.addEventListener('change', onWide);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const t = setTimeout(() => firstLink.current?.focus(), 150);
     return () => {
       window.removeEventListener('keydown', onKey);
-      mq.removeEventListener('change', onWide);
+      document.body.style.overflow = prev;
+      clearTimeout(t);
     };
   }, [open]);
 
   return (
-    <AppBar
-      position="sticky"
-      elevation={0}
-      sx={{ bgcolor: colors.bg, top: 0, color: colors.ink, borderBottom: `1px solid ${colors.border}`, boxShadow: 'none' }}
-    >
-      <Container
-        sx={{ width: '100%', py: '18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px 32px' }}
+    <>
+      <AppBar
+        position="sticky"
+        elevation={0}
+        sx={{ bgcolor: colors.bg, top: 0, color: colors.ink, borderBottom: `1px solid ${open ? 'transparent' : colors.border}`, boxShadow: 'none', transition: 'border-color 200ms ease' }}
       >
-        <Box
-          component={RouterLink}
-          to="/"
-          sx={{ display: 'flex', alignItems: 'baseline', gap: '10px', color: 'inherit', textDecoration: 'none' }}
-        >
-          <Box component="span" sx={{ typography: 'h5' }}>Justin Neely</Box>
-          <Box component="span" sx={{ typography: 'mono', color: colors.muted, display: { xs: 'none', sm: 'inline' } }}>Product designer</Box>
-        </Box>
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: '8px', mx: 'auto', typography: 'mono', color: colors.muted }}>
-          <StatusDot /> Open to product designer roles
-        </Box>
-        <Box component="nav" aria-label="Main" sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px 28px', [mobileNav]: { display: 'none' } }}>
-          {navItems.map(([to, label]) => (
-            <Link key={to} component={RouterLink} to={to} underline="hover" sx={navLinkSx}>{label}</Link>
-          ))}
-        </Box>
-        <ThemeToggle sx={{ [mobileNav]: { ml: 'auto' } }} />
-        <IconButton
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          onClick={() => setOpen((o) => !o)}
-          sx={{ display: 'none', mr: -1, color: colors.ink, borderRadius: 0, [mobileNav]: { display: 'inline-flex' } }}
-        >
-          <MenuIcon open={open} />
-        </IconButton>
-      </Container>
-      <Collapse in={open} timeout={200} unmountOnExit>
-        <Box component="nav" id="mobile-menu" aria-label="Main" sx={{ display: 'none', [mobileNav]: { display: 'block' }, borderTop: `1px solid ${colors.border}` }}>
-          {navItems.map(([to, label]) => (
-            <Link
-              key={to}
-              component={RouterLink}
-              to={to}
-              underline="none"
-              onClick={() => setOpen(false)}
-              sx={{ ...navLinkSx, display: 'block', px: gutter, py: '16px', borderBottom: `1px solid ${colors.border}`, '&:last-of-type': { borderBottom: 0 } }}
-            >
-              {label}
-            </Link>
-          ))}
-        </Box>
-      </Collapse>
-    </AppBar>
+        <Container sx={{ width: '100%', py: '16px', display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', gap: '16px' }}>
+          <MenuButton open={open} onClick={() => setOpen((o) => !o)} />
+          <Box component={RouterLink} to="/" sx={{ display: 'flex', alignItems: 'baseline', gap: '10px', color: 'inherit', textDecoration: 'none' }}>
+            <Box component="span" sx={{ typography: 'h5' }}>Justin Neely</Box>
+            <Box component="span" sx={{ typography: 'mono', color: colors.muted, display: { xs: 'none', sm: 'inline' } }}>Product design</Box>
+          </Box>
+          <Box sx={{ justifySelf: 'end', display: 'flex', alignItems: 'center', gap: '28px' }}>
+            <Box sx={{ display: { xs: 'none', lg: 'flex' }, alignItems: 'center', gap: '8px', typography: 'mono', color: colors.muted }}>
+              <StatusDot /> Open to roles
+            </Box>
+            <ThemeToggle />
+          </Box>
+        </Container>
+      </AppBar>
+
+      <Box
+        id="site-menu"
+        component="nav"
+        aria-label="Main"
+        aria-hidden={!open}
+        sx={{
+          position: 'fixed', inset: 0, zIndex: (t) => t.zIndex.appBar - 1,
+          bgcolor: colors.bg, color: colors.ink,
+          pt: '72px', overflowY: 'auto',
+          opacity: open ? 1 : 0, visibility: open ? 'visible' : 'hidden',
+          transition: open ? 'opacity 300ms ease' : 'opacity 250ms ease, visibility 0s linear 250ms',
+          '@media (prefers-reduced-motion: reduce)': { transition: 'none' }
+        }}
+      >
+        <Container sx={{ minHeight: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 6, py: { xs: 4, md: 6 } }}>
+          <Box component="ol" sx={{ listStyle: 'none', m: 0, p: 0, borderTop: `1px solid ${colors.ink}` }}>
+            {navItems.map(([to, label], i) => (
+              <Box component="li" key={to} sx={{ borderBottom: `1px solid ${colors.border}` }}>
+                <Box
+                  component={RouterLink}
+                  to={to}
+                  ref={i === 0 ? firstLink : undefined}
+                  onClick={() => setOpen(false)}
+                  tabIndex={open ? 0 : -1}
+                  sx={{
+                    display: 'flex', alignItems: 'baseline', gap: { xs: '16px', md: '32px' }, py: { xs: '14px', md: '18px' },
+                    color: colors.ink, textDecoration: 'none',
+                    opacity: open ? 1 : 0, transform: open ? 'none' : 'translateY(12px)',
+                    transition: `opacity 500ms ease ${open ? 80 + i * 60 : 0}ms, transform 500ms cubic-bezier(.2,.7,.2,1) ${open ? 80 + i * 60 : 0}ms`,
+                    '& .label': { transition: 'transform 300ms cubic-bezier(.2,.7,.2,1), color 200ms ease' },
+                    '&:hover .label, &:focus-visible .label': { transform: 'translateX(12px)', color: colors.accentText },
+                    '&:focus-visible': { outline: 'none' },
+                    '@media (prefers-reduced-motion: reduce)': { transition: 'none', transform: 'none' }
+                  }}
+                >
+                  <Box component="span" sx={{ typography: 'mono', color: colors.accentText, minWidth: 28 }}>{String(i + 1).padStart(2, '0')}</Box>
+                  <Box component="span" className="label" sx={{ typography: 'display' }}>{label}</Box>
+                </Box>
+              </Box>
+            ))}
+          </Box>
+
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4, 1fr)' }, gap: '24px', opacity: open ? 1 : 0, transition: `opacity 500ms ease ${open ? 360 : 0}ms` }}>
+            {menuContact.map(([k, v, props]) => (
+              <div key={k}>
+                <Box sx={{ typography: 'caption', color: colors.muted, mb: '6px' }}>{k}</Box>
+                <Link {...props} tabIndex={open ? 0 : -1} underline="hover" sx={{ typography: 'subtitle2', color: colors.ink, textDecorationColor: colors.coral, '&:hover': { color: colors.accentText } }}>{v}</Link>
+              </div>
+            ))}
+            <div>
+              <Box sx={{ typography: 'caption', color: colors.muted, mb: '6px' }}>Right now</Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: '8px', typography: 'subtitle2' }}><StatusDot /> Open to product designer roles</Box>
+            </div>
+          </Box>
+        </Container>
+      </Box>
+    </>
   );
 }
 
