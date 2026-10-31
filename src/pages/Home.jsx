@@ -5,6 +5,7 @@ import { colors, outlineText, fluid } from '../theme.js';
 import { work } from './work.js';
 import { PUBLIC_CASE_STUDIES } from '../../lib/public-case-studies.js';
 import { Container, Label, Placeholder, SiteNav, SiteFooter } from '../components/Shared.jsx';
+import MessyText from '../components/MessyText.jsx';
 
 const sectionTop = 'clamp(96px, 12vw, 176px)';
 const reduced = '@media (prefers-reduced-motion: reduce)';
@@ -326,7 +327,7 @@ export default function Home() {
         <Reveal delay={120}>
           {/* The headline is a full sentence, so it runs a step smaller than the display size. */}
           <Box component="h1" sx={{ m: 0, typography: 'display', fontSize: fluid(30, 68), maxWidth: 1100, textWrap: 'balance' }}>
-            I work through <Box component="span" sx={outlineText()}>the messy parts</Box> so the people using the product don’t have to.
+            I work through <MessyText sx={outlineText()}>the messy parts</MessyText> so the people using the product don’t have to.
           </Box>
         </Reveal>
         <Reveal delay={240}>
