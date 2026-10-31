@@ -17,6 +17,7 @@ export const navBtnSx = { typography: 'label', color: colors.ink };
 export const navLinkSx = {
   typography: 'label',
   color: colors.ink,
+  textDecorationColor: colors.coral,
   '&:hover': { color: colors.accentText }
 };
 
@@ -177,12 +178,12 @@ export function SiteNav() {
 const footLink = {
   color: colors.ink,
   textDecoration: 'none',
-  backgroundImage: 'linear-gradient(currentColor, currentColor)',
+  backgroundImage: `linear-gradient(${colors.coral}, ${colors.coral})`,
   backgroundSize: '0% 1px',
   backgroundPosition: '0 100%',
   backgroundRepeat: 'no-repeat',
-  transition: 'background-size 300ms ease',
-  '&:hover, &:focus-visible': { backgroundSize: '100% 1px' }
+  transition: 'background-size 300ms ease, color 200ms ease',
+  '&:hover, &:focus-visible': { backgroundSize: '100% 1px', color: colors.accentText }
 };
 
 function FootCol({ title, children }) {
@@ -199,12 +200,12 @@ function FootCol({ title, children }) {
 /** Studio footer: contact line, link columns, back to top, and the three-line sign-off. */
 export function SiteFooter({ sx }) {
   return (
-    <Box component="footer" id="contact" sx={{ borderTop: `1px solid ${colors.ink}`, pt: 'clamp(40px, 6vw, 72px)', ...sx }}>
+    <Box component="footer" id="contact" sx={{ borderTop: `2px solid ${colors.coral}`, pt: 'clamp(40px, 6vw, 72px)', ...sx }}>
       <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1.6fr 1fr 1fr 1fr' }, gap: { xs: '40px', md: '32px' } }}>
         <div>
           <Box sx={{ typography: 'caption', color: colors.muted, mb: '14px' }}>Contact</Box>
           <Box sx={{ typography: 'h3', m: 0 }}>If you want to talk.</Box>
-          <Link href="mailto:justin@jwfn.design" underline="none" sx={{ ...footLink, display: 'inline-block', mt: 1.5, typography: 'h3', color: colors.muted, '&:hover': { color: colors.ink } }}>
+          <Link href="mailto:justin@jwfn.design" underline="none" sx={{ ...footLink, display: 'inline-block', mt: 1.5, typography: 'h3', color: colors.accentText, backgroundSize: '100% 2px', '&:hover': { color: colors.ink, backgroundSize: '100% 2px' } }}>
             justin@jwfn.design
           </Link>
         </div>
@@ -227,7 +228,7 @@ export function SiteFooter({ sx }) {
       <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '32px', mt: 'clamp(64px, 10vw, 128px)', pb: '8px' }}>
         <Box sx={{ typography: 'h2', color: colors.ink }}>
           <div>Left-handed by nature.</div>
-          <Box sx={{ color: colors.muted }}>Designer by profession.</Box>
+          <Box sx={{ color: colors.coralLarge }}>Designer by profession.</Box>
           <div>Human by default.</div>
         </Box>
         <Box sx={{ typography: 'mono', color: colors.muted, textAlign: { md: 'right' } }}>

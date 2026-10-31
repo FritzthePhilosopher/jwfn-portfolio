@@ -98,7 +98,9 @@ function Toggle({ view, setView }) {
         cursor: 'pointer',
         typography: 'label',
         color: view === v ? colors.ink : colors.muted,
-        transition: 'color 150ms ease',
+        borderBottom: `1px solid ${view === v ? colors.coral : 'transparent'}`,
+        pb: '2px',
+        transition: 'color 150ms ease, border-color 150ms ease',
         '&:hover': { color: colors.ink },
         '&:focus-visible': { outline: `1px solid ${colors.ink}`, outlineOffset: 4 }
       }}
@@ -150,11 +152,12 @@ function WorkList() {
                 transition: 'opacity 250ms ease',
                 // Dim the other rows while one is hovered.
                 opacity: hover && hover !== w.slug ? 0.3 : 1,
+                '&:hover .name, &:focus-visible .name': { color: colors.accentText },
                 '&:focus-visible': { outline: `1px solid ${colors.ink}`, outlineOffset: 2 }
               }}
             >
-              <Box component="span" sx={{ typography: 'mono', color: colors.muted }}>{w.n}</Box>
-              <Box component="span" sx={{ typography: { xs: 'h4', md: 'h3' } }}>
+              <Box component="span" sx={{ typography: 'mono', color: colors.accentText }}>{w.n}</Box>
+              <Box component="span" className="name" sx={{ typography: { xs: 'h4', md: 'h3' }, transition: 'color 200ms ease' }}>
                 {w.name}
                 <Box component="span" sx={{ typography: 'caption', color: colors.muted, ml: 1.5, verticalAlign: 'middle' }}>{lockNote(w)}</Box>
               </Box>
@@ -173,7 +176,7 @@ function WorkList() {
         aria-hidden="true"
         sx={{
           position: 'fixed', left: 0, top: 0, zIndex: 20, pointerEvents: 'none',
-          width: 320, aspectRatio: '4 / 3', overflow: 'hidden', bgcolor: colors.tint,
+          width: 320, aspectRatio: '4 / 3', overflow: 'hidden', bgcolor: colors.tint, outline: `2px solid ${colors.coral}`,
           opacity: current ? 1 : 0, transition: 'opacity 200ms ease',
           display: 'none', '@media (hover: hover) and (pointer: fine)': { display: 'block' }
         }}
@@ -206,7 +209,7 @@ function WorkGrid() {
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, mt: '14px' }}>
               <Box sx={{ typography: 'h6' }}>
-                <Box component="span" sx={{ typography: 'mono', color: colors.muted, mr: 1.5 }}>{w.n}</Box>{w.name}
+                <Box component="span" sx={{ typography: 'mono', color: colors.accentText, mr: 1.5 }}>{w.n}</Box>{w.name}
               </Box>
               <Box sx={{ typography: 'mono', color: colors.muted }}>{w.year}</Box>
             </Box>
@@ -230,7 +233,7 @@ export default function Home() {
         sx={{ minHeight: { md: 'calc(100svh - 64px)' }, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', pt: { xs: 8, md: 6 }, pb: { xs: 8, md: 5 } }}
       >
         <Reveal>
-          <Label sx={{ mb: 3 }}>What I do</Label>
+          <Label sx={{ mb: 3, color: colors.accentText }}>What I do</Label>
         </Reveal>
         <Reveal delay={120}>
           <Box component="h1" sx={{ m: 0, typography: 'display', maxWidth: 1100, textWrap: 'balance' }}>
@@ -243,8 +246,8 @@ export default function Home() {
               15+ years in enterprise B2B design, with experience at Truelio (formerly Dynamic Marketing Systems) and CarMax. Every decision has a reason behind it.
             </Box>
             <Box sx={{ display: 'flex', justifyContent: { md: 'flex-end' }, gap: '32px', typography: 'label' }}>
-              <Link href="#about" underline="hover" sx={{ color: colors.ink }}>Who I am →</Link>
-              <Link href="#work" underline="hover" sx={{ color: colors.ink }}>See the work ↓</Link>
+              <Link href="#about" underline="hover" sx={{ color: colors.ink, textDecorationColor: colors.coral, '&:hover': { color: colors.accentText } }}>Who I am →</Link>
+              <Link href="#work" underline="hover" sx={{ color: colors.ink, textDecorationColor: colors.coral, '&:hover': { color: colors.accentText } }}>See the work ↓</Link>
             </Box>
           </Box>
         </Reveal>
@@ -252,7 +255,7 @@ export default function Home() {
           aria-hidden="true"
           sx={{
             display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: '12px', mt: 6, typography: 'caption', color: colors.muted,
-            '& i': { display: 'block', width: 40, height: '1px', bgcolor: colors.muted, transformOrigin: 'left',
+            '& i': { display: 'block', width: 40, height: '1px', bgcolor: colors.coral, transformOrigin: 'left',
               '@keyframes scrollcue': { '0%': { transform: 'scaleX(0)' }, '50%': { transform: 'scaleX(1)' }, '100%': { transform: 'scaleX(0)', transformOrigin: 'right' } },
               animation: 'scrollcue 2.4s ease-in-out infinite', [reduced]: { animation: 'none' } }
           }}
@@ -267,7 +270,7 @@ export default function Home() {
           <Box sx={{ display: 'flex', alignItems: 'baseline', gap: '16px' }}>
             <Box component="h2" sx={{ m: 0, typography: 'h1' }}>Selected work</Box>
             <Box sx={{ typography: 'mono', color: colors.muted }}>
-              (<CountUp to={work.length} /> cases)
+              (<Box component="span" sx={{ color: colors.accentText }}><CountUp to={work.length} /></Box> cases)
             </Box>
           </Box>
           <Toggle view={view} setView={setView} />
@@ -294,7 +297,7 @@ export default function Home() {
             </Box>
             <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' }, gap: '28px', mt: 7 }}>
               {stats.map(([n, l]) => (
-                <Box key={n} sx={{ borderTop: `1px solid ${colors.ink}`, pt: 2 }}>
+                <Box key={n} sx={{ borderTop: `2px solid ${colors.coral}`, pt: 2 }}>
                   <Box sx={{ typography: 'stat' }}>{n}</Box>
                   <Box sx={{ mt: 1, typography: 'body2', color: colors.body }}>{l}</Box>
                 </Box>
@@ -320,7 +323,7 @@ export default function Home() {
                 </Box>
               ))}
             </Box>
-            <Link component={RouterLink} to="/resume" underline="hover" sx={{ display: 'inline-block', mt: 3, typography: 'label', color: colors.ink }}>Full resume →</Link>
+            <Link component={RouterLink} to="/resume" underline="hover" sx={{ display: 'inline-block', mt: 3, typography: 'label', color: colors.ink, textDecorationColor: colors.coral, '&:hover': { color: colors.accentText } }}>Full resume →</Link>
           </div>
         </Box>
       </Container>

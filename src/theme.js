@@ -1,7 +1,8 @@
 import { createTheme } from '@mui/material';
 
-// Studio palette: warm off-white paper, near-black ink, hairline rules.
-// Coral survives only as a small signal (accentText, the status dot).
+// Studio palette: warm off-white paper, near-black ink, hairline rules,
+// with coral as the brand accent. accentText is a darker coral that passes
+// contrast for small text on the paper (4.8:1).
 export const colors = {
   bg: '#F6F6F4',
   ink: '#141414',
@@ -9,15 +10,17 @@ export const colors = {
   muted: '#86867F',
   border: '#DDDDD7',
   tint: '#EDEDE9',
-  band: '#E6E6E1',
-  accent: '#141414',
-  accentText: '#D9481F',
+  band: '#FF7F50',
+  accent: '#FF7F50',
+  accentText: '#C2401F',
   coral: '#FF7F50',
-  onBand: '#141414',
-  onBandMuted: '#5E5E58',
-  accentOnBand: '#141414',
-  bandBorder: '#C9C9C2',
-  bandBorderStrong: '#AFAFA7'
+  coralTint: '#FFE3D8',
+  coralLarge: '#EC6236', // coral for big type: 3:1 on the paper
+  onBand: '#3B1F18',
+  onBandMuted: '#5A2A1E',
+  accentOnBand: '#2A1612',
+  bandBorder: '#C2512B',
+  bandBorderStrong: '#A8431F'
 };
 
 export const fonts = {
@@ -114,7 +117,7 @@ const theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: { color: colors.ink, backgroundColor: colors.bg },
-        '::selection': { background: colors.ink, color: colors.bg },
+        '::selection': { background: colors.coral, color: colors.ink },
         '[id]': { scrollMarginTop: '72px' }
       }
     },
