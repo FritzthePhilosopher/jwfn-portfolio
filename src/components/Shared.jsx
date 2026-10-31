@@ -76,7 +76,7 @@ export function Placeholder({ label, sx }) {
   );
 }
 
-const navItems = [['/#work', 'Work'], ['/#about', 'About'], ['/resume', 'Resume'], ['/#contact', 'Contact']];
+const navItems = [['/', 'Home'], ['/#work', 'Work'], ['/#about', 'About'], ['/resume', 'Resume'], ['/#contact', 'Contact']];
 
 /** Small coral dot with a slow pulse (still for reduced motion). */
 export function StatusDot() {
@@ -212,7 +212,11 @@ export function SiteNav() {
                   component={RouterLink}
                   to={to}
                   ref={i === 0 ? firstLink : undefined}
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setOpen(false);
+                    // Home from the home page: there's no route change, so scroll up ourselves.
+                    if (to === '/' && location.pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
                   tabIndex={open ? 0 : -1}
                   sx={{
                     display: 'flex', alignItems: 'baseline', gap: { xs: '16px', md: '32px' }, py: { xs: '14px', md: '18px' },

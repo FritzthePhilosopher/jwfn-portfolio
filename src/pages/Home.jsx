@@ -98,9 +98,9 @@ function Toggle({ view, setView }) {
   );
   return (
     <Box role="group" aria-label="Show work as" sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-      {opt('txt', 'Index')}
-      <Box component="span" aria-hidden="true" sx={{ typography: 'label', color: colors.muted }}>/</Box>
       {opt('img', 'Images')}
+      <Box component="span" aria-hidden="true" sx={{ typography: 'label', color: colors.muted }}>/</Box>
+      {opt('txt', 'Index')}
     </Box>
   );
 }
@@ -297,7 +297,7 @@ const years = work.flatMap((w) => (w.year.match(/\d{4}/g) || []).map(Number));
 const range = `${Math.min(...years)}–${Math.max(...years)}`;
 
 export default function Home() {
-  const [view, setView] = useState('txt');
+  const [view, setView] = useState('img');
   return (
     <Box sx={{ width: '100%', bgcolor: colors.bg, color: colors.ink, typography: 'body1' }}>
       <SiteNav />
