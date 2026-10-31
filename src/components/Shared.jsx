@@ -128,6 +128,16 @@ const menuContact = [
   ['Resume', 'PDF ↓', { href: RESUME_PDF, download: 'Justin-Neely-Resume.pdf' }]
 ];
 
+/** The coral J square, drawn from the same shapes as public/favicon.svg. */
+export function LogoMark({ size = 36, sx }) {
+  return (
+    <Box component="svg" viewBox="0 0 64 64" width={size} height={size} aria-hidden="true" sx={{ flex: 'none', ...sx }}>
+      <rect width="64" height="64" fill="#FF7F50" />
+      <path fill="#2A1612" d="M27.9 52.48Q23.12 52.48 20.84 50.63Q18.56 48.79 18.56 45.9Q18.56 44.11 19.71 42.76Q20.87 41.4 23.06 41.4Q24.9 41.4 26.09 42.5Q27.27 43.6 27.27 45.27Q27.27 46.42 26.87 47.23Q26.46 48.04 25.83 48.38V48.67Q26.29 48.79 26.78 48.85Q27.27 48.9 27.73 48.9Q29.87 48.9 30.96 47.58Q32.06 46.25 32.06 43.02V15.33H26.58V11.52H45.44V15.33H41.4V39.96Q41.4 42.73 40.68 45.04Q39.96 47.35 38.35 48.99Q36.73 50.63 34.16 51.56Q31.6 52.48 27.9 52.48Z" />
+    </Box>
+  );
+}
+
 function MenuButton({ open, onClick }) {
   return (
     <ButtonBase
@@ -177,8 +187,10 @@ export function SiteNav() {
       >
         <Container sx={{ width: '100%', py: '16px', display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', gap: '16px' }}>
           <MenuButton open={open} onClick={() => setOpen((o) => !o)} />
-          <Box component={RouterLink} to="/" sx={{ display: 'flex', alignItems: 'baseline', gap: '10px', color: 'inherit', textDecoration: 'none' }}>
-            <Box component="span" sx={{ typography: 'h5' }}>Justin Neely</Box>
+          <Box component={RouterLink} to="/" aria-label="Justin Neely, home" sx={{ display: 'flex', alignItems: 'baseline', gap: '10px', color: 'inherit', textDecoration: 'none' }}>
+            {/* Phones: the J mark. Wider screens: the wordmark. */}
+            <LogoMark sx={{ display: { xs: 'block', sm: 'none' }, alignSelf: 'center' }} />
+            <Box component="span" sx={{ typography: 'h5', display: { xs: 'none', sm: 'inline' } }}>Justin Neely</Box>
             <Box component="span" sx={{ typography: 'mono', color: colors.muted, display: { xs: 'none', sm: 'inline' } }}>Product design</Box>
           </Box>
           <Box sx={{ justifySelf: 'end', display: 'flex', alignItems: 'center', gap: '28px' }}>
