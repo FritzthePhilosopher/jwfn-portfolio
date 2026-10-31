@@ -128,12 +128,12 @@ const menuContact = [
   ['Resume', 'PDF ↓', { href: RESUME_PDF, download: 'Justin-Neely-Resume.pdf' }]
 ];
 
-/** The coral J square, drawn from the same shapes as public/favicon.svg. */
+/** The coral J square: an extended black J (Archivo), same shapes as public/favicon.svg. */
 export function LogoMark({ size = 36, sx }) {
   return (
     <Box component="svg" viewBox="0 0 64 64" width={size} height={size} aria-hidden="true" sx={{ flex: 'none', ...sx }}>
       <rect width="64" height="64" fill="#FF7F50" />
-      <path fill="#2A1612" d="M27.9 52.48Q23.12 52.48 20.84 50.63Q18.56 48.79 18.56 45.9Q18.56 44.11 19.71 42.76Q20.87 41.4 23.06 41.4Q24.9 41.4 26.09 42.5Q27.27 43.6 27.27 45.27Q27.27 46.42 26.87 47.23Q26.46 48.04 25.83 48.38V48.67Q26.29 48.79 26.78 48.85Q27.27 48.9 27.73 48.9Q29.87 48.9 30.96 47.58Q32.06 46.25 32.06 43.02V15.33H26.58V11.52H45.44V15.33H41.4V39.96Q41.4 42.73 40.68 45.04Q39.96 47.35 38.35 48.99Q36.73 50.63 34.16 51.56Q31.6 52.48 27.9 52.48Z" />
+      <path fill="#141414" d="M31.85 52.5Q25.53 52.5 21.14 50.92Q16.74 49.34 14.46 45.91Q12.17 42.48 12.17 37.1V36.16H25.82V37.27Q25.82 40.08 27.23 41.28Q28.63 42.48 31.33 42.48Q34.43 42.48 35.87 41.05Q37.3 39.61 37.3 36.22V11.5H51.83V35.81Q51.83 41.66 49.42 45.35Q47.02 49.04 42.57 50.77Q38.12 52.5 31.85 52.5Z" />
     </Box>
   );
 }
