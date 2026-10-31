@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Box, Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { colors } from '../theme.js';
+import { colors, outlineText } from '../theme.js';
 import { work } from './work.js';
 import { PUBLIC_CASE_STUDIES } from '../../lib/public-case-studies.js';
 import { Container, Label, Placeholder, SiteNav, SiteFooter } from '../components/Shared.jsx';
@@ -260,24 +260,23 @@ function WorkGrid() {
                   )}
                 </Box>
 
-                {/* Caption: name and year, the credit, then one line on the work */}
-                <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr auto', md: s.feature ? '64px 1.2fr 1fr auto' : '1fr auto' }, alignItems: 'baseline', gap: '4px 16px', pt: '16px', px: { md: s.feature ? 0 : 0 } }}>
-                  {s.feature && <Box component="span" sx={{ typography: 'mono', color: colors.accentText, display: { xs: 'none', md: 'block' } }}>{w.n}</Box>}
-                  <Box component="h3" className="name" sx={{ m: 0, typography: 'h4', textTransform: 'uppercase', letterSpacing: '0.01em', transition: 'color 200ms ease' }}>
-                    {!s.feature && <Box component="span" sx={{ typography: 'mono', color: colors.accentText, mr: 1.5 }}>{w.n}</Box>}
-                    {s.feature && <Box component="span" sx={{ typography: 'mono', color: colors.accentText, mr: 1.5, display: { md: 'none' } }}>{w.n}</Box>}
-                    {w.name}
-                  </Box>
-                  {s.feature && <Box component="span" sx={{ typography: 'mono', color: colors.muted, display: { xs: 'none', md: 'block' } }}>{w.credit}</Box>}
-                  <Box component="span" sx={{ typography: 'mono', color: colors.muted, textAlign: 'right' }}>{w.year}</Box>
-                  <Box sx={{ gridColumn: s.feature ? { xs: '1 / -1', md: '2 / -1' } : '1 / -1', display: { md: s.feature ? 'none' : 'block' }, typography: 'mono', color: colors.muted }}>{w.credit}</Box>
-                  <Box sx={{ gridColumn: s.feature ? { xs: '1 / -1', md: '2 / -1' } : '1 / -1', display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '8px 24px', mt: '8px' }}>
-                    <Box component="p" sx={{ m: 0, maxWidth: 560, typography: 'body2', color: colors.body, textWrap: 'pretty' }}>{w.title}</Box>
-                    <Box sx={{ display: 'flex', alignItems: 'baseline', gap: '8px', typography: 'label', whiteSpace: 'nowrap' }}>
-                      {!w.locked && !PUBLIC_CASE_STUDIES.includes(w.slug) && <Box component="span" sx={{ typography: 'caption', color: colors.muted, mr: 1 }}>Password</Box>}
-                      <span>{w.locked ? 'Unlock' : 'Read'}</span>
-                      <Box component="span" className="arrow" sx={{ color: colors.accentText, transition: 'transform 250ms ease' }}>→</Box>
+                {/* Caption, like a film credit: the role on top, the name big underneath */}
+                <Box sx={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '16px', pt: '18px' }}>
+                  <Box sx={{ minWidth: 0 }}>
+                    <Box sx={{ typography: 'credit', color: colors.muted, mb: '6px' }}>{w.credit}</Box>
+                    <Box component="h3" className="name" sx={{ m: 0, typography: s.feature ? 'h2' : 'h3', transition: 'color 200ms ease' }}>
+                      <Box component="span" sx={{ typography: 'mono', color: colors.accentText, mr: 1.5, verticalAlign: 'top' }}>{w.n}</Box>
+                      {w.name}
                     </Box>
+                  </Box>
+                  <Box component="span" sx={{ typography: 'mono', color: colors.muted, whiteSpace: 'nowrap', pb: '4px' }}>{w.year}</Box>
+                </Box>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '8px 24px', mt: '12px' }}>
+                  <Box component="p" sx={{ m: 0, maxWidth: 560, typography: 'body2', color: colors.body, textWrap: 'pretty' }}>{w.title}</Box>
+                  <Box sx={{ display: 'flex', alignItems: 'baseline', gap: '8px', typography: 'label', whiteSpace: 'nowrap' }}>
+                    {!w.locked && !PUBLIC_CASE_STUDIES.includes(w.slug) && <Box component="span" sx={{ typography: 'caption', color: colors.muted, mr: 1 }}>Password</Box>}
+                    <span>{w.locked ? 'Unlock' : 'Read'}</span>
+                    <Box component="span" className="arrow" sx={{ color: colors.accentText, transition: 'transform 250ms ease' }}>→</Box>
                   </Box>
                 </Box>
               </Box>
@@ -322,11 +321,11 @@ export default function Home() {
           <span>15+ years, enterprise B2B</span>
         </Box>
         <Reveal sx={{ mt: { md: 10 } }}>
-          <Label sx={{ mb: 3, color: colors.accentText }}>What I do</Label>
+          <Box sx={{ mb: 2, typography: 'credit', color: colors.accentText }}>What I do</Box>
         </Reveal>
         <Reveal delay={120}>
-          <Box component="h1" sx={{ m: 0, typography: 'display', maxWidth: 1100, textWrap: 'balance' }}>
-            I turn complex systems into products people can actually use.
+          <Box component="h1" sx={{ m: 0, typography: 'display', maxWidth: 1180, textWrap: 'balance' }}>
+            I turn <Box component="span" sx={outlineText()}>complex systems</Box> into products people can actually use.
           </Box>
         </Reveal>
         <Reveal delay={240}>

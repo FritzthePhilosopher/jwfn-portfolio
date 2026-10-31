@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Box, Chip, Divider, AppBar, Link, ButtonBase } from '@mui/material';
 import { useColorScheme } from '@mui/material/styles';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
-import { colors, stripes } from '../theme.js';
+import { colors, stripes, fluid, outlineText } from '../theme.js';
 import { RESUME_PDF } from '../pages/resume-data.js';
 
 export const gutter = 'clamp(20px, 5vw, 48px)';
@@ -219,18 +219,18 @@ export function SiteNav() {
                   }}
                   tabIndex={open ? 0 : -1}
                   sx={{
-                    display: 'flex', alignItems: 'baseline', gap: { xs: '16px', md: '32px' }, py: { xs: '14px', md: '18px' },
+                    display: 'flex', alignItems: 'baseline', gap: { xs: '16px', md: '32px' }, py: { xs: '8px', md: '10px' },
                     color: colors.ink, textDecoration: 'none',
                     opacity: open ? 1 : 0, transform: open ? 'none' : 'translateY(12px)',
                     transition: `opacity 500ms ease ${open ? 80 + i * 60 : 0}ms, transform 500ms cubic-bezier(.2,.7,.2,1) ${open ? 80 + i * 60 : 0}ms`,
-                    '& .label': { transition: 'transform 300ms cubic-bezier(.2,.7,.2,1), color 200ms ease' },
-                    '&:hover .label, &:focus-visible .label': { transform: 'translateX(12px)', color: colors.accentText },
+                    '& .label': { transition: 'transform 300ms cubic-bezier(.2,.7,.2,1), color 200ms ease, -webkit-text-stroke-color 200ms ease' },
+                    '&:hover .label, &:focus-visible .label': { transform: 'translateX(12px)', ...outlineText(colors.coral) },
                     '&:focus-visible': { outline: 'none' },
                     '@media (prefers-reduced-motion: reduce)': { transition: 'none', transform: 'none' }
                   }}
                 >
                   <Box component="span" sx={{ typography: 'mono', color: colors.accentText, minWidth: 28 }}>{String(i + 1).padStart(2, '0')}</Box>
-                  <Box component="span" className="label" sx={{ typography: 'display' }}>{label}</Box>
+                  <Box component="span" className="label" sx={{ typography: 'h2', fontSize: fluid(56, 128), lineHeight: 0.88 }}>{label}</Box>
                 </Box>
               </Box>
             ))}
@@ -287,7 +287,7 @@ export function SiteFooter({ sx }) {
         <div>
           <Box sx={{ typography: 'caption', color: colors.muted, mb: '14px' }}>Contact</Box>
           <Box sx={{ typography: 'h3', m: 0 }}>If you want to talk.</Box>
-          <Link href="mailto:justin@jwfn.design" underline="none" sx={{ ...footLink, display: 'inline-block', mt: 1.5, typography: 'h3', color: colors.accentText, backgroundSize: '100% 2px', '&:hover': { color: colors.ink, backgroundSize: '100% 2px' } }}>
+          <Link href="mailto:justin@jwfn.design" underline="none" sx={{ ...footLink, display: 'inline-block', mt: 2, typography: 'quote', fontWeight: 500, color: colors.accentText, backgroundSize: '100% 2px', '&:hover': { color: colors.ink, backgroundSize: '100% 2px' } }}>
             justin@jwfn.design
           </Link>
         </div>
@@ -308,9 +308,9 @@ export function SiteFooter({ sx }) {
       </Box>
 
       <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '32px', mt: 'clamp(64px, 10vw, 128px)', pb: '8px' }}>
-        <Box sx={{ typography: 'h2', color: colors.ink }}>
+        <Box sx={{ flex: '1 1 100%', typography: 'h1', fontSize: fluid(26, 58), color: colors.ink }}>
           <div>Left-handed by nature.</div>
-          <Box sx={{ color: colors.coralLarge }}>Designer by profession.</Box>
+          <Box sx={outlineText(colors.coral)}>Designer by profession.</Box>
           <div>Human by default.</div>
         </Box>
         <Box sx={{ typography: 'mono', color: colors.muted, textAlign: { md: 'right' } }}>

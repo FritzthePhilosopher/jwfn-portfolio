@@ -55,11 +55,24 @@ const toVars = (scheme) => Object.fromEntries(Object.entries(scheme).map(([k, v]
 /** Color tokens as CSS variables: colors.ink === 'var(--c-ink)'. */
 export const colors = Object.fromEntries(Object.keys(light).map((k) => [k, `var(${cssVar(k)})`]));
 
+// Credit-sequence type, after the Cyberpunk: Edgerunners intro:
+// wide = extended black caps (Archivo at its widest), cond = ultra-condensed
+// heavy caps (Anton). Body copy stays Instrument Sans; labels stay mono.
 export const fonts = {
   serif: "'IBM Plex Serif', serif",
   sans: "'Instrument Sans', system-ui, sans-serif",
-  mono: "'JetBrains Mono', monospace"
+  mono: "'JetBrains Mono', monospace",
+  wide: "'Archivo', 'Instrument Sans', system-ui, sans-serif",
+  cond: "'Anton', 'Archivo', Impact, sans-serif"
 };
+
+/** Outlined letters: transparent fill, stroke scales with the type.
+ *  Pass a real color: currentColor would pick up the transparent fill. */
+export const outlineText = (color = 'var(--c-ink)') => ({
+  color: 'transparent',
+  WebkitTextStroke: `0.028em ${color}`,
+  paintOrder: 'stroke fill'
+});
 
 export const stripes =
   `repeating-linear-gradient(135deg, ${colors.stripeA} 0 14px, ${colors.stripeB} 14px 28px)`;
@@ -88,28 +101,29 @@ export function fluid(min, max) {
 // [token, family, weight, minPx, maxPx, lineHeight, letterSpacing, role]
 // maxPx === minPx means a fixed size.
 const RAMP = [
-  ['display',   'sans',  500, 40, 96, 1.0,  '-0.04em',  'Hero headline, case study title, contact CTA'],
-  ['h1',        'sans',  500, 34, 56, 1.05, '-0.035em', 'Home page section headings'],
-  ['h2',        'sans',  500, 28, 44, 1.1,  '-0.03em',  'Case study section headings'],
-  ['h3',        'sans',  500, 24, 32, 1.15, '-0.025em', 'Work card titles, sub-section headings'],
-  ['h4',        'sans',  500, 20, 24, 1.25, '-0.015em', 'Company names, decision titles, about cards'],
-  ['h5',        'sans',  600, 15, 15, 1.2,  '0',        'Nav wordmark'],
-  ['h6',        'sans',  500, 17, 17, 1.3,  '-0.01em',  'List row names'],
-  ['stat',      'sans',  500, 44, 56, 1,    '-0.04em',  'Big numbers: stats band, results'],
-  ['statSm',    'sans',  500, 28, 36, 1.05, '-0.03em',  'Inline metrics, decision numbers'],
-  ['quote',     'sans',  400, 22, 30, 1.35, '-0.02em',  'Reflection / pull quote, intro statement'],
-  ['subtitle1', 'sans',  400, 18, 21, 1.5,  '-0.005em', 'Lead paragraph under a title'],
-  ['subtitle2', 'sans',  500, 16, 16, 1.4,  '0',        'Emphasized values (Role, Client, Year)'],
-  ['body1',     'sans',  400, 16, 16, 1.6,  '0',        'Default body copy'],
-  ['body2',     'sans',  400, 14, 14, 1.55, '0',        'Card details, stat captions, small copy'],
-  ['button',    'sans',  500, 15, 15, 1.25, '0',        'Buttons'],
-  ['overline',  'mono',  400, 12, 12, 1.4,  '0.06em',   'Section eyebrows'],
-  ['label',     'mono',  400, 12, 12, 1.4,  '0.06em',   'Nav links, list headers'],
-  ['caption',   'mono',  400, 11, 11, 1.4,  '0.06em',   'Field labels, chips, figure captions'],
-  ['mono',      'mono',  400, 12, 12, 1.5,  '0',        'Dates, index numbers, footer']
+  ['display',   'wide',  900, 32, 104, 0.9, '-0.01em',  'Hero headline, case study title, next project'],
+  ['h1',        'wide',  900, 30, 64,  0.92, '-0.01em', 'Home page section headings, sign-off'],
+  ['h2',        'cond',  400, 34, 60,  0.95, '0',       'Case study section headings, about statement'],
+  ['h3',        'cond',  400, 30, 44,  0.95, '0.005em', 'Project names, sub-section headings'],
+  ['h4',        'cond',  400, 24, 32,  1,    '0.005em', 'Company names, index names'],
+  ['h5',        'wide',  900, 14, 14,  1,    '0.01em',  'Nav wordmark'],
+  ['h6',        'cond',  400, 20, 22,  1,    '0.01em',  'List row names'],
+  ['stat',      'cond',  400, 56, 88,  0.9,  '0',       'Big numbers: results'],
+  ['statSm',    'cond',  400, 34, 44,  0.95, '0',       'Inline metrics'],
+  ['credit',    'wide',  800, 13, 15,  1.1,  '0',       'Role label above a name, like a film credit'],
+  ['quote',     'sans',  400, 22, 30,  1.35, '-0.02em', 'Intro statement, pull quotes'],
+  ['subtitle1', 'sans',  400, 18, 21,  1.5,  '-0.005em','Lead paragraph under a title'],
+  ['subtitle2', 'sans',  500, 16, 16,  1.4,  '0',       'Emphasized values (Role, Client, Year)'],
+  ['body1',     'sans',  400, 16, 16,  1.6,  '0',       'Default body copy'],
+  ['body2',     'sans',  400, 14, 14,  1.55, '0',       'Card details, captions, small copy'],
+  ['button',    'sans',  500, 15, 15,  1.25, '0',       'Buttons'],
+  ['overline',  'mono',  400, 12, 12,  1.4,  '0.06em',  'Section eyebrows'],
+  ['label',     'mono',  400, 12, 12,  1.4,  '0.06em',  'Nav links, list headers'],
+  ['caption',   'mono',  400, 11, 11,  1.4,  '0.06em',  'Field labels, chips, figure captions'],
+  ['mono',      'mono',  400, 12, 12,  1.5,  '0',       'Dates, index numbers, footer']
 ];
 
-const UPPERCASE = new Set(['overline', 'label', 'caption']);
+const UPPERCASE = new Set(['display', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'overline', 'label', 'caption']);
 
 /** Ramp as data, for the /type specimen page and documentation. */
 export const ramp = RAMP.map(([token, family, weight, min, max, lineHeight, letterSpacing, role]) => ({
@@ -126,6 +140,7 @@ const variants = Object.fromEntries(
       fontSize: r.min === r.max ? rem(r.min) : fluid(r.min, r.max),
       lineHeight: r.lineHeight,
       letterSpacing: r.letterSpacing,
+      ...(r.family === 'wide' && { fontStretch: '125%' }),
       ...(r.uppercase ? { textTransform: 'uppercase' } : { textTransform: 'none' })
     }
   ])
@@ -166,7 +181,7 @@ const theme = extendTheme({
           display: 'h1', h1: 'h2', h2: 'h2', h3: 'h3', h4: 'h3', h5: 'div', h6: 'h4',
           stat: 'div', statSm: 'div', quote: 'p',
           subtitle1: 'p', subtitle2: 'div', body1: 'p', body2: 'p',
-          overline: 'div', label: 'span', caption: 'span', mono: 'span'
+          overline: 'div', label: 'span', caption: 'span', mono: 'span', credit: 'span'
         }
       }
     },

@@ -184,7 +184,7 @@ function NextProject({ slug }) {
           <Box className="name" sx={{ typography: 'display', transition: 'color 200ms ease' }}>{next.name}</Box>
           <Box className="arrow" aria-hidden="true" sx={{ typography: 'display', color: colors.accentText, transition: 'transform 300ms cubic-bezier(.2,.7,.2,1)' }}>→</Box>
         </Box>
-        <Box sx={{ mt: 1, typography: 'mono', color: colors.muted }}>{next.credit} · {next.year}</Box>
+        <Box sx={{ mt: 2, typography: 'credit', color: colors.muted }}>{next.credit} · {next.year}</Box>
         {next.cover && (
           <Box sx={{ mt: 4, overflow: 'hidden', aspectRatio: { xs: '16 / 9', md: '3 / 1' }, bgcolor: colors.tint }}>
             <Box component="img" src={next.cover.src} alt="" loading="lazy" sx={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: next.focus || 'top', display: 'block', transition: 'transform 900ms cubic-bezier(.2,.7,.2,1)' }} />
@@ -229,7 +229,8 @@ export default function RichCaseStudy({ s, slug }) {
           <Link component={RouterLink} to="/#work" underline="hover" sx={{ color: colors.muted, textDecorationColor: colors.coral, '&:hover': { color: colors.ink } }}>← All work</Link>
           {entry && <span>Case {entry.n} / {pad(work.length)}</span>}
         </Box>
-        <Box component="h1" sx={{ m: 0, mt: 'clamp(48px, 8vw, 112px)', typography: 'display', maxWidth: 1100, overflowWrap: 'anywhere' }}>
+        {entry && <Box sx={{ mt: 'clamp(48px, 8vw, 112px)', typography: 'credit', color: colors.accentText }}>{entry.credit}</Box>}
+        <Box component="h1" sx={{ m: 0, mt: entry ? 2 : 'clamp(48px, 8vw, 112px)', typography: 'display', maxWidth: 1100, overflowWrap: 'anywhere' }}>
           {s.title}
         </Box>
         <Box component="p" sx={{ m: 0, mt: 4, maxWidth: 820, typography: 'quote', color: colors.body, textWrap: 'pretty' }}>{s.subtitle}</Box>
