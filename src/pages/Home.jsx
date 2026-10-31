@@ -5,7 +5,6 @@ import { colors, outlineText, fluid } from '../theme.js';
 import { work } from './work.js';
 import { PUBLIC_CASE_STUDIES } from '../../lib/public-case-studies.js';
 import { Container, Label, Placeholder, SiteNav, SiteFooter } from '../components/Shared.jsx';
-import WorkBehind from '../components/WorkBehind.jsx';
 
 const sectionTop = 'clamp(96px, 12vw, 176px)';
 const reduced = '@media (prefers-reduced-motion: reduce)';
@@ -295,7 +294,6 @@ const range = `${Math.min(...years)}–${Math.max(...years)}`;
 
 export default function Home() {
   const [view, setView] = useState('img');
-  const [showing, setShowing] = useState(null);
   return (
     <Box sx={{ width: '100%', bgcolor: colors.bg, color: colors.ink, typography: 'body1' }}>
       <SiteNav />
@@ -323,15 +321,12 @@ export default function Home() {
           <span>15+ years, enterprise B2B</span>
         </Box>
         <Reveal sx={{ mt: { md: 10 } }}>
-          {/* Credits whichever project is showing through "the messy parts" */}
-          <Box sx={{ mb: 2, typography: 'credit', color: colors.accentText }} aria-live="off">
-            {showing ? <><Box component="span" sx={{ typography: 'mono', mr: 1 }}>{showing.n}</Box>{showing.name} · {showing.credit}</> : 'What I do'}
-          </Box>
+          <Box sx={{ mb: 2, typography: 'credit', color: colors.accentText }}>What I do</Box>
         </Reveal>
         <Reveal delay={120}>
           {/* The headline is a full sentence, so it runs a step smaller than the display size. */}
           <Box component="h1" sx={{ m: 0, typography: 'display', fontSize: fluid(30, 68), maxWidth: 1100, textWrap: 'balance' }}>
-            I work through <WorkBehind onShow={setShowing}>the messy parts</WorkBehind> so the people using the product don’t have to.
+            I work through <Box component="span" sx={outlineText()}>the messy parts</Box> so the people using the product don’t have to.
           </Box>
         </Reveal>
         <Reveal delay={240}>
