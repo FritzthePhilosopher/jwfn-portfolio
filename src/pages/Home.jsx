@@ -260,16 +260,21 @@ function WorkGrid() {
                   )}
                 </Box>
 
-                {/* Caption, like a film credit: the role on top, the name big underneath */}
-                <Box sx={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '16px', pt: '18px' }}>
-                  <Box sx={{ minWidth: 0 }}>
-                    <Box sx={{ typography: 'credit', color: colors.muted, mb: '6px' }}>{w.credit}</Box>
-                    <Box component="h3" className="name" sx={{ m: 0, typography: s.feature ? 'h2' : 'h3', transition: 'color 200ms ease' }}>
-                      <Box component="span" sx={{ typography: 'mono', color: colors.accentText, mr: 1.5, verticalAlign: 'top' }}>{w.n}</Box>
-                      {w.name}
-                    </Box>
+                {/* Caption: the name, then my role and who I worked with */}
+                <Box sx={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '16px', pt: '18px' }}>
+                  <Box component="h3" className="name" sx={{ m: 0, minWidth: 0, typography: s.feature ? 'h2' : 'h3', transition: 'color 200ms ease' }}>
+                    <Box component="span" sx={{ typography: 'mono', color: colors.accentText, mr: 1.5, verticalAlign: 'top' }}>{w.n}</Box>
+                    {w.name}
                   </Box>
-                  <Box component="span" sx={{ typography: 'mono', color: colors.muted, whiteSpace: 'nowrap', pb: '4px' }}>{w.year}</Box>
+                  <Box component="span" sx={{ typography: 'mono', color: colors.muted, whiteSpace: 'nowrap' }}>{w.year}</Box>
+                </Box>
+                <Box component="dl" sx={{ m: 0, mt: '12px', display: 'grid', gridTemplateColumns: 'auto 1fr', columnGap: '16px', rowGap: '4px', alignItems: 'baseline' }}>
+                  <Box component="dt" sx={{ typography: 'caption', color: colors.muted }}>Role</Box>
+                  <Box component="dd" sx={{ m: 0, typography: 'credit', color: colors.ink }}>{w.role}</Box>
+                  {w.team && <>
+                    <Box component="dt" sx={{ typography: 'caption', color: colors.muted }}>Team</Box>
+                    <Box component="dd" sx={{ m: 0, typography: 'body2', color: colors.body }}>{w.team}</Box>
+                  </>}
                 </Box>
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '8px 24px', mt: '12px' }}>
                   <Box component="p" sx={{ m: 0, maxWidth: 560, typography: 'body2', color: colors.body, textWrap: 'pretty' }}>{w.title}</Box>
