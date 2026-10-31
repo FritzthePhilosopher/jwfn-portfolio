@@ -119,53 +119,12 @@ const indexGrid = {
 
 const beatLabel = { typography: 'caption', color: colors.muted, mb: '8px', display: { md: 'none' } };
 
-/** The hover preview: the problem first, then the final design wipes in from the right. */
-function BeforeAfter({ w }) {
-  const before = w.before || {};
-  return (
-    <Box sx={{ position: 'relative', width: '100%', height: '100%' }}>
-      {/* Before */}
-      <Box sx={{ position: 'absolute', inset: 0, bgcolor: colors.tint, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-        {before.src
-          ? <Box component="img" src={before.src} alt="" sx={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top left', display: 'block', filter: 'grayscale(1) contrast(.9)' }} />
-          : <Box sx={{ px: 4, typography: 'h3', color: colors.ink, textWrap: 'balance' }}>{before.text}</Box>}
-      </Box>
-      {/* After, wiping right to left */}
-      <Box
-        key={w.slug}
-        sx={{
-          position: 'absolute', inset: 0, overflow: 'hidden', bgcolor: colors.tint,
-          '@keyframes wipe': { from: { clipPath: 'inset(0 0 0 100%)' }, to: { clipPath: 'inset(0 0 0 0)' } },
-          animation: 'wipe 700ms cubic-bezier(.7,0,.2,1) 700ms both',
-          '@media (prefers-reduced-motion: reduce)': { animation: 'none' }
-        }}
-      >
-        {w.cover && <Box component="img" src={w.cover.src} alt="" sx={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: w.focus || 'top', display: 'block' }} />}
-        {w.locked && (
-          <Box sx={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: '8px', px: 1.5, py: 1, bgcolor: colors.bg, color: colors.ink, typography: 'label' }}><LockIcon /> Password protected</Box>
-          </Box>
-        )}
-      </Box>
-      {/* Labels swap as the wipe passes */}
-      <Box sx={{ position: 'absolute', top: 10, right: 10, display: 'flex', gap: '6px', typography: 'caption' }}>
-        <Box key={w.slug + 'b'} sx={{ px: 1, py: '3px', bgcolor: colors.bg, color: colors.ink, '@keyframes outB': { to: { opacity: 0 } }, animation: 'outB 200ms ease 1100ms forwards', '@media (prefers-reduced-motion: reduce)': { display: 'none' } }}>Before</Box>
-        <Box key={w.slug + 'a'} sx={{ px: 1, py: '3px', bgcolor: colors.coral, color: colors.accentOnBand, '@keyframes inA': { from: { opacity: 0 } }, animation: 'inA 200ms ease 1100ms both', '@media (prefers-reduced-motion: reduce)': { animation: 'none' } }}>After</Box>
-      </Box>
-    </Box>
-  );
-}
-
-/** Text view: each project as problem → move → result. The preview opens to the left of the cursor. */
+/** Text view: each project as problem → move → result. On desktop, the cover follows the cursor. */
 function WorkList() {
   const [hover, setHover] = useState(null);
   const preview = useRef(null);
-  const W = 400;
   const onMove = (e) => {
-    if (!preview.current) return;
-    // Left of the cursor, unless that would run off the left edge.
-    const x = e.clientX - W - 32 < 12 ? e.clientX + 32 : e.clientX - W - 32;
-    preview.current.style.transform = `translate(${x}px, ${e.clientY - W * 0.375}px)`;
+    if (preview.current) preview.current.style.transform = `translate(${e.clientX + 24}px, ${e.clientY - 120}px)`;
   };
   const current = work.find((w) => w.slug === hover);
 
@@ -230,18 +189,20 @@ function WorkList() {
         ))}
       </Box>
 
-      {/* Floating before → after preview, desktop pointers only */}
+      {/* Floating cover, desktop pointers only */}
       <Box
         ref={preview}
         aria-hidden="true"
         sx={{
           position: 'fixed', left: 0, top: 0, zIndex: 20, pointerEvents: 'none',
-          width: W, aspectRatio: '4 / 3', overflow: 'hidden', outline: `2px solid ${colors.coral}`,
+          width: 320, aspectRatio: '4 / 3', overflow: 'hidden', bgcolor: colors.tint, outline: `2px solid ${colors.coral}`,
           opacity: current ? 1 : 0, transition: 'opacity 200ms ease',
           display: 'none', '@media (hover: hover) and (pointer: fine)': { display: 'block' }
         }}
       >
-        {current && <BeforeAfter w={current} />}
+        {current?.cover && (
+          <Box component="img" src={current.cover.src} alt="" sx={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: current.focus || 'top', display: 'block' }} />
+        )}
       </Box>
     </Box>
   );
