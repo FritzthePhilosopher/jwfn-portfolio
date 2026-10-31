@@ -107,7 +107,7 @@ export default function Home() {
           Justin Neely. 15+ years in enterprise B2B design, with experience at Truelio (formerly Dynamic Marketing Systems) and CarMax.{' '}
           {/* Desktop: the tagline gets its own line. Phones wrap naturally. */}
           <Box component="br" sx={{ display: { xs: 'none', md: 'inline' } }} />
-          Left-handed by nature. Designer by profession. Human by{'\u00A0'}default.
+          Left-handed by nature. Designer by profession. Curious by{'\u00A0'}habit.
         </Box>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '12px', mt: 5 }}>
           <Button variant="contained" size="large" href="#work">See selected work ↓</Button>
