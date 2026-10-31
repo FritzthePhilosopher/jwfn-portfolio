@@ -10,6 +10,11 @@ const all = [
     tags: ['CarMax Auctions', 'Product design'],
     year: '2026',
     credit: 'Product designer, CarMax Auctions',
+    // Index row: problem → move → result. Public wording only (this one is locked).
+    problem: "Dealers couldn't tell how bad a vehicle's damage was before they bid.",
+    move: 'Redesigned how damage shows up on the vehicle detail page.',
+    result: { big: '94%', text: 'of 50 surveyed dealers preferred the final direction' },
+    before: { text: 'How bad is that damage, really?' },
     title: "I designed the damage detail card that shows dealers a vehicle's true condition.",
     // Locked: the home page shows only a blurred preview.
     locked: true,
@@ -32,6 +37,10 @@ const all = [
     tags: ['Truelio', 'UX'],
     year: '2021–2022',
     credit: 'UX designer at Truelio, for American Airlines flight attendants',
+    problem: 'Flight attendants could only check their card applications on a web portal.',
+    move: 'A mobile app that puts application status and projected earnings first.',
+    result: { big: 'Live', text: 'Shipped and in use' },
+    before: { text: 'Checking status meant logging in to a web portal.' },
     title: 'I designed an app that let flight attendants track card sign-ups and incentives.',
     cover: {
       src: '/images/aadvantage-cash/cover.jpg',
@@ -44,6 +53,10 @@ const all = [
     tags: ['Client project', 'UX'],
     year: '2018',
     credit: 'UX designer, with Jarrett Coger (lead) and Treven Holcomb',
+    problem: "The site lacked direction, so parents and students couldn't tell what to do next.",
+    move: 'Consolidated 25 pages into 6 long pages with clear directions.',
+    result: { big: '25 → 6', text: 'pages, with an easier path to apply' },
+    before: { src: '/images/life-school/site-map.png', alt: 'The old site map: 25 pages of scattered information' },
     title: cards['life-school'].title,
     cover: cards['life-school'].cover,
     // Where tall crops should anchor (CSS object-position). Keeps the headline in frame.

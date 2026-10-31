@@ -9,11 +9,6 @@ import { Container, Label, Placeholder, SiteNav, SiteFooter } from '../component
 const sectionTop = 'clamp(96px, 12vw, 176px)';
 const reduced = '@media (prefers-reduced-motion: reduce)';
 
-const stats = [
-  ['15+', 'Years designing enterprise B2B software'],
-  ['2', 'Teams: one agency, Truelio (formerly Dynamic Marketing Systems), and one enterprise, CarMax'],
-  ['4y 3m', 'Full-time on CarMax Auctions, after six months as a contractor']
-];
 
 // Short work history for the home page; the full version is on /resume.
 const previously = [
@@ -26,13 +21,6 @@ const about = [
   ['Atlanta.', 'Home for more than a decade.']
 ];
 
-// Rows share one grid so the columns line up: no. / name / client & type / year.
-const rowGrid = {
-  display: 'grid',
-  gridTemplateColumns: { xs: '32px 1fr auto', md: '64px 1.4fr 1fr 1fr 120px' },
-  alignItems: 'baseline',
-  gap: '4px 16px'
-};
 
 /** Fades and lifts children in once they scroll into view. */
 function Reveal({ children, delay = 0, sx }) {
@@ -110,33 +98,86 @@ function Toggle({ view, setView }) {
   );
   return (
     <Box role="group" aria-label="Show work as" sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-      {opt('img', 'Img')}
+      {opt('txt', 'Index')}
       <Box component="span" aria-hidden="true" sx={{ typography: 'label', color: colors.muted }}>/</Box>
-      {opt('txt', 'Txt')}
+      {opt('img', 'Images')}
     </Box>
   );
 }
 
 const lockNote = (w) => (w.locked ? 'Locked' : PUBLIC_CASE_STUDIES.includes(w.slug) ? 'Open' : 'Password');
 
-/** Text view: one row per project. On desktop, a cover image follows the cursor. */
+// Index columns, mirrored for a left-hander: the story reads left to right,
+// and the project's name, number and year anchor on the right edge.
+const indexGrid = {
+  display: 'grid',
+  gridTemplateColumns: { xs: '1fr', md: '1fr 1fr 0.9fr 220px' },
+  columnGap: '32px',
+  rowGap: '16px',
+  alignItems: 'start'
+};
+
+const beatLabel = { typography: 'caption', color: colors.muted, mb: '8px', display: { md: 'none' } };
+
+/** The hover preview: the problem first, then the final design wipes in from the right. */
+function BeforeAfter({ w }) {
+  const before = w.before || {};
+  return (
+    <Box sx={{ position: 'relative', width: '100%', height: '100%' }}>
+      {/* Before */}
+      <Box sx={{ position: 'absolute', inset: 0, bgcolor: colors.tint, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+        {before.src
+          ? <Box component="img" src={before.src} alt="" sx={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top left', display: 'block', filter: 'grayscale(1) contrast(.9)' }} />
+          : <Box sx={{ px: 4, typography: 'h3', color: colors.ink, textWrap: 'balance' }}>{before.text}</Box>}
+      </Box>
+      {/* After, wiping right to left */}
+      <Box
+        key={w.slug}
+        sx={{
+          position: 'absolute', inset: 0, overflow: 'hidden', bgcolor: colors.tint,
+          '@keyframes wipe': { from: { clipPath: 'inset(0 0 0 100%)' }, to: { clipPath: 'inset(0 0 0 0)' } },
+          animation: 'wipe 700ms cubic-bezier(.7,0,.2,1) 700ms both',
+          '@media (prefers-reduced-motion: reduce)': { animation: 'none' }
+        }}
+      >
+        {w.cover && <Box component="img" src={w.cover.src} alt="" sx={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: w.focus || 'top', display: 'block' }} />}
+        {w.locked && (
+          <Box sx={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: '8px', px: 1.5, py: 1, bgcolor: colors.bg, color: colors.ink, typography: 'label' }}><LockIcon /> Password protected</Box>
+          </Box>
+        )}
+      </Box>
+      {/* Labels swap as the wipe passes */}
+      <Box sx={{ position: 'absolute', top: 10, right: 10, display: 'flex', gap: '6px', typography: 'caption' }}>
+        <Box key={w.slug + 'b'} sx={{ px: 1, py: '3px', bgcolor: colors.bg, color: colors.ink, '@keyframes outB': { to: { opacity: 0 } }, animation: 'outB 200ms ease 1100ms forwards', '@media (prefers-reduced-motion: reduce)': { display: 'none' } }}>Before</Box>
+        <Box key={w.slug + 'a'} sx={{ px: 1, py: '3px', bgcolor: colors.coral, color: colors.accentOnBand, '@keyframes inA': { from: { opacity: 0 } }, animation: 'inA 200ms ease 1100ms both', '@media (prefers-reduced-motion: reduce)': { animation: 'none' } }}>After</Box>
+      </Box>
+    </Box>
+  );
+}
+
+/** Text view: each project as problem → move → result. The preview opens to the left of the cursor. */
 function WorkList() {
   const [hover, setHover] = useState(null);
   const preview = useRef(null);
+  const W = 400;
   const onMove = (e) => {
-    if (preview.current) preview.current.style.transform = `translate(${e.clientX + 24}px, ${e.clientY - 120}px)`;
+    if (!preview.current) return;
+    // Left of the cursor, unless that would run off the left edge.
+    const x = e.clientX - W - 32 < 12 ? e.clientX + 32 : e.clientX - W - 32;
+    preview.current.style.transform = `translate(${x}px, ${e.clientY - W * 0.375}px)`;
   };
   const current = work.find((w) => w.slug === hover);
+
   return (
     <Box onMouseMove={onMove} onMouseLeave={() => setHover(null)}>
-      <Box sx={{ ...rowGrid, py: '10px', borderBottom: `1px solid ${colors.ink}`, typography: 'caption', color: colors.muted }}>
-        <span>No.</span>
-        <span>Project</span>
-        <Box component="span" sx={{ display: { xs: 'none', md: 'block' } }}>Client</Box>
-        <Box component="span" sx={{ display: { xs: 'none', md: 'block' } }}>Discipline</Box>
-        <Box component="span" sx={{ textAlign: 'right' }}>Year</Box>
+      <Box sx={{ ...indexGrid, display: { xs: 'none', md: 'grid' }, py: '10px', borderBottom: `1px solid ${colors.ink}`, typography: 'caption', color: colors.muted }}>
+        <span>The problem</span>
+        <span>The move</span>
+        <span>The result</span>
+        <Box component="span" sx={{ textAlign: 'right' }}>Project</Box>
       </Box>
-      <Box component="ol" sx={{ listStyle: 'none', m: 0, p: 0 }}>
+      <Box component="ol" sx={{ listStyle: 'none', m: 0, p: 0, borderTop: { xs: `1px solid ${colors.ink}`, md: 0 } }}>
         {work.map((w) => (
           <Box component="li" key={w.slug} sx={{ borderBottom: `1px solid ${colors.border}` }}>
             <Box
@@ -145,45 +186,62 @@ function WorkList() {
               onMouseEnter={() => setHover(w.slug)}
               onFocus={() => setHover(null)}
               sx={{
-                ...rowGrid,
-                py: { xs: '18px', md: '26px' },
+                ...indexGrid,
+                py: { xs: '24px', md: '32px' },
                 color: colors.ink,
                 textDecoration: 'none',
                 transition: 'opacity 250ms ease',
-                // Dim the other rows while one is hovered.
-                opacity: hover && hover !== w.slug ? 0.3 : 1,
+                opacity: hover && hover !== w.slug ? 0.28 : 1,
+                '& .name, & .arrow': { transition: 'color 200ms ease, transform 250ms ease' },
                 '&:hover .name, &:focus-visible .name': { color: colors.accentText },
+                '&:hover .arrow, &:focus-visible .arrow': { transform: 'translateX(-6px)' },
                 '&:focus-visible': { outline: `1px solid ${colors.ink}`, outlineOffset: 2 }
               }}
             >
-              <Box component="span" sx={{ typography: 'mono', color: colors.accentText }}>{w.n}</Box>
-              <Box component="span" className="name" sx={{ typography: { xs: 'h4', md: 'h3' }, transition: 'color 200ms ease' }}>
-                {w.name}
-                <Box component="span" sx={{ typography: 'caption', color: colors.muted, ml: 1.5, verticalAlign: 'middle' }}>{lockNote(w)}</Box>
+              <div>
+                <Box sx={beatLabel}>The problem</Box>
+                <Box sx={{ typography: 'subtitle1', color: colors.ink, textWrap: 'pretty' }}>{w.problem}</Box>
+              </div>
+              <div>
+                <Box sx={beatLabel}>The move</Box>
+                <Box sx={{ display: 'flex', gap: '12px', typography: 'body1', color: colors.body, textWrap: 'pretty' }}>
+                  <Box component="span" aria-hidden="true" sx={{ color: colors.accentText, display: { xs: 'none', md: 'inline' } }}>→</Box>
+                  <span>{w.move}</span>
+                </Box>
+              </div>
+              <div>
+                <Box sx={beatLabel}>The result</Box>
+                <Box sx={{ typography: 'stat', color: colors.ink, lineHeight: 0.95 }}>{w.result.big}</Box>
+                <Box sx={{ mt: 1, typography: 'body2', color: colors.body, maxWidth: 240 }}>{w.result.text}</Box>
+              </div>
+              {/* Mirrored meta: anchored right, first on phones */}
+              <Box sx={{ order: { xs: -1, md: 0 }, textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px', pb: { xs: 1, md: 0 }, borderBottom: { xs: `1px solid ${colors.border}`, md: 0 } }}>
+                <Box sx={{ typography: 'mono', color: colors.accentText }}>{w.n}</Box>
+                <Box className="name" sx={{ typography: 'h4' }}>{w.name}</Box>
+                <Box sx={{ typography: 'mono', color: colors.muted }}>{w.tags[0]} · {w.year}</Box>
+                <Box sx={{ mt: 1, display: 'flex', alignItems: 'baseline', gap: '8px', typography: 'label' }}>
+                  <Box component="span" className="arrow" sx={{ color: colors.accentText }}>←</Box>
+                  <span>{w.locked ? 'Unlock' : 'Read'}</span>
+                  <Box component="span" sx={{ typography: 'caption', color: colors.muted }}>{lockNote(w)}</Box>
+                </Box>
               </Box>
-              <Box component="span" sx={{ typography: 'body2', color: colors.body, display: { xs: 'none', md: 'block' } }}>{w.tags[0]}</Box>
-              <Box component="span" sx={{ typography: 'body2', color: colors.body, display: { xs: 'none', md: 'block' } }}>{w.tags.slice(1).join(', ')}</Box>
-              <Box component="span" sx={{ typography: 'mono', color: colors.muted, textAlign: 'right' }}>{w.year}</Box>
-              <Box component="span" sx={{ gridColumn: { xs: '2 / -1', md: '2 / 5' }, mt: '6px', typography: 'body2', color: colors.muted, maxWidth: 560 }}>{w.title}</Box>
             </Box>
           </Box>
         ))}
       </Box>
 
-      {/* Floating cover, desktop pointers only */}
+      {/* Floating before → after preview, desktop pointers only */}
       <Box
         ref={preview}
         aria-hidden="true"
         sx={{
           position: 'fixed', left: 0, top: 0, zIndex: 20, pointerEvents: 'none',
-          width: 320, aspectRatio: '4 / 3', overflow: 'hidden', bgcolor: colors.tint, outline: `2px solid ${colors.coral}`,
+          width: W, aspectRatio: '4 / 3', overflow: 'hidden', outline: `2px solid ${colors.coral}`,
           opacity: current ? 1 : 0, transition: 'opacity 200ms ease',
           display: 'none', '@media (hover: hover) and (pointer: fine)': { display: 'block' }
         }}
       >
-        {current?.cover && (
-          <Box component="img" src={current.cover.src} alt="" sx={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
-        )}
+        {current && <BeforeAfter w={current} />}
       </Box>
     </Box>
   );
@@ -278,7 +336,7 @@ const years = work.flatMap((w) => (w.year.match(/\d{4}/g) || []).map(Number));
 const range = `${Math.min(...years)}–${Math.max(...years)}`;
 
 export default function Home() {
-  const [view, setView] = useState('img');
+  const [view, setView] = useState('txt');
   return (
     <Box sx={{ width: '100%', bgcolor: colors.bg, color: colors.ink, typography: 'body1' }}>
       <SiteNav />
@@ -369,14 +427,7 @@ export default function Home() {
                 </Box>
               ))}
             </Box>
-            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' }, gap: '28px', mt: 7 }}>
-              {stats.map(([n, l]) => (
-                <Box key={n} sx={{ borderTop: `2px solid ${colors.coral}`, pt: 2 }}>
-                  <Box sx={{ typography: 'stat' }}>{n}</Box>
-                  <Box sx={{ mt: 1, typography: 'body2', color: colors.body }}>{l}</Box>
-                </Box>
-              ))}
-            </Box>
+            
           </div>
         </Box>
       </Container>
