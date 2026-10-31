@@ -110,9 +110,9 @@ function Toggle({ view, setView }) {
   );
   return (
     <Box role="group" aria-label="Show work as" sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-      {opt('txt', 'Txt')}
-      <Box component="span" aria-hidden="true" sx={{ typography: 'label', color: colors.muted }}>/</Box>
       {opt('img', 'Img')}
+      <Box component="span" aria-hidden="true" sx={{ typography: 'label', color: colors.muted }}>/</Box>
+      {opt('txt', 'Txt')}
     </Box>
   );
 }
@@ -189,40 +189,74 @@ function WorkList() {
   );
 }
 
-/** Image view: covers in a grid with a caption line under each. */
+function LockIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square">
+      <rect x="5" y="11" width="14" height="10" />
+      <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+    </svg>
+  );
+}
+
+/** Image view: the first project runs full width, the rest sit two up. */
 function WorkGrid() {
   return (
-    <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: 'repeat(3, 1fr)' }, gap: '48px 24px', pt: 4 }}>
-      {work.map((w, i) => (
-        <Reveal key={w.slug} delay={i * 80}>
-          <Box
-            component={RouterLink}
-            to={w.to}
-            sx={{ display: 'block', color: colors.ink, textDecoration: 'none', '&:hover img': { transform: 'scale(1.04)' }, '&:focus-visible': { outline: `1px solid ${colors.ink}`, outlineOffset: 4 } }}
-          >
-            <Box sx={{ aspectRatio: '4 / 5', overflow: 'hidden', bgcolor: colors.tint }}>
-              {w.cover ? (
-                <Box component="img" src={w.cover.src} alt={w.cover.alt} loading="lazy" sx={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block', transition: 'transform 700ms cubic-bezier(.2,.7,.2,1)' }} />
-              ) : (
-                <Placeholder sx={{ height: '100%' }} />
-              )}
-            </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, mt: '14px' }}>
-              <Box sx={{ typography: 'h6' }}>
-                <Box component="span" sx={{ typography: 'mono', color: colors.accentText, mr: 1.5 }}>{w.n}</Box>{w.name}
+    <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: { xs: '56px', md: '72px 32px' }, pt: 3 }}>
+      {work.map((w, i) => {
+        const feature = i === 0;
+        return (
+          <Reveal key={w.slug} delay={feature ? 0 : (i - 1) * 100} sx={{ gridColumn: feature ? { md: '1 / -1' } : undefined }}>
+            <Box
+              component={RouterLink}
+              to={w.to}
+              sx={{
+                display: 'block', color: colors.ink, textDecoration: 'none',
+                '&:hover img, &:focus-visible img': { transform: 'scale(1.03)' },
+                '&:hover .name, &:focus-visible .name': { color: colors.accentText },
+                '&:hover .cta, &:focus-visible .cta': { gap: '14px' },
+                '&:focus-visible': { outline: `1px solid ${colors.ink}`, outlineOffset: 6 }
+              }}
+            >
+              <Box sx={{ position: 'relative', overflow: 'hidden', aspectRatio: feature ? { xs: '4 / 3', md: '16 / 7' } : '4 / 3', bgcolor: colors.tint }}>
+                {w.cover ? (
+                  <Box component="img" src={w.cover.src} alt={w.cover.alt} loading="lazy" sx={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block', transition: 'transform 700ms cubic-bezier(.2,.7,.2,1)' }} />
+                ) : (
+                  <Placeholder sx={{ height: '100%' }} />
+                )}
+                {w.locked && (
+                  <Box sx={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '8px', px: 1.5, py: 1, bgcolor: colors.bg, color: colors.ink, typography: 'label' }}>
+                      <LockIcon /> Password protected
+                    </Box>
+                  </Box>
+                )}
               </Box>
-              <Box sx={{ typography: 'mono', color: colors.muted }}>{w.year}</Box>
+              <Box sx={{ display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'baseline', gap: '6px 16px', pt: '18px' }}>
+                <Box sx={{ display: 'flex', alignItems: 'baseline', gap: '12px', minWidth: 0 }}>
+                  <Box component="span" sx={{ typography: 'mono', color: colors.accentText }}>{w.n}</Box>
+                  <Box component="h3" className="name" sx={{ m: 0, typography: feature ? 'h3' : 'h4', transition: 'color 200ms ease' }}>{w.name}</Box>
+                </Box>
+                <Box component="span" sx={{ typography: 'mono', color: colors.muted }}>{w.year}</Box>
+                <Box sx={{ gridColumn: '1 / -1', typography: 'caption', color: colors.muted }}>{w.tags.join(' · ')}</Box>
+                <Box component="p" sx={{ gridColumn: '1 / -1', m: 0, mt: '6px', maxWidth: 620, typography: 'body2', color: colors.body, textWrap: 'pretty' }}>{w.title}</Box>
+                <Box className="cta" sx={{ gridColumn: '1 / -1', mt: '8px', display: 'flex', alignItems: 'center', gap: '8px', typography: 'label', transition: 'gap 200ms ease' }}>
+                  <span>{w.locked ? 'Unlock the case study' : 'Read the case study'}</span>
+                  <Box component="span" sx={{ color: colors.accentText }}>→</Box>
+                  {!w.locked && !PUBLIC_CASE_STUDIES.includes(w.slug) && (
+                    <Box component="span" sx={{ typography: 'caption', color: colors.muted, ml: 1 }}>Password required</Box>
+                  )}
+                </Box>
+              </Box>
             </Box>
-            <Box sx={{ mt: '4px', typography: 'caption', color: colors.muted }}>{w.tags.join(' · ')} · {lockNote(w)}</Box>
-          </Box>
-        </Reveal>
-      ))}
+          </Reveal>
+        );
+      })}
     </Box>
   );
 }
 
 export default function Home() {
-  const [view, setView] = useState('txt');
+  const [view, setView] = useState('img');
   return (
     <Box sx={{ width: '100%', bgcolor: colors.bg, color: colors.ink, typography: 'body1' }}>
       <SiteNav />
@@ -230,9 +264,26 @@ export default function Home() {
       {/* HERO: fills the first screen, statement anchored low */}
       <Container
         id="top"
-        sx={{ minHeight: { md: 'calc(100svh - 64px)' }, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', pt: { xs: 8, md: 6 }, pb: { xs: 8, md: 5 } }}
+        sx={{ minHeight: { md: 'calc(100svh - 64px)' }, display: 'flex', flexDirection: 'column', pt: { xs: 4, md: 5 }, pb: { xs: 8, md: 5 } }}
       >
-        <Reveal>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4, 1fr)' },
+            gap: '8px 24px',
+            pb: '14px',
+            borderBottom: `1px solid ${colors.border}`,
+            typography: 'mono',
+            color: colors.muted,
+            mb: { xs: 8, md: 'auto' }
+          }}
+        >
+          <span>Justin Neely</span>
+          <span>Product designer</span>
+          <span>Atlanta, GA</span>
+          <span>15+ years, enterprise B2B</span>
+        </Box>
+        <Reveal sx={{ mt: { md: 10 } }}>
           <Label sx={{ mb: 3, color: colors.accentText }}>What I do</Label>
         </Reveal>
         <Reveal delay={120}>
@@ -275,7 +326,7 @@ export default function Home() {
           </Box>
           <Toggle view={view} setView={setView} />
         </Box>
-        {view === 'txt' ? <WorkList /> : <WorkGrid />}
+        {view === 'img' ? <WorkGrid /> : <WorkList />}
       </Container>
 
       {/* ABOUT */}

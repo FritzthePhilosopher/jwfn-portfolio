@@ -1,27 +1,59 @@
-import { createTheme } from '@mui/material';
+import { experimental_extendTheme as extendTheme } from '@mui/material/styles';
 
-// Studio palette: warm off-white paper, near-black ink, hairline rules,
-// with coral as the brand accent. accentText is a darker coral that passes
-// contrast for small text on the paper (4.8:1).
-export const colors = {
+/* ------------------------------------------------------------------
+   COLOR
+   Studio palette (warm off-white paper, near-black ink, hairline rules)
+   with coral as the brand accent, in a light and a dark scheme.
+   Components use `colors.ink` etc., which are CSS variables, so the whole
+   site flips when the theme toggle sets data-mui-color-scheme on <html>.
+   accentText is coral tuned for small text (4.5:1+) in each scheme;
+   coralLarge is tuned for big type (3:1+). The coral band keeps dark
+   text in both schemes.
+   ------------------------------------------------------------------ */
+const light = {
   bg: '#F6F6F4',
   ink: '#141414',
   body: '#3F3F3C',
   muted: '#86867F',
   border: '#DDDDD7',
   tint: '#EDEDE9',
+  stripeA: '#E9E9E4',
+  stripeB: '#EFEFEB',
   band: '#FF7F50',
   accent: '#FF7F50',
   accentText: '#C2401F',
   coral: '#FF7F50',
   coralTint: '#FFE3D8',
-  coralLarge: '#EC6236', // coral for big type: 3:1 on the paper
+  coralLarge: '#EC6236',
   onBand: '#3B1F18',
   onBandMuted: '#5A2A1E',
   accentOnBand: '#2A1612',
   bandBorder: '#C2512B',
   bandBorderStrong: '#A8431F'
 };
+
+const dark = {
+  ...light,
+  bg: '#131312',
+  ink: '#F2F1EC',
+  body: '#C9C8C1',
+  muted: '#8F8E87',
+  border: '#2E2D2A',
+  tint: '#1D1C1A',
+  stripeA: '#1D1C1A',
+  stripeB: '#232220',
+  accentText: '#FF8A5E',
+  coralTint: '#3A2219',
+  coralLarge: '#FF7F50'
+};
+
+export const schemes = { light, dark };
+
+const cssVar = (k) => `--c-${k.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase())}`;
+const toVars = (scheme) => Object.fromEntries(Object.entries(scheme).map(([k, v]) => [cssVar(k), v]));
+
+/** Color tokens as CSS variables: colors.ink === 'var(--c-ink)'. */
+export const colors = Object.fromEntries(Object.keys(light).map((k) => [k, `var(${cssVar(k)})`]));
 
 export const fonts = {
   serif: "'IBM Plex Serif', serif",
@@ -30,7 +62,7 @@ export const fonts = {
 };
 
 export const stripes =
-  'repeating-linear-gradient(135deg, #E9E9E4 0 14px, #EFEFEB 14px 28px)';
+  `repeating-linear-gradient(135deg, ${colors.stripeA} 0 14px, ${colors.stripeB} 14px 28px)`;
 
 /* ------------------------------------------------------------------
    TYPE RAMP
@@ -99,12 +131,17 @@ const variants = Object.fromEntries(
   ])
 );
 
-const theme = createTheme({
-  palette: {
-    primary: { main: colors.accent },
-    text: { primary: colors.ink, secondary: colors.muted },
-    divider: colors.border,
-    background: { default: colors.bg, paper: colors.bg }
+const palette = (c) => ({
+  primary: { main: c.accent, contrastText: c.accentOnBand },
+  text: { primary: c.ink, secondary: c.muted },
+  divider: c.border,
+  background: { default: c.bg, paper: c.bg }
+});
+
+const theme = extendTheme({
+  colorSchemes: {
+    light: { palette: palette(light) },
+    dark: { palette: palette(dark) }
   },
   shape: { borderRadius: 2 },
   typography: {
@@ -116,8 +153,10 @@ const theme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: {
-        body: { color: colors.ink, backgroundColor: colors.bg },
-        '::selection': { background: colors.coral, color: colors.ink },
+        ':root, [data-mui-color-scheme="light"]': toVars(light),
+        '[data-mui-color-scheme="dark"]': toVars(dark),
+        body: { color: colors.ink, backgroundColor: colors.bg, transition: 'background-color 200ms ease, color 200ms ease' },
+        '::selection': { background: colors.coral, color: colors.accentOnBand },
         '[id]': { scrollMarginTop: '72px' }
       }
     },
@@ -131,7 +170,10 @@ const theme = createTheme({
         }
       }
     },
-    MuiButton: { defaultProps: { disableElevation: true } },
+    MuiButton: {
+      defaultProps: { disableElevation: true },
+      styleOverrides: { outlined: { '&.MuiButton-colorInherit': { borderColor: 'currentColor' } } }
+    },
     MuiChip: { styleOverrides: { root: { borderRadius: 0 } } },
     MuiPaper: { styleOverrides: { root: { borderRadius: 0 } } }
   }

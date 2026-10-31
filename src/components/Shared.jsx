@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Box, Chip, Divider, AppBar, Link, IconButton, Collapse } from '@mui/material';
+import { Box, Chip, Divider, AppBar, Link, IconButton, Collapse, ButtonBase } from '@mui/material';
+import { useColorScheme } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
 import { colors, stripes } from '../theme.js';
 import { RESUME_PDF } from '../pages/resume-data.js';
@@ -103,6 +104,33 @@ function MenuIcon({ open }) {
   );
 }
 
+function ThemeIcon() {
+  // A circle, half filled: reads as "light / dark" in either scheme.
+  return (
+    <svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true">
+      <circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor" />
+    </svg>
+  );
+}
+
+/** Light / dark switch. MUI remembers the choice in localStorage. */
+export function ThemeToggle({ sx }) {
+  const { mode, setMode } = useColorScheme();
+  const isDark = mode === 'dark';
+  return (
+    <ButtonBase
+      onClick={() => setMode(isDark ? 'light' : 'dark')}
+      aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+      title="Toggle theme"
+      sx={{ ...navLinkSx, gap: '8px', py: '6px', px: '2px', '&:focus-visible': { outline: `1px solid ${colors.ink}`, outlineOffset: 3 }, ...sx }}
+    >
+      <ThemeIcon />
+      <span>{isDark ? 'Light' : 'Dark'}</span>
+    </ButtonBase>
+  );
+}
+
 export function SiteNav() {
   const [open, setOpen] = useState(false);
 
@@ -145,12 +173,13 @@ export function SiteNav() {
             <Link key={to} component={RouterLink} to={to} underline="hover" sx={navLinkSx}>{label}</Link>
           ))}
         </Box>
+        <ThemeToggle sx={{ [mobileNav]: { ml: 'auto' } }} />
         <IconButton
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen((o) => !o)}
-          sx={{ display: 'none', ml: 'auto', mr: -1, color: colors.ink, borderRadius: 0, [mobileNav]: { display: 'inline-flex' } }}
+          sx={{ display: 'none', mr: -1, color: colors.ink, borderRadius: 0, [mobileNav]: { display: 'inline-flex' } }}
         >
           <MenuIcon open={open} />
         </IconButton>
@@ -197,6 +226,9 @@ function FootCol({ title, children }) {
   );
 }
 
+// Set at build time in vite.config.js, so every deploy stamps its own date.
+const lastUpdated = new Date(__BUILD_DATE__).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
+
 /** Studio footer: contact line, link columns, back to top, and the three-line sign-off. */
 export function SiteFooter({ sx }) {
   return (
@@ -232,9 +264,58 @@ export function SiteFooter({ sx }) {
           <div>Human by default.</div>
         </Box>
         <Box sx={{ typography: 'mono', color: colors.muted, textAlign: { md: 'right' } }}>
-          <div>© 2026 Justin Neely</div>
-          <div>Atlanta, GA</div>
+          <div>© 2026 Justin Neely · Atlanta, GA</div>
+          <div>Last updated {lastUpdated}</div>
         </Box>
+      </Box>
+    </Box>
+  );
+}
+
+/**
+ * Every project as a row: number, name, client, discipline, year.
+ * Used at the bottom of each case study; `current` marks the page you're on.
+ */
+export function ProjectIndex({ items, current, sx }) {
+  return (
+    <Box component="section" aria-labelledby="index-heading" sx={sx}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 2, mb: 2 }}>
+        <Box component="h2" id="index-heading" sx={{ m: 0, ...monoLabel }}>Index</Box>
+        <Box sx={{ typography: 'mono', color: colors.muted }}>({String(items.length).padStart(2, '0')})</Box>
+      </Box>
+      <Box component="ol" sx={{ listStyle: 'none', m: 0, p: 0, borderTop: `1px solid ${colors.ink}` }}>
+        {items.map((w) => {
+          const here = w.slug === current;
+          return (
+            <Box component="li" key={w.slug} sx={{ borderBottom: `1px solid ${colors.border}` }}>
+              <Box
+                component={here ? 'div' : RouterLink}
+                to={here ? undefined : w.to}
+                aria-current={here ? 'page' : undefined}
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: { xs: '32px 1fr auto', md: '64px 1.4fr 1fr 1fr 120px' },
+                  alignItems: 'baseline',
+                  gap: '4px 16px',
+                  py: '16px',
+                  color: here ? colors.muted : colors.ink,
+                  textDecoration: 'none',
+                  '& .name': { transition: 'color 150ms ease' },
+                  ...(!here && { '&:hover .name, &:focus-visible .name': { color: colors.accentText } })
+                }}
+              >
+                <Box component="span" sx={{ typography: 'mono', color: colors.accentText }}>{w.n}</Box>
+                <Box component="span" className="name" sx={{ typography: 'h6' }}>
+                  {w.name}
+                  {here && <Box component="span" sx={{ typography: 'caption', ml: 1.5 }}>You're here</Box>}
+                </Box>
+                <Box component="span" sx={{ typography: 'body2', color: colors.body, display: { xs: 'none', md: 'block' } }}>{w.tags[0]}</Box>
+                <Box component="span" sx={{ typography: 'body2', color: colors.body, display: { xs: 'none', md: 'block' } }}>{w.tags.slice(1).join(', ')}</Box>
+                <Box component="span" sx={{ typography: 'mono', color: colors.muted, textAlign: 'right' }}>{w.year}</Box>
+              </Box>
+            </Box>
+          );
+        })}
       </Box>
     </Box>
   );
