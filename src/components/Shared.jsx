@@ -323,7 +323,7 @@ export function SiteFooter({ sx }) {
         <Box sx={{ flex: '1 1 100%', typography: 'h1', fontSize: fluid(26, 58), color: colors.ink }}>
           <div>Left-handed by nature.</div>
           <Box sx={outlineText(colors.coral)}>Designer by profession.</Box>
-          <div>Human by default.</div>
+          <div>Curious by habit.</div>
         </Box>
         <Box sx={{ typography: 'mono', color: colors.muted, textAlign: { md: 'right' } }}>
           <div>© 2026 Justin Neely · Atlanta, GA</div>

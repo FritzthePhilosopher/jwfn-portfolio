@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Box, Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { colors, outlineText } from '../theme.js';
+import { colors, outlineText, fluid } from '../theme.js';
 import { work } from './work.js';
 import { PUBLIC_CASE_STUDIES } from '../../lib/public-case-studies.js';
 import { Container, Label, Placeholder, SiteNav, SiteFooter } from '../components/Shared.jsx';
@@ -324,8 +324,9 @@ export default function Home() {
           <Box sx={{ mb: 2, typography: 'credit', color: colors.accentText }}>What I do</Box>
         </Reveal>
         <Reveal delay={120}>
-          <Box component="h1" sx={{ m: 0, typography: 'display', maxWidth: 1180, textWrap: 'balance' }}>
-            I turn <Box component="span" sx={outlineText()}>complex systems</Box> into products people can actually use.
+          {/* The headline is a full sentence, so it runs a step smaller than the display size. */}
+          <Box component="h1" sx={{ m: 0, typography: 'display', fontSize: fluid(30, 80), maxWidth: 1180, textWrap: 'balance' }}>
+            I work through <Box component="span" sx={outlineText()}>the messy parts</Box> so the people using the product don’t have to.
           </Box>
         </Reveal>
         <Reveal delay={240}>
