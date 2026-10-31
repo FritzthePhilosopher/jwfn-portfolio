@@ -279,9 +279,9 @@ function WorkGrid() {
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '8px 24px', mt: '12px' }}>
                   <Box component="p" sx={{ m: 0, maxWidth: 560, typography: 'body2', color: colors.body, textWrap: 'pretty' }}>{w.title}</Box>
                   <Box sx={{ display: 'flex', alignItems: 'baseline', gap: '8px', typography: 'label', whiteSpace: 'nowrap' }}>
-                    {!w.locked && !PUBLIC_CASE_STUDIES.includes(w.slug) && <Box component="span" sx={{ typography: 'caption', color: colors.muted, mr: 1 }}>Password</Box>}
                     <span>{w.locked ? 'Unlock' : 'Read'}</span>
                     <Box component="span" className="arrow" sx={{ color: colors.accentText, transition: 'transform 250ms ease' }}>→</Box>
+                    {!w.locked && !PUBLIC_CASE_STUDIES.includes(w.slug) && <Box component="span" sx={{ typography: 'caption', color: colors.muted, ml: 1 }}>Password</Box>}
                   </Box>
                 </Box>
               </Box>
