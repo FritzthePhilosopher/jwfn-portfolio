@@ -288,8 +288,6 @@ function FootCol({ title, children }) {
   );
 }
 
-// Set at build time in vite.config.js, so every deploy stamps its own date.
-const lastUpdated = new Date(__BUILD_DATE__).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
 
 /** Studio footer: contact line, link columns, back to top, and the three-line sign-off. */
 export function SiteFooter({ sx }) {
@@ -320,14 +318,13 @@ export function SiteFooter({ sx }) {
       </Box>
 
       <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '32px', mt: 'clamp(64px, 10vw, 128px)', pb: '8px' }}>
-        <Box sx={{ flex: '1 1 100%', typography: 'h1', fontSize: fluid(22, 40), color: colors.ink }}>
+        <Box sx={{ typography: 'h1', fontSize: fluid(22, 40), color: colors.ink }}>
           <div>Left-handed by nature.</div>
           <Box sx={outlineText(colors.coral)}>Designer by profession.</Box>
           <div>Curious by habit.</div>
         </Box>
         <Box sx={{ typography: 'mono', color: colors.muted, textAlign: { md: 'right' } }}>
-          <div>© 2026 Justin Neely · Atlanta, GA</div>
-          <div>Last updated {lastUpdated}</div>
+          © 2026 Justin Neely · Atlanta, GA
         </Box>
       </Box>
     </Box>
