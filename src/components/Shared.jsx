@@ -320,7 +320,7 @@ export function SiteFooter({ sx }) {
       </Box>
 
       <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '32px', mt: 'clamp(64px, 10vw, 128px)', pb: '8px' }}>
-        <Box sx={{ flex: '1 1 100%', typography: 'h1', fontSize: fluid(26, 58), color: colors.ink }}>
+        <Box sx={{ flex: '1 1 100%', typography: 'h1', fontSize: fluid(22, 40), color: colors.ink }}>
           <div>Left-handed by nature.</div>
           <Box sx={outlineText(colors.coral)}>Designer by profession.</Box>
           <div>Curious by habit.</div>
