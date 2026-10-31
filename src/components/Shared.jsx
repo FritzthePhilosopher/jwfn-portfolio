@@ -187,9 +187,9 @@ export function SiteNav() {
       >
         <Container sx={{ width: '100%', py: '16px', display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', gap: '16px' }}>
           <MenuButton open={open} onClick={() => setOpen((o) => !o)} />
-          <Box component={RouterLink} to="/" aria-label="Justin Neely, home" sx={{ display: 'flex', alignItems: 'baseline', gap: '10px', color: 'inherit', textDecoration: 'none' }}>
-            {/* Phones: the J mark. Wider screens: the wordmark. */}
-            <LogoMark sx={{ display: { xs: 'block', sm: 'none' }, alignSelf: 'center' }} />
+          <Box component={RouterLink} to="/" aria-label="Justin Neely, home" sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0, sm: '12px' }, color: 'inherit', textDecoration: 'none' }}>
+            {/* Phones: the J mark alone. Wider screens: the J beside the wordmark. */}
+            <LogoMark sx={{ width: { xs: 36, sm: 28 }, height: { xs: 36, sm: 28 } }} />
             <Box component="span" sx={{ typography: 'h5', display: { xs: 'none', sm: 'inline' } }}>Justin Neely</Box>
             <Box component="span" sx={{ typography: 'mono', color: colors.muted, display: { xs: 'none', sm: 'inline' } }}>Product design</Box>
           </Box>
