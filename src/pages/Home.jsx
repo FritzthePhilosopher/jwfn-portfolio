@@ -99,9 +99,9 @@ export default function Home() {
         <Label sx={{ mb: '28px' }}>Product designer / Atlanta, GA</Label>
         <Box
           component="h1"
-          sx={{ ...displaySx, maxWidth: 1040 }}
+          sx={{ ...displaySx, maxWidth: 1040, textWrap: 'balance' }}
         >
-          I turn complex systems into products people can actually use.
+          I work through the messy parts so the people using the product don’t have to.
         </Box>
         <Box component="p" sx={{ mt: 4, mb: 0, maxWidth: 700, typography: 'subtitle1', color: colors.body, textWrap: 'pretty' }}>
           Justin Neely. 15+ years in enterprise B2B design, with experience at Truelio (formerly Dynamic Marketing Systems) and CarMax.{' '}
