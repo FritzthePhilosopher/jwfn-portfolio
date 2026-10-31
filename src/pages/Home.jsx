@@ -325,7 +325,7 @@ export default function Home() {
         </Reveal>
         <Reveal delay={120}>
           {/* The headline is a full sentence, so it runs a step smaller than the display size. */}
-          <Box component="h1" sx={{ m: 0, typography: 'display', fontSize: fluid(28, 60), maxWidth: 1000, textWrap: 'balance' }}>
+          <Box component="h1" sx={{ m: 0, typography: 'display', fontSize: fluid(30, 68), maxWidth: 1100, textWrap: 'balance' }}>
             I work through <Box component="span" sx={outlineText()}>the messy parts</Box> so the people using the product don’t have to.
           </Box>
         </Reveal>
