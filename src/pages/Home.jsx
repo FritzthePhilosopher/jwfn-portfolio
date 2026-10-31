@@ -218,14 +218,11 @@ function LockIcon() {
 }
 
 // Desktop layout for the image view, on a 12-column grid:
-// the first project runs edge to edge, then pairs alternate a wide
-// landscape (7 cols) with a narrower portrait (5 cols) set lower.
+// the first project runs edge to edge, then the rest sit two up,
+// same width, same image shape, top-aligned.
 function slot(i) {
   if (i === 0) return { cols: '1 / -1', ratio: { xs: '4 / 3', md: '2 / 1' }, offset: 0, feature: true };
-  const wide = i % 2 === 1;
-  return wide
-    ? { cols: 'span 7', ratio: '4 / 3', offset: 0 }
-    : { cols: 'span 5', ratio: { xs: '4 / 3', md: '4 / 5' }, offset: 'clamp(80px, 10vw, 160px)' };
+  return { cols: 'span 6', ratio: '4 / 3', offset: 0 };
 }
 
 /** Image view: big, mixed-shape images with a credit line under each. */
