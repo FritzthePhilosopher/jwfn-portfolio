@@ -311,8 +311,17 @@ function FootCol({ title, children }) {
 /** Studio footer: contact line, link columns, back to top, and the three-line sign-off. */
 export function SiteFooter({ sx }) {
   return (
-    <Box component="footer" id="contact" sx={{ borderTop: `2px solid ${colors.coral}`, pt: 'clamp(40px, 6vw, 72px)', ...sx }}>
-      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1.6fr 1fr 1fr 1fr' }, gap: { xs: '40px', md: '32px' } }}>
+    <Box component="footer" id="contact" sx={{ position: 'relative', borderTop: `2px solid ${colors.coral}`, pt: { xs: '68px', md: 'clamp(40px, 6vw, 72px)' }, ...sx }}>
+      {/* Hangs off the right end of the coral line */}
+      <Link
+        href="#"
+        underline="none"
+        onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+        sx={{ ...footLink, position: 'absolute', top: '14px', right: 0, typography: 'label' }}
+      >
+        Back to top ↑
+      </Link>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1.6fr 1fr 1fr' }, gap: { xs: '40px', md: '32px' } }}>
         <div>
           <Box sx={{ typography: 'caption', color: colors.muted, mb: '14px' }}>Contact</Box>
           <Box sx={{ typography: 'h3', m: 0 }}>If you want to talk.</Box>
@@ -328,11 +337,6 @@ export function SiteFooter({ sx }) {
           {navItems.map(([to, label]) => (
             <li key={to}><Link component={RouterLink} to={to} underline="none" sx={footLink}>{label}</Link></li>
           ))}
-        </FootCol>
-        <FootCol title="&nbsp;">
-          <li>
-            <Link href="#" underline="none" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} sx={footLink}>Back to top ↑</Link>
-          </li>
         </FootCol>
       </Box>
 
