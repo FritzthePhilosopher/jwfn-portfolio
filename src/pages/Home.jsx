@@ -323,7 +323,7 @@ export default function Home() {
           <span>Justin Neely</span>
           <span>Product designer</span>
           <span>Atlanta, GA</span>
-          <span>15+ years, enterprise B2B</span>
+          <span>15+ years designing</span>
         </Box>
         <Reveal sx={{ mt: { md: 10 } }}>
           <Box sx={{ mb: 2, typography: 'credit', color: colors.accentText }}>What I do</Box>
