@@ -44,6 +44,25 @@ export const h2CaseSx = { m: 0, typography: 'h2' };
 // Hero / case study title
 export const displaySx = { m: 0, typography: 'display', overflowWrap: 'anywhere' };
 
+/**
+ * Sets ® and ™ small and raised, so they don't sit full size on the baseline
+ * next to big display type. Use around any project name or title.
+ */
+export function BrandText({ children }) {
+  if (typeof children !== 'string') return children;
+  return children.split(/([®™])/).map((part, i) =>
+    part === '®' || part === '™' ? (
+      <Box
+        key={i}
+        component="sup"
+        sx={{ fontSize: '0.38em', lineHeight: 0, verticalAlign: 'top', position: 'relative', top: '0.3em', ml: '0.04em', mr: '0.12em', fontFamily: 'inherit', fontWeight: 'inherit' }}
+      >
+        {part}
+      </Box>
+    ) : part
+  );
+}
+
 export function Container({ children, sx, ...rest }) {
   return (
     <Box
@@ -365,7 +384,7 @@ export function ProjectIndex({ items, current, sx }) {
               >
                 <Box component="span" sx={{ typography: 'mono', color: colors.accentText }}>{w.n}</Box>
                 <Box component="span" className="name" sx={{ typography: 'h6' }}>
-                  {w.name}
+                  <BrandText>{w.name}</BrandText>
                   {here && <Box component="span" sx={{ typography: 'caption', ml: 1.5 }}>You're here</Box>}
                 </Box>
                 <Box component="span" sx={{ typography: 'body2', color: colors.body, display: { xs: 'none', md: 'block' } }}>{w.tags[0]}</Box>

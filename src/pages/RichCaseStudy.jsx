@@ -3,7 +3,7 @@ import { Box, Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { colors } from '../theme.js';
 import { work } from './work.js';
-import { Container, SiteNav, SiteFooter, ProjectIndex, fieldLabel } from '../components/Shared.jsx';
+import { Container, SiteNav, SiteFooter, ProjectIndex, fieldLabel, BrandText } from '../components/Shared.jsx';
 
 const sectionGap = 'clamp(72px, 9vw, 128px)';
 const pad = (n) => String(n).padStart(2, '0');
@@ -181,7 +181,7 @@ function NextProject({ slug }) {
           <span>{next.n} / {pad(work.length)}</span>
         </Box>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '8px 24px', mt: 2 }}>
-          <Box className="name" sx={{ typography: 'display', transition: 'color 200ms ease' }}>{next.name}</Box>
+          <Box className="name" sx={{ typography: 'display', transition: 'color 200ms ease' }}><BrandText>{next.name}</BrandText></Box>
           <Box className="arrow" aria-hidden="true" sx={{ typography: 'display', color: colors.accentText, transition: 'transform 300ms cubic-bezier(.2,.7,.2,1)' }}>→</Box>
         </Box>
         <Box sx={{ mt: 2, typography: 'credit', color: colors.muted }}>{next.credit} · {next.year}</Box>
@@ -231,7 +231,7 @@ export default function RichCaseStudy({ s, slug }) {
         </Box>
         {entry && <Box sx={{ mt: 'clamp(48px, 8vw, 112px)', typography: 'credit', color: colors.accentText }}>{entry.credit}</Box>}
         <Box component="h1" sx={{ m: 0, mt: entry ? 2 : 'clamp(48px, 8vw, 112px)', typography: 'display', maxWidth: 1100, overflowWrap: 'anywhere' }}>
-          {s.title}
+          <BrandText>{s.title}</BrandText>
         </Box>
         <Box component="p" sx={{ m: 0, mt: 4, maxWidth: 820, typography: 'quote', color: colors.body, textWrap: 'pretty' }}>{s.subtitle}</Box>
 

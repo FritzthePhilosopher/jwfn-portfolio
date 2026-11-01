@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { colors, outlineText, fluid } from '../theme.js';
 import { work } from './work.js';
 import { PUBLIC_CASE_STUDIES } from '../../lib/public-case-studies.js';
-import { Container, Label, Placeholder, SiteNav, SiteFooter } from '../components/Shared.jsx';
+import { Container, Label, Placeholder, SiteNav, SiteFooter, BrandText } from '../components/Shared.jsx';
 
 const sectionTop = 'clamp(96px, 12vw, 176px)';
 const reduced = '@media (prefers-reduced-motion: reduce)';
@@ -176,7 +176,7 @@ function WorkList() {
               {/* Mirrored meta: anchored right, first on phones */}
               <Box sx={{ order: { xs: -1, md: 0 }, textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px', pb: { xs: 1, md: 0 }, borderBottom: { xs: `1px solid ${colors.border}`, md: 0 } }}>
                 <Box sx={{ typography: 'mono', color: colors.accentText }}>{w.n}</Box>
-                <Box className="name" sx={{ typography: 'h4' }}>{w.name}</Box>
+                <Box className="name" sx={{ typography: 'h4' }}><BrandText>{w.name}</BrandText></Box>
                 <Box sx={{ typography: 'mono', color: colors.muted }}>{w.tags[0]} · {w.year}</Box>
                 <Box sx={{ mt: 1, display: 'flex', alignItems: 'baseline', gap: '8px', typography: 'label' }}>
                   <Box component="span" className="arrow" sx={{ color: colors.accentText }}>←</Box>
@@ -262,9 +262,10 @@ function WorkGrid() {
 
                 {/* Caption: the name, then my role and who I worked with */}
                 <Box sx={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '16px', pt: '18px' }}>
-                  <Box component="h3" className="name" sx={{ m: 0, minWidth: 0, typography: s.feature ? 'h2' : 'h3', transition: 'color 200ms ease' }}>
-                    <Box component="span" sx={{ typography: 'mono', color: colors.accentText, mr: 1.5, verticalAlign: 'top' }}>{w.n}</Box>
-                    {w.name}
+                  {/* The number hangs in its own column, so a wrapped name lines up under itself */}
+                  <Box component="h3" className="name" sx={{ m: 0, minWidth: 0, display: 'flex', alignItems: 'flex-start', gap: 1.5, typography: s.feature ? 'h2' : 'h3', transition: 'color 200ms ease' }}>
+                    <Box component="span" sx={{ typography: 'mono', color: colors.accentText, flex: 'none', pt: '0.15em' }}>{w.n}</Box>
+                    <Box component="span" sx={{ minWidth: 0 }}><BrandText>{w.name}</BrandText></Box>
                   </Box>
                   <Box component="span" sx={{ typography: 'mono', color: colors.muted, whiteSpace: 'nowrap' }}>{w.year}</Box>
                 </Box>
