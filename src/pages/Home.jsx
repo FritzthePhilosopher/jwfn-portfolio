@@ -304,10 +304,10 @@ export default function Home() {
     <Box sx={{ width: '100%', bgcolor: colors.bg, color: colors.ink, typography: 'body1' }}>
       <SiteNav />
 
-      {/* HERO: fills the first screen, statement anchored low */}
+      {/* HERO: facts row, then the statement with 64px above and below */}
       <Container
         id="top"
-        sx={{ minHeight: { md: 'calc(100svh - 64px)' }, display: 'flex', flexDirection: 'column', pt: { xs: 4, md: 5 }, pb: { xs: 8, md: 5 } }}
+        sx={{ display: 'flex', flexDirection: 'column', pt: { xs: 4, md: 5 }, pb: '64px' }}
       >
         <Box
           sx={{
@@ -318,7 +318,7 @@ export default function Home() {
             borderBottom: `1px solid ${colors.border}`,
             typography: 'mono',
             color: colors.muted,
-            mb: { xs: 8, md: 'auto' }
+            mb: '64px'
           }}
         >
           <span>Justin Neely</span>
@@ -326,7 +326,7 @@ export default function Home() {
           <span>Atlanta, GA</span>
           <span>15+ years designing</span>
         </Box>
-        <Reveal sx={{ mt: { md: 10 } }}>
+        <Reveal>
           <Box sx={{ mb: 2, typography: 'credit', color: colors.accentText }}>What I do</Box>
         </Reveal>
         <Reveal delay={120}>
@@ -360,7 +360,7 @@ export default function Home() {
       </Container>
 
       {/* WORK: list or grid */}
-      <Container id="work" sx={{ pt: { xs: 4, md: 8 } }}>
+      <Container id="work" sx={{ pt: 0 }}>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '16px', mb: 3 }}>
           <Box sx={{ display: 'flex', alignItems: 'baseline', gap: '16px' }}>
             <Box component="h2" sx={{ m: 0, typography: 'h1' }}>Selected work</Box>
