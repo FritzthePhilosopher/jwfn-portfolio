@@ -308,22 +308,22 @@ function FootCol({ title, children }) {
 }
 
 
+const toTop = (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+
 /** Studio footer: contact line, link columns, back to top, and the three-line sign-off. */
 export function SiteFooter({ sx }) {
   return (
-    <Box component="footer" id="contact" sx={{ borderTop: `2px solid ${colors.coral}`, pt: '14px', ...sx }}>
-      {/* Just under the coral line, in the Pages column (right-aligned on phones) */}
-      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1.6fr 1fr 1fr' }, columnGap: '32px', mb: { xs: '28px', md: 'clamp(32px, 5vw, 58px)' } }}>
-        <Link
-          href="#"
-          underline="none"
-          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          sx={{ ...footLink, gridColumn: { md: 3 }, justifySelf: { xs: 'end', md: 'start' }, typography: 'label' }}
-        >
-          Back to top ↑
-        </Link>
-      </Box>
-      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1.6fr 1fr 1fr' }, gap: { xs: '40px', md: '32px' } }}>
+    <Box component="footer" id="contact" sx={{ position: 'relative', borderTop: `2px solid ${colors.coral}`, pt: { xs: '68px', md: 'clamp(40px, 6vw, 72px)' }, ...sx }}>
+      {/* Phones: hangs off the right end of the coral line */}
+      <Link
+        href="#"
+        underline="none"
+        onClick={toTop}
+        sx={{ ...footLink, position: 'absolute', top: '14px', right: 0, typography: 'label', display: { md: 'none' } }}
+      >
+        Back to top ↑
+      </Link>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1.6fr 1fr 1fr auto' }, gap: { xs: '40px', md: '32px' } }}>
         <div>
           <Box sx={{ typography: 'caption', color: colors.muted, mb: '14px' }}>Contact</Box>
           <Box sx={{ typography: 'h3', m: 0 }}>If you want to talk.</Box>
@@ -340,6 +340,13 @@ export function SiteFooter({ sx }) {
             <li key={to}><Link component={RouterLink} to={to} underline="none" sx={footLink}>{label}</Link></li>
           ))}
         </FootCol>
+        {/* Desktop: at the right edge, on the same line as "Home" */}
+        <Box sx={{ display: { xs: 'none', md: 'block' }, textAlign: 'right' }}>
+          <Box aria-hidden="true" sx={{ typography: 'caption', mb: '14px', visibility: 'hidden' }}>Top</Box>
+          <Box sx={{ typography: 'body2' }}>
+            <Link href="#" underline="none" onClick={toTop} sx={footLink}>Back to top ↑</Link>
+          </Box>
+        </Box>
       </Box>
 
       <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '32px', mt: 'clamp(64px, 10vw, 128px)', pb: '8px' }}>
