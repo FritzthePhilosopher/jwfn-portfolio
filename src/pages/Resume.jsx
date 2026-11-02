@@ -23,7 +23,7 @@ export default function Resume() {
         <Label>Resume</Label>
         <Box component="h1" sx={{ ...displaySx, mt: '20px' }}>Justin Neely.</Box>
         <Box component="p" sx={{ mt: 3, mb: 0, maxWidth: 720, typography: 'subtitle1', color: colors.body }}>
-          Product designer in Atlanta. 15+ years designing, with experience at Truelio (formerly Dynamic Marketing Systems) and CarMax.
+          Product designer in Atlanta. 15+ years designing, with experience at CarMax and Truelio (formerly Dynamic Marketing Systems).
         </Box>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '12px', mt: 5 }}>
           <Button variant="contained" size="large" href={RESUME_PDF} download="Justin-Neely-Resume.pdf">Download resume (PDF) ↓</Button>
