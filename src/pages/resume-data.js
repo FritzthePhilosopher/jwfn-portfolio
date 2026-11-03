@@ -1,4 +1,6 @@
-// Resume content, from public/Justin-Neely-Resume.pdf. Keep the two in sync.
+// Resume content. The site renders it on /resume, and scripts/build-resume-pdf.mjs
+// builds public/Justin-Neely-Resume.pdf from it: after editing, run
+// `node scripts/build-resume-pdf.mjs` so the PDF matches.
 export const RESUME_PDF = '/Justin-Neely-Resume.pdf';
 
 export const jobs = [
