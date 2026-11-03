@@ -55,21 +55,14 @@ const html = `<!doctype html>
   .eyebrow { font: 400 7.6px/1.4 'JetBrains Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; color: ${C.muted};
              padding-bottom: 5px; border-bottom: 1px solid ${C.ink}; }
 
-  /* Meta strip, like the top of the homepage */
-  .meta { display: grid; grid-template-columns: repeat(4, 1fr); padding-bottom: 7px; border-bottom: 1px solid ${C.border}; }
-  .meta span:last-child { text-align: right; }
-
   /* Name block */
-  header { display: flex; justify-content: space-between; align-items: flex-end; padding: 26px 0 18px; }
+  header { display: flex; justify-content: space-between; align-items: center; padding: 4px 0 16px; margin-bottom: 18px; border-bottom: 1.5px solid ${C.ink}; }
   .name { display: flex; align-items: center; gap: 12px; }
-  .name svg { width: 46px; height: 46px; flex: none; }
-  h1 { font: 900 50px/0.9 'Archivo', sans-serif; font-stretch: 125%; letter-spacing: -0.01em; text-transform: uppercase; color: ${C.ink}; }
+  .name svg { width: 34px; height: 34px; flex: none; }
+  .title { font: 400 8px/1.4 'JetBrains Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; color: ${C.accentText}; margin-top: 6px; }
+  h1 { font: 900 24px/0.95 'Archivo', sans-serif; font-stretch: 125%; letter-spacing: -0.01em; text-transform: uppercase; color: ${C.ink}; }
   .contact { text-align: right; display: grid; gap: 2px; color: ${C.ink}; }
 
-  /* Statement, from the homepage hero */
-  .what { padding: 16px 0 22px; border-top: 1px solid ${C.ink}; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 20px; }
-  .credit { font: 800 8.5px/1.1 'Archivo', sans-serif; font-stretch: 125%; color: ${C.accentText}; margin-bottom: 6px; }
-  .statement { font: 900 18px/1.04 'Archivo', sans-serif; font-stretch: 125%; text-transform: uppercase; color: ${C.ink}; }
   .outline { color: transparent; -webkit-text-stroke: 0.75px ${C.ink}; paint-order: stroke fill; }
 
   /* Columns */
@@ -102,24 +95,15 @@ const html = `<!doctype html>
   .foot { text-align: right; display: grid; gap: 2px; }
 </style></head>
 <body>
-  <div class="meta mono muted"><span>Justin Neely</span><span>Product designer</span><span>Atlanta, GA</span><span>15+ years designing</span></div>
-
   <header>
     <div class="name">
       <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" fill="${C.coral}"/><path fill="${C.ink}" d="${J_PATH}"/></svg>
-      <h1>Justin Neely.</h1>
+      <div><h1>Justin Neely</h1><div class="title">Product designer / Atlanta, GA</div></div>
     </div>
     <div class="contact mono">
       <span>937.266.0092</span><span>justin@jwfn.design</span><span>linkedin.com/in/jwfn</span><span>jwfn.design</span>
     </div>
   </header>
-
-  <div class="what">
-    <div>
-      <div class="credit">What I do</div>
-      <p class="statement">I work through <span class="outline">the messy parts</span><br>so the people using the product don’t have to.</p>
-    </div>
-  </div>
 
   <main>
     <div>
