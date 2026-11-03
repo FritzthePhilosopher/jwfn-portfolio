@@ -46,45 +46,45 @@ const html = `<!doctype html>
   @page { size: Letter; margin: 0; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: ${C.paper}; }
-  body { width: 8.5in; height: 11in; padding: 0.5in 0.6in 0.42in; color: ${C.body};
-         font: 400 10px/1.55 'Instrument Sans', sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  body { width: 8.5in; height: 11in; padding: 0.45in 0.55in 0.4in; color: ${C.body};
+         font: 400 12.5px/1.45 'Instrument Sans', sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact;
          display: flex; flex-direction: column; }
-  .mono { font: 400 8px/1.4 'JetBrains Mono', monospace; letter-spacing: 0; white-space: nowrap; }
+  .mono { font: 400 9.5px/1.4 'JetBrains Mono', monospace; letter-spacing: 0; white-space: nowrap; }
   .muted { color: ${C.muted}; }
   .accent { color: ${C.accentText}; }
-  .eyebrow { font: 400 7.6px/1.4 'JetBrains Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; color: ${C.muted};
+  .eyebrow { font: 400 8.5px/1.4 'JetBrains Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; color: ${C.muted};
              padding-bottom: 5px; border-bottom: 1px solid ${C.ink}; }
 
   /* Name block */
   header { display: flex; justify-content: space-between; align-items: center; padding: 4px 0 16px; margin-bottom: 18px; border-bottom: 1.5px solid ${C.ink}; }
   .name { display: flex; align-items: center; gap: 12px; }
   .name svg { width: 34px; height: 34px; flex: none; }
-  .title { font: 400 8px/1.4 'JetBrains Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; color: ${C.accentText}; margin-top: 6px; }
+  .title { font: 400 9px/1.4 'JetBrains Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; color: ${C.accentText}; margin-top: 6px; }
   h1 { font: 900 24px/0.95 'Archivo', sans-serif; font-stretch: 125%; letter-spacing: -0.01em; text-transform: uppercase; color: ${C.ink}; }
   .contact { text-align: right; display: grid; gap: 2px; color: ${C.ink}; }
 
   .outline { color: transparent; -webkit-text-stroke: 0.75px ${C.ink}; paint-order: stroke fill; }
 
   /* Columns */
-  main { display: grid; grid-template-columns: 1fr 2in; gap: 0 28px; flex: 1; }
-  .job { padding: 14px 0 12px; border-bottom: 1px solid ${C.border}; }
+  main { display: grid; grid-template-columns: 1fr 2.05in; gap: 0 26px; flex: 1; }
+  .job { padding: 12px 0 10px; border-bottom: 1px solid ${C.border}; }
   .job:last-child { border-bottom: 0; }
   .row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-  h3 { font: 400 19.5px/1 'Anton', sans-serif; white-space: nowrap; letter-spacing: 0.005em; text-transform: uppercase; color: ${C.ink}; }
+  h3 { font: 400 21px/1 'Anton', sans-serif; white-space: nowrap; letter-spacing: 0.005em; text-transform: uppercase; color: ${C.ink}; }
   sup { font-size: 0.5em; vertical-align: 0.9em; }
-  .role { margin-top: 10px; }
+  .role { margin-top: 9px; }
   .role-head { display: flex; align-items: baseline; gap: 9px; }
-  h4 { font: 500 10.8px/1.3 'Instrument Sans', sans-serif; color: ${C.ink}; }
+  h4 { font: 500 13.5px/1.3 'Instrument Sans', sans-serif; color: ${C.ink}; }
   ul { list-style: none; margin-top: 3px; }
-  li { position: relative; padding-left: 12px; margin-bottom: 3px; text-wrap: pretty; }
-  li::before { content: ''; position: absolute; left: 1px; top: 0.62em; width: 4px; height: 4px; background: ${C.coral}; }
+  li { position: relative; padding-left: 13px; margin-bottom: 2px; text-wrap: pretty; }
+  li::before { content: ''; position: absolute; left: 1px; top: 0.6em; width: 4.5px; height: 4.5px; background: ${C.coral}; }
 
   aside { display: flex; flex-direction: column; gap: 28px; }
   .edu { padding: 11px 0; border-bottom: 1px solid ${C.border}; }
-  .edu h4 { font-size: 10.4px; }
+  .edu h4 { font-size: 13px; }
   .edu p { color: ${C.body}; }
   .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; list-style: none; }
-  .chips li { padding: 3px 5px 2px; margin: 0; font: 400 7px/1.3 'JetBrains Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase;
+  .chips li { padding: 3px 5px 2px; margin: 0; font: 400 8.2px/1.3 'JetBrains Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase;
               color: ${C.ink}; background: ${C.tint}; border: 1px solid ${C.border}; }
   .chips li::before { display: none; }
 
