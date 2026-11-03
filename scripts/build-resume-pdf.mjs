@@ -66,10 +66,10 @@ const html = `<!doctype html>
   .outline { color: transparent; -webkit-text-stroke: 0.75px ${C.ink}; paint-order: stroke fill; }
 
   /* Columns */
-  main { display: grid; grid-template-columns: 1fr 2.05in; gap: 0 26px; flex: 1; }
+  main { display: grid; grid-template-columns: 1fr 2.3in; gap: 0 44px; flex: 1; }
   .job { padding: 12px 0 10px; border-bottom: 1px solid ${C.border}; }
   .job:last-child { border-bottom: 0; }
-  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .row { display: flex; flex-direction: column; gap: 4px; }
   h3 { font: 400 21px/1 'Anton', sans-serif; white-space: nowrap; letter-spacing: 0.005em; text-transform: uppercase; color: ${C.ink}; }
   sup { font-size: 0.5em; vertical-align: 0.9em; }
   .role { margin-top: 9px; }
