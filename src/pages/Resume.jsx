@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Box, Button, Divider } from '@mui/material';
 import { colors } from '../theme.js';
-import { Container, Label, SiteNav, SiteFooter, displaySx, monoChipSx } from '../components/Shared.jsx';
+import { Container, Label, SiteNav, SiteFooter, monoChipSx } from '../components/Shared.jsx';
 import { RESUME_PDF, jobs, education, skills } from './resume-data.js';
 
 const sectionLabel = { typography: 'overline', color: colors.muted, mb: 2 };
@@ -21,7 +21,7 @@ export default function Resume() {
       {/* HEADER */}
       <Container sx={{ pt: 'clamp(48px, 8vw, 96px)' }}>
         <Label>Resume</Label>
-        <Box component="h1" sx={{ ...displaySx, mt: '20px' }}>Justin Neely.</Box>
+        <Box component="h1" sx={{ m: 0, mt: '20px', typography: 'h1', overflowWrap: 'anywhere' }}>Justin Neely.</Box>
         <Box component="p" sx={{ mt: 3, mb: 0, maxWidth: 720, typography: 'subtitle1', color: colors.body }}>
           Product designer in Atlanta. 15+ years designing, with experience at CarMax and Truelio (formerly Dynamic Marketing Systems).
         </Box>
