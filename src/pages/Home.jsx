@@ -17,8 +17,9 @@ const previously = [
 ];
 
 const about = [
-  ['Agency first.', 'I started at Dynamic Marketing Systems (now Truelio), a digital marketing agency, where I did my Barclays and American Airlines work, then moved in-house to product design.'],
-  ['Atlanta.', 'Home for more than a decade.']
+  ['Now.', 'Designing and building with AI, Claude especially.'],
+  ['Atlanta.', 'Home for more than a decade.'],
+  ['Off the clock.', 'Twenty years of lifting, Muay Thai, plus gaming and reading.']
 ];
 
 
@@ -381,7 +382,7 @@ export default function Home() {
           <div>
             <Reveal>
               <Box component="p" sx={{ m: 0, typography: 'h2', maxWidth: 820, textWrap: 'pretty' }}>
-                A left-handed human being who happens to design. I start with what matters to the people using the product, then make it visible.
+                A left-handed human who happens to design.
               </Box>
             </Reveal>
             <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: '24px 40px', mt: 5, maxWidth: 820 }}>
