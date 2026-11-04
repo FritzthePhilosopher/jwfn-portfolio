@@ -338,7 +338,7 @@ export default function Home() {
         <Reveal delay={240}>
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: '24px 48px', alignItems: 'end', mt: 'clamp(40px, 6vw, 72px)' }}>
             <Box component="p" sx={{ m: 0, maxWidth: 460, typography: 'subtitle1', color: colors.body }}>
-              Product designer with experience at CarMax and Truelio (formerly Dynamic Marketing Systems).
+              Product designer with 15+ years across CarMax and Truelio (formerly Dynamic Marketing Systems).
             </Box>
             <Box sx={{ display: 'flex', justifyContent: { md: 'flex-end' }, gap: '32px', typography: 'label' }}>
               <Link href="#about" underline="hover" sx={{ color: colors.ink, textDecorationColor: colors.coral, '&:hover': { color: colors.accentText } }}>Who I am →</Link>
