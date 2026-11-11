@@ -46,7 +46,7 @@
         "src": "/private/damage-assessment/customer-journey.jpg",
         "alt": "Customer journey map for a dealer buyer. Stages run Find, Evaluate, Price it, Bid, and Win and pick up, then split on whether the car matches the listing: yes leads to Recon and resell, no leads to File arbitration. Evaluate and Price it are highlighted as where the damage cards sit. Rows above and below show what the dealer is thinking, pain points before the redesign, and opportunities. An emotion curve shows confidence dropping at Evaluate, Price it and pickup before the redesign, and staying higher with damage cards.",
         "caption": "Customer journey map, reconstructed after the project",
-        "scrollWidth": 1800
+        "fullSizeLink": true
       }
     },
     {

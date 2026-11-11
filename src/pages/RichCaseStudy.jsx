@@ -53,6 +53,7 @@ function Figure({ img, sx }) {
   // in a fixed-height window you scroll inside.
   // Optional img.scrollWidth (px) shows a wide image, like a journey map, at a
   // readable size in a window you scroll sideways, with a link to the full image.
+  // Optional img.fullSizeLink fits the image to the column and adds that link.
   const picture = (
     <Box component="img" src={img.src} alt={img.alt} loading="lazy" onError={() => setFailed(true)} sx={{ display: 'block', width: '100%', height: 'auto', bgcolor: '#fff', ...(img.scrollWidth && { minWidth: img.scrollWidth }) }} />
   );
@@ -77,10 +78,10 @@ function Figure({ img, sx }) {
           {picture}
         </Box>
       ) : picture}
-      {(img.caption || img.scrollWidth) && (
+      {(img.caption || img.scrollWidth || img.fullSizeLink) && (
         <Box component="figcaption" sx={{ ...caption, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '8px 24px' }}>
           {img.caption && <span>{img.caption}</span>}
-          {img.scrollWidth && (
+          {(img.scrollWidth || img.fullSizeLink) && (
             <Link href={img.src} target="_blank" rel="noopener" underline="hover" sx={{ color: colors.ink, '&:hover': { color: colors.accentText } }}>
               Open full size ↗
             </Link>
