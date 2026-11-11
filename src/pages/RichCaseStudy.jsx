@@ -235,10 +235,11 @@ export default function RichCaseStudy({ s, slug }) {
 
   const meta = [
     ['Role', s.role],
+    ['Team', s.team],
     ['Client', s.client],
     ['Year', s.year],
     ['Discipline', s.tags.filter((t) => t !== s.client && t !== s.year).join(', ')]
-  ];
+  ].filter(([, v]) => v);
 
   return (
     <Box sx={{ width: '100%', bgcolor: colors.bg, color: colors.ink, typography: 'body1' }}>

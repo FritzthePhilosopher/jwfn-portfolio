@@ -7,12 +7,13 @@
     "2026"
   ],
   "year": "2026",
-  "role": "Product Designer, alongside Bobby Eaves (lead)",
+  "role": "Product Designer",
+  "team": "Justin Neely, Bobby Eaves",
   "client": "CarMax Auctions",
   "links": [],
   "glance": {
     "Problem": "Damage photos on the vehicle detail page were too small and too spread out for dealers to judge before bidding.",
-    "Contribution": "Product design on a two-person team, with Bobby Eaves as lead.",
+    "Contribution": "Product design on a two-person team with Bobby Eaves.",
     "Outcome": "A vertical stack of damage cards: a large photo with the damage highlighted, plus its location, type and size.",
     "Metric": "94% preferred it"
   },

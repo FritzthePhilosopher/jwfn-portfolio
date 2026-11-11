@@ -66,7 +66,7 @@ export default function CaseStudy() {
         </Box>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px 64px', mt: 5, pt: '20px' }}>
           <Box sx={{ width: '100%' }}><Divider /></Box>
-          {[['Role', s.role], ['Client', s.client], ['Year', s.year]].map(([k, v]) => (
+          {[['Role', s.role], ['Team', s.team], ['Client', s.client], ['Year', s.year]].filter(([, v]) => v).map(([k, v]) => (
             <div key={k}>
               <Box sx={fieldLabel}>{k}</Box>
               <Box sx={{ typography: 'subtitle2' }}>{v}</Box>
