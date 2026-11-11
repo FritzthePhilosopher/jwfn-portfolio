@@ -36,6 +36,20 @@
       }
     },
     {
+      "id": "journey",
+      "label": "Journey",
+      "heading": "The dealer's journey.",
+      "paras": [
+        "A dealer buys a car they won't see in person until it's on their lot, so everything they know about the damage comes from the listing. Mapping the journey showed where that matters most: the bid gets decided at Evaluate and Price it, and gets tested at pickup, where anything missed online turns into a dispute."
+      ],
+      "image": {
+        "src": "/private/damage-assessment/customer-journey.jpg",
+        "alt": "Customer journey map for a dealer buyer. Stages run Find, Evaluate, Price it, Bid, and Win and pick up, then split on whether the car matches the listing: yes leads to Recon and resell, no leads to File arbitration. Evaluate and Price it are highlighted as where the damage cards sit. Rows above and below show what the dealer is thinking, pain points before the redesign, and opportunities. An emotion curve shows confidence dropping at Evaluate, Price it and pickup before the redesign, and staying higher with damage cards.",
+        "caption": "Customer journey map, reconstructed after the project",
+        "scrollWidth": 1800
+      }
+    },
+    {
       "id": "context",
       "label": "Context",
       "heading": "Each competitor solved part of it.",

@@ -51,12 +51,23 @@ function Figure({ img, sx }) {
   // Optional img.maxWidth (px) narrows and centers the figure.
   // Optional img.frameHeight (px) shows a tall image, like a full-page wireframe,
   // in a fixed-height window you scroll inside.
+  // Optional img.scrollWidth (px) shows a wide image, like a journey map, at a
+  // readable size in a window you scroll sideways, with a link to the full image.
   const picture = (
-    <Box component="img" src={img.src} alt={img.alt} loading="lazy" onError={() => setFailed(true)} sx={{ display: 'block', width: '100%', height: 'auto', bgcolor: '#fff' }} />
+    <Box component="img" src={img.src} alt={img.alt} loading="lazy" onError={() => setFailed(true)} sx={{ display: 'block', width: '100%', height: 'auto', bgcolor: '#fff', ...(img.scrollWidth && { minWidth: img.scrollWidth }) }} />
   );
   return (
     <Box component="figure" sx={{ m: 0, mt: 5, ...(img.maxWidth && { maxWidth: img.maxWidth, mx: 'auto' }), ...sx }}>
-      {img.frameHeight ? (
+      {img.scrollWidth ? (
+        <Box
+          tabIndex={0}
+          role="region"
+          aria-label={`${img.alt} (scroll sideways to see all of it)`}
+          sx={{ overflowX: 'auto', border: `1px solid ${colors.border}`, bgcolor: '#fff', '&:focus-visible': { outline: `2px solid ${colors.coral}`, outlineOffset: 2 } }}
+        >
+          {picture}
+        </Box>
+      ) : img.frameHeight ? (
         <Box
           tabIndex={0}
           role="region"
@@ -66,7 +77,16 @@ function Figure({ img, sx }) {
           {picture}
         </Box>
       ) : picture}
-      {img.caption && <Box component="figcaption" sx={caption}>{img.caption}</Box>}
+      {(img.caption || img.scrollWidth) && (
+        <Box component="figcaption" sx={{ ...caption, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '8px 24px' }}>
+          {img.caption && <span>{img.caption}</span>}
+          {img.scrollWidth && (
+            <Link href={img.src} target="_blank" rel="noopener" underline="hover" sx={{ color: colors.ink, '&:hover': { color: colors.accentText } }}>
+              Open full size ↗
+            </Link>
+          )}
+        </Box>
+      )}
     </Box>
   );
 }
