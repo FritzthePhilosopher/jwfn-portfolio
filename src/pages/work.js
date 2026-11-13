@@ -5,8 +5,8 @@ import { cards } from './cards.js';
 
 const all = [
   {
-    slug: 'damage-detail-card',
-    name: 'Damage Detail Card',
+    slug: 'damage-assessment-card',
+    name: 'Damage Assessment Card',
     tags: ['CarMax Auctions', 'Product design'],
     year: '2026',
     credit: 'Product designer, CarMax Auctions',
